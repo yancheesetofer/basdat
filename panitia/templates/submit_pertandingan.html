@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    {% block meta %} {% endblock meta %}
+  </head>
+
+  <body>
+    <h1>BUAT PERTANDINGAN</h1>
+    <form method="post">
+      {% csrf_token %}
+      <label for="wasit-utama">Pilih Wasit Utama:</label>
+      <select name="wasit-utama" id="wasit-utama">
+        <option value="">-- Pilih Wasit Utama --</option>
+        <!-- populate with available referees -->
+      </select>
+      <br />
+      <label for="wasit-pembantu1">Pilih Wasit Pembantu/Hakim Garis:</label>
+      <select name="wasit-pembantu1" id="wasit-pembantu1">
+        <option value="">-- Pilih Wasit Pembantu/Hakim Garis --</option>
+        <!-- populate with available referees -->
+      </select>
+      <br />
+      <label for="wasit-pembantu2">Pilih Wasit Pembantu/Hakim Garis:</label>
+      <select name="wasit-pembantu2" id="wasit-pembantu2">
+        <option value="">-- Pilih Wasit Pembantu/Hakim Garis --</option>
+        <!-- populate with available referees -->
+      </select>
+      <br />
+      <label for="wasit-cadangan">Pilih Wasit Cadangan:</label>
+      <select name="wasit-cadangan" id="wasit-cadangan">
+        <option value="">-- Pilih Wasit Cadangan --</option>
+        <!-- populate with available referees -->
+      </select>
+      <br />
+      <h2>Pilih Tim:</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Tim 1</th>
+            <th>Tim 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <select name="tim-1" id="tim-1">
+                <option value="">-- Pilih Tim --</option>
+                <!-- populate with available teams -->
+              </select>
+            </td>
+            <td>
+              <select name="tim-2" id="tim-2">
+                <option value="">-- Pilih Tim --</option>
+                <!-- populate with available teams -->
+              </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br />
+      <button type="submit">SUBMIT</button>
+    </form>
+  </body>
+</html>

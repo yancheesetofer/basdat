@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    {% block meta %} {% endblock meta %}
+  </head>
+
+  <body>
+    <h1>LIST PERTANDINGAN</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Grup A</th>
+          <th>Action</th>
+          <th>Grup B</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>A vs B</td>
+          <td>
+            <button type="button">Update</button>
+            <button type="button">Delete</button>
+          </td>
+          <td>I vs J</td>
+          <td>
+            <button type="button">Update</button>
+            <button type="button">Delete</button>
+          </td>
+        </tr>
+        <tr>
+          <td>C vs D</td>
+          <td>
+            <button type="button">Update</button>
+            <button type="button">Delete</button>
+          </td>
+          <td>K vs L</td>
+          <td>
+            <button type="button">Update</button>
+            <button type="button">Delete</button>
+          </td>
+        </tr>
+        <tr>
+          <td>E vs F</td>
+          <td>
+            <button type="button">Update</button>
+            <button type="button">Delete</button>
+          </td>
+          <td>M vs N</td>
+          <td>
+            <button type="button">Update</button>
+            <button type="button">Delete</button>
+          </td>
+        </tr>
+        <tr>
+          <td>G vs H</td>
+          <td>
+            <button type="button">Update</button>
+            <button type="button">Delete</button>
+          </td>
+          <td>? vs ?</td>
+          <td>
+            <button type="button">Add</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+    <table>
+      <thead>
+        <tr>
+          <th>Grup C</th>
+          <th>Action</th>
+          <th>Grup D</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>? vs ?</td>
+          <td>
+            <button type="button">Add</button>
+          </td>
+          <td>? vs ?</td>
+          <td>
+            <button type="button">Add</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

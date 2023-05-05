@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    {% block meta %} {% endblock meta %}
+  </head>
+
+  <body>
+    <h1>RAPAT PERTANDINGAN {{team_a}} vs {{team_b}}</h1>
+    <form method="post">
+      {% csrf_token %}
+      <label for="isi_rapat">Isi Rapat:</label><br />
+      <textarea id="isi_rapat" name="isi_rapat"></textarea><br /><br />
+      <input type="submit" value="Submit" />
+    </form>
+  </body>
+</html>

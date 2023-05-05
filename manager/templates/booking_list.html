@@ -1,0 +1,39 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    {% block meta %} {% endblock meta %}
+    <title>List Pemesanan</title>
+  </head>
+  <body>
+    <h1>List Pemesanan</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Stadium</th>
+          <th>Waktu</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Stadium 1</td>
+          <td>08:00 - 10:00</td>
+        </tr>
+        <tr>
+          <td>Stadium 2</td>
+          <td>10:00 - 12:00</td>
+        </tr>
+        <tr>
+          <td>Stadium 3</td>
+          <td>12:00 - 14:00</td>
+        </tr>
+      </tbody>
+    </table>
+    <button>PESAN</button>
+    {% block content %} {% endblock content %}
+  </body>
+</html>

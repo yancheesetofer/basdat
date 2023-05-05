@@ -1,0 +1,50 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    {% block meta %} {% endblock meta %}
+    <title>LIST RAPAT</title>
+  </head>
+  <body>
+    <h1>LIST RAPAT</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>RAPAT TEAM</th>
+          <th>Nama Panitia</th>
+          <th>Stadium</th>
+          <th>Tanggal dan waktu</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>A vs B</td>
+          <td>XYZ</td>
+          <td>stadium GBK</td>
+          <td>5 Juli 2023, 07.00 - 09.00</td>
+          <td><button>Lihat Laporan Rapat</button></td>
+        </tr>
+         <tr>
+          <td>C vs D</td>
+          <td>XYZ</td>
+          <td>stadium Siliwangi</td>
+          <td>5 Juli 2023, 07.00 - 09.00</td>
+          <td><button>Lihat Laporan Rapat</button></td>
+        </tr>
+         <tr>
+          <td>E vs F</td>
+          <td>XYZ</td>
+          <td>stadium Cendrawasih</td>
+          <td>5 Juli 2023, 07.00 - 09.00</td>
+          <td><button>Lihat Laporan Rapat</button></td>
+        </tr>
+      </tbody>
+    </table>
+    {% block content %} {% endblock content %}
+  </body>
+</html>

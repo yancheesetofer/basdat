@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    {% block meta %} {% endblock meta %}
+    <title>PEMINJAMAN STADIUM</title>
+  </head>
+  <body>
+    <h1>PEMINJAMAN STADIUM</h1>
+    <form action="#" method="POST">
+      {% csrf_token %}
+      <div>
+        <label for="stadium">Stadium:</label>
+        <select name="stadium" id="stadium">
+          <option value="Stadium 1">Stadium 1</option>
+          <option value="Stadium 2">Stadium 2</option>
+          <option value="Stadium 3">Stadium 3</option>
+        </select>
+      </div>
+      <div>
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required />
+      </div>
+      <button type="submit">SUBMIT</button>
+    </form>
+    {% block content %} {% endblock content %}
+  </body>
+</html>
