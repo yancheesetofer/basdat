@@ -1,39 +1,47 @@
-{% extends "base.html" %}
-
-{% block content %}
+{% extends "base.html" %} {% block content %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {% block meta %} {% endblock meta %}
-    <title>List Pemesanan</title>
+    <title>Pilih Stadium</title>
   </head>
   <body>
-    <h1 class="text-xl font-bold underline">List Pemesanan</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>Stadium</th>
-          <th>Waktu</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Stadium 1</td>
-          <td>08:00 - 10:00</td>
-        </tr>
-        <tr>
-          <td>Stadium 2</td>
-          <td>10:00 - 12:00</td>
-        </tr>
-        <tr>
-          <td>Stadium 3</td>
-          <td>12:00 - 14:00</td>
-        </tr>
-      </tbody>
-    </table>
-    <button>PESAN</button>
+    <h1 class="text-3xl font-bold flex justify-center mt-10">Pilih Stadium</h1>
+    <div class="flex justify-evenly items-center mt-10">
+      <form action="" method="POST">
+        <select
+          id="countries"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          name="stadium"
+        >
+          <option selected>Stadium pilihan</option>
+          <option value="US">Stadium A</option>
+          <option value="CA">Stadium B</option>
+          <option value="FR">Stadium C</option>
+          <option value="DE">Stadium D</option>
+        </select>
+        <select
+          id="countries"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          name="tanggal"
+        >
+          <option selected>Tanggal</option>
+          <option value="US">21 Januari 2021</option>
+          <option value="CA">23 Januari 2021</option>
+          <option value="DE">26 Januari 2021</option>
+          <option value="FR">30 Januari 2021</option>
+        </select>
+      </form>
+    </div>
+    <div class="flex justify-center">
+      <button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-10"
+      >
+        Submit
+      </button>
+    </div>
   </body>
 </html>
 {% endblock content %}
