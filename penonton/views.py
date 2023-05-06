@@ -12,9 +12,12 @@ def listWaktuStadium(request):
     return render(request, "listWaktuStadium.html")
 
 
-def listPertandingan(request):
-    return render(request, "listPertandingan.html")
+def listPertandinganStadium(request):
+    return render(request, "listPertandinganStadium.html")
 
 
 def tiketPertandingan(request):
     return render(request, "beliTiket.html")
+
+def listSemuaPertandingan(request):
+    return render(request, "listSemuaPertandingan.html")
