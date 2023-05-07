@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block meta %}
+
+{% endblock meta %}
+
+{% block content %}
+<head>
+    <title>
+        Register User
+    </title>
+    <script
+        defer
+        src="https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js"
+      ></script>
+  
+      <!-- Alpine CDN -->
+      <script
+        defer
+        src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+      ></script>
+  </head>
+    <body class="bg-gray-200">
+        <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+            <div class="items-center w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+                <div class="text-center p-6 space-y-4 md:space-y-6 sm:p-8">
+                    <h1 class="items-center self-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                        Create an account as
+                    </h1>
+                    <ul class="items-center flex-block">
+                        <li class="items-center self-center py-3">
+                            <a href="{% url 'user:register_manager' %}">
+                                <button  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                    Manager
+                                </button>
+                            </a>
+                        </li>
+                        <li class="py-3">
+                            <a href="{% url 'user:register_panitia' %}"> 
+                                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                    Panitia
+                                </button>
+                            </a>
+                        </li>
+                        <li class="py-3">
+                            <a href="{% url 'user:register_penonton' %}">
+                                <button href="{% url 'user:register_penonton' %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                    Penonton
+                                </button>
+                            </a>
+                        </li>
+                    </ul>
+                    
+                </div>
+            </div>
+        </div>
+    </body>
+    
+{% endblock content %}

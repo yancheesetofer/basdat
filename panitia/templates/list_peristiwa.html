@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block meta %}
+
+{% endblock meta %}
+
+{% block content %}
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
+
+  </head>
+    <body class="bg-gray-200">
+        <div class="relative overflow-x-auto mx-20">
+            <h2 class="mx-20 mb-10 text-2xl font-bold pt-10 self-center items-center text-center">
+                LIST PERISTIWA
+            </h2>
+            <h3 class="mx-20 mb-10 font-semibold pt-10 self-center items-center text-center">
+                Peristiwa Tim A
+            </h3>
+            <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Nama Pemain
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Peristiwa
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Alphonso Areola
+                        </th>
+                        <td class="px-6 py-4">
+                            Red Card (70")
+                        </td>
+                    </tr>
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            Benjamin Pavard
+                        </th>
+                        <td class="px-6 py-4">
+                            Yellow Card (70")
+                        </td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+    </body>
+    
+{% endblock content %}

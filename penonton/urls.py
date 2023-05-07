@@ -9,4 +9,5 @@ urlpatterns = [
     path("pertandinganStadium/", listPertandinganStadium, name="pertandinganStadium"),
     path("tiket/", tiketPertandingan, name="tiket"),
     path("semuaPertandingan/", listSemuaPertandingan, name="semuaPertandingan"),
+    path('profile/', show_profile, name='profile' )
 ]

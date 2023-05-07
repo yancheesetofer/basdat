@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block meta %}
+
+{% endblock meta %}
+
+{% block content %}
+<head>
+    <script
+        defer
+        src="https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js"
+      ></script>
+  
+      <!-- Alpine CDN -->
+      <script
+        defer
+        src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+      ></script>
+  </head>
+    <body class="bg-gray-200">
+        <div class=" container mx-auto my-5 p-5 self-center, items-center">
+        <div class="md:flex no-wrap md:-mx-1 ">
+            <!-- Left Side -->
+           
+            <!-- Right Side -->
+            <div class="w-full md:w-12/12 mx-20 h-64">
+                <!-- About Section -->
+                <div class="bg-white p-10 shadow-sm rounded-sm">
+                    <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8">
+                        <span clas="text-green-500">
+                            <svg class="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                        </span>
+                        <span class="tracking-wide">About</span>
+                    </div>
+                    <div class="text-gray-700">
+                        <div class="grid md:grid-cols-2 text-sm">
+                            <div class="grid grid-cols-2">
+                                <div class="px-4 py-3 font-semibold">Nama Depan</div>
+                                <div class="px-4 py-3">Bang</div>
+                            </div>
+                            <div class="grid grid-cols-2">
+                                <div class="px-4 py-3 font-semibold">Nama Belakang</div>
+                                <div class="px-4 py-3">Messi</div>
+                            </div>
+                            <div class="grid grid-cols-2">
+                                <div class="px-4 py-3 font-semibold">Nomor HP</div>
+                                <div class="px-4 py-3">0812345678</div>
+                            </div>
+                            <div class="grid grid-cols-2">
+                                <div class="px-4 py-3 font-semibold">Email</div>
+                                <div class="px-4 py-3">messi@gmail.com</div>
+                            </div>
+                            <div class="grid grid-cols-2">
+                                <div class="px-4 py-3 font-semibold">Alamat</div>
+                                <div class="px-4 py-3">Jalan Kesatuan no. 56, Depok</div>
+                            </div>
+                            <div class="grid grid-cols-2">
+                                <div class="px-4 py-3 font-semibold">Status</div>
+                                <div class="px-4 py-3">
+                                    Dosen
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <!-- End of about section -->
+                <div class="my-4"></div>
+                <div class="bg-white p-10 shadow-sm rounded-sm">
+                    <div class="grid grid-cols-2">
+                        <div>
+                            <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
+                                <span clas="text-green-500">
+                                    <svg class="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                    </svg>
+                                </span>
+                                <span class="tracking-wide">Daftar Tim</span>
+                            </div>
+                            {% if nama_tim == null %}
+                                <h1 class="text-gray-500 font-semibold text-m"> 
+                                    Belum Membuat Tim
+                                </h1>
+                            {% else %}
+                                <ul class="list-inside space-y-2">
+                                <li>
+                                    <div class="text-teal-600 font-semibold">Nama Tim: {{nama_tim}} </div>
+                                    <div class="text-teal-600 pb-2 text-m">Asal Universitas: {{asal}} </div>
+
+                                    <div class="container mx-auto mt-2">
+                                        <div
+                                          class="max-w-2xl"
+                                          x-data="{ 
+                                              faqOne: false,
+                                              faqTwo: false,
+                                              faqThree: false,
+                                              activeClass: 'bg-teal-600 focus:outline-none',
+                                          }"
+                                          class="p-6 mx-auto bg-white"
+                                        >
+                                          <div class="mb-4">
+                                            <div
+                                              @click="faqOne = ! faqOne"
+                                              :class="faqOne === true ? activeClass : ''"
+                                              class="flex items-center text-sm justify-between w-full py-3 pl-3 pr-2 font-semibold text-gray-100 bg-teal-600 rounded cursor-pointer hover:text-white-100"
+                                            >
+                                              Lihat Daftar Pemain
+                                              <span
+                                                class="flex items-center justify-center w-6 h-6"
+                                              >
+                                                <svg
+                                                :class="faqOne === true ? 'block' : 'hidden'"
+                                                  class="w-3 h-3 fill-current"
+                                                  viewBox="0 -192 469.33333 469"
+                                                  xmlns="http://www.w3.org/2000/svg"
+                                                >
+                                                  <path
+                                                    d="m437.332031.167969h-405.332031c-17.664062 0-32 14.335937-32 32v21.332031c0 17.664062 14.335938 32 32 32h405.332031c17.664063 0 32-14.335938 32-32v-21.332031c0-17.664063-14.335937-32-32-32zm0 0"
+                                                  />
+                                                </svg>
+                                                <svg
+                                                :class="faqOne === false ? 'block' : 'hidden'"
+                                                
+                                                  class="w-3 h-3 fill-current"
+                                                  viewBox="0 0 469.33333 469.33333"
+                                                  xmlns="http://www.w3.org/2000/svg"
+                                                >
+                                                  <path
+                                                    d="m437.332031 192h-160v-160c0-17.664062-14.335937-32-32-32h-21.332031c-17.664062 0-32 14.335938-32 32v160h-160c-17.664062 0-32 14.335938-32 32v21.332031c0 17.664063 14.335938 32 32 32h160v160c0 17.664063 14.335938 32 32 32h21.332031c17.664063 0 32-14.335937 32-32v-160h160c17.664063 0 32-14.335937 32-32v-21.332031c0-17.664062-14.335937-32-32-32zm0 0"
+                                                  />
+                                              </span>
+                                            </div>
+                                            <div x-show="faqOne" x-collapse>
+                                                <div class="flex-inline">
+                                                    <p class ="text-gray-800 text-sm">
+                                                      Anggota Tim: 
+                                                    </p>
+                                                      <ul>
+                                                          {% for pemain in list_pemain %}
+                                                              <li>
+                                                                  <p class ="text-gray-500 text-sm">
+                                                                      {{pemain}}
+                                                                  </p>
+                                                              </li>  
+                                                          {% endfor %}
+                                                      </ul>  
+                                                  </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                </li>
+                            </ul>
+                            {% endif %}
+                        </div>
+                        <div>
+                            <div class="flex items-center space-x-2 font-semibold text-gray-900 leading-8 mb-3">
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <!-- End of profile tab -->
+            </div>
+        </div>
+    </div>
+</div>
+    </body>
+    
+{% endblock content %}

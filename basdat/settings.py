@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'manager',
     'panitia',
-    'penonton'
+    'penonton',
+    'user'
 ]
 
 MIDDLEWARE = [
