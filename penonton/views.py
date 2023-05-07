@@ -1,10 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 
 # Create your views here.
 
 
-def index(request):
+def pilih(request):
     return render(request, "pilihStadium.html")
 
 
@@ -18,6 +17,7 @@ def listPertandinganStadium(request):
 
 def tiketPertandingan(request):
     return render(request, "beliTiket.html")
+
 
 def listSemuaPertandingan(request):
     return render(request, "listSemuaPertandingan.html")
