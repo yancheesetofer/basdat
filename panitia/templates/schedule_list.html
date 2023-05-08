@@ -1,0 +1,46 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    {% block meta %} {% endblock meta %}
+    <title>List Waktu Stadium {{ stadium_name }}</title>
+  </head>
+  <body>
+    <h1>List Waktu Stadium {{ stadium_name }}</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>List Waktu</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>07:00 - 08:00</td>
+          <td><button type="button">Dipesan</button></td>
+        </tr>
+        <tr>
+          <td>08:00 - 09:00</td>
+          <td><button type="button">Dipesan</button></td>
+        </tr>
+        <tr>
+          <td>09:00 - 10:00</td>
+          <td><button type="button">Dipesan</button></td>
+        </tr>
+        <tr>
+          <td>10:00 - 11:00</td>
+          <td><button type="button">Dipesan</button></td>
+        </tr>
+        <tr>
+          <td>11:00 - 12:00</td>
+          <td><button type="button">Next</button></td>
+        </tr>
+      </tbody>
+    </table>
+    {% block content %} {% endblock content %}
+  </body>
+</html>
