@@ -19,4 +19,8 @@ def register_panitia(request):
     }
     return render(request, "registerUser.html", context)
 
+def homePage (request):
+    return render(request, "loginRegister.html")
 
+def loginPage (request):
+    return render(request, "login.html")
