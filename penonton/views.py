@@ -40,4 +40,5 @@ def show_profile(request):
     context = {
         'list_pertandingan' : list_pertandingan
     }
+    context = {}
     return render(request, "dashboardPenonton.html", context)
