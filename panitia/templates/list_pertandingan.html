@@ -1,96 +1,153 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    {% block meta %} {% endblock meta %}
-  </head>
+{% extends 'base.html' %} {% load static %} {% block meta %} {% endblock meta %}
+{% block content %}
+<head>
+  <link rel="stylesheet" href="{% static 'css/tailwind.min.css' %}" />
+</head>
 
-  <body>
-    <h1>LIST PERTANDINGAN</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>Grup A</th>
-          <th>Action</th>
-          <th>Grup B</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>A vs B</td>
-          <td>
-            <button type="button">Update</button>
-            <button type="button">Delete</button>
-          </td>
-          <td>I vs J</td>
-          <td>
-            <button type="button">Update</button>
-            <button type="button">Delete</button>
-          </td>
-        </tr>
-        <tr>
-          <td>C vs D</td>
-          <td>
-            <button type="button">Update</button>
-            <button type="button">Delete</button>
-          </td>
-          <td>K vs L</td>
-          <td>
-            <button type="button">Update</button>
-            <button type="button">Delete</button>
-          </td>
-        </tr>
-        <tr>
-          <td>E vs F</td>
-          <td>
-            <button type="button">Update</button>
-            <button type="button">Delete</button>
-          </td>
-          <td>M vs N</td>
-          <td>
-            <button type="button">Update</button>
-            <button type="button">Delete</button>
-          </td>
-        </tr>
-        <tr>
-          <td>G vs H</td>
-          <td>
-            <button type="button">Update</button>
-            <button type="button">Delete</button>
-          </td>
-          <td>? vs ?</td>
-          <td>
-            <button type="button">Add</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <br />
-    <table>
-      <thead>
-        <tr>
-          <th>Grup C</th>
-          <th>Action</th>
-          <th>Grup D</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>? vs ?</td>
-          <td>
-            <button type="button">Add</button>
-          </td>
-          <td>? vs ?</td>
-          <td>
-            <button type="button">Add</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </body>
-</html>
+<body class="bg-gray-100">
+  {% include 'navbar_panitia.html' %}
+  <h1 class="text-3xl font-bold mt-8 mb-4 text-center">LIST PERTANDINGAN</h1>
+  <table class="w-full border-collapse border border-gray-400">
+    <thead>
+      <tr class="bg-gray-200">
+        <th class="p-3 text-left">Grup A</th>
+        <th class="p-3 text-center">Action</th>
+        <th class="p-3 text-left">Grup B</th>
+        <th class="p-3 text-center">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="p-3 border-t border-gray-400">A vs B</td>
+        <td class="p-3 border-t border-gray-400 text-center">
+          <button
+            type="button"
+            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+          >
+            Update
+          </button>
+          <button
+            type="button"
+            class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700"
+          >
+            Delete
+          </button>
+        </td>
+        <td class="p-3 border-t border-gray-400">I vs J</td>
+        <td class="p-3 border-t border-gray-400 text-center">
+          <button
+            type="button"
+            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+          >
+            Update
+          </button>
+          <button
+            type="button"
+            class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td class="p-3 border-t border-gray-400">C vs D</td>
+        <td class="p-3 border-t border-gray-400 text-center">
+          <button
+            type="button"
+            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+          >
+            Update
+          </button>
+          <button
+            type="button"
+            class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700"
+          >
+            Delete
+          </button>
+        </td>
+        <td class="p-3 border-t border-gray-400">K vs L</td>
+        <td class="p-3 border-t border-gray-400 text-center">
+          <button
+            type="button"
+            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+          >
+            Update
+          </button>
+          <button
+            type="button"
+            class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td class="p-3 border-t border-gray-400">E vs F</td>
+        <td class="p-3 border-t border-gray-400 text-center">
+          <button
+            type="button"
+            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+          >
+            Update
+          </button>
+          <button
+            type="button"
+            class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700"
+          >
+            Delete
+          </button>
+        </td>
+        <td class="p-3 border-t border-gray-400">M vs N</td>
+        <td class="p-3 border-t border-gray-400 text-center">
+          <button
+            type="button"
+            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+          >
+            Update
+          </button>
+          <button
+            type="button"
+            class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td class="p-3 border-t border-gray-400">G vs H</td>
+        <td class="p-3 border-t border-gray-400 text-center">
+          <button
+            type="button"
+            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+          >
+            Update
+          </button>
+          <button
+            type="button"
+            class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700"
+          >
+            Delete
+          </button>
+        </td>
+        <td class="p-3 border-t border-gray-400">O vs P</td>
+        <td class="p-3 border-t border-gray-400 text-center">
+          <button
+            type="button"
+            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+          >
+            Update
+          </button>
+          <button
+            type="button"
+            class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+</body>
+
+{% endblock content %}

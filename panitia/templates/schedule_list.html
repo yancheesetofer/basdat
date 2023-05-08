@@ -1,46 +1,76 @@
-{% load static %}
-
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    {% block meta %} {% endblock meta %}
-    <title>List Waktu Stadium {{ stadium_name }}</title>
-  </head>
-  <body>
-    <h1>List Waktu Stadium {{ stadium_name }}</h1>
-    <table>
+{% extends "base.html" %} {% block content %}
+<head>
+  <title>List Waktu Stadium {{ stadium_name }}</title>
+</head>
+<body class="p-5">
+  {% include 'navbar_panitia.html' %}
+  <h1 class="text-3xl font-bold mb-5">List Waktu Stadium {{ stadium_name }}</h1>
+  <div class="overflow-x-auto">
+    <table class="table-auto w-full">
       <thead>
         <tr>
-          <th>List Waktu</th>
-          <th>Action</th>
+          <th class="px-4 py-2 text-center">List Waktu</th>
+          <th class="px-4 py-2 text-center">Action</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>07:00 - 08:00</td>
-          <td><button type="button">Dipesan</button></td>
+          <td class="px-4 py-2 text-center">07:00 - 08:00</td>
+          <td class="px-4 py-2 text-center">
+            <button
+              type="button"
+              class="px-4 py-2 bg-gray-400 text-white rounded-md cursor-not-allowed"
+            >
+              Dipesan
+            </button>
+          </td>
         </tr>
         <tr>
-          <td>08:00 - 09:00</td>
-          <td><button type="button">Dipesan</button></td>
+          <td class="px-4 py-2 text-center">08:00 - 09:00</td>
+          <td class="px-4 py-2 text-center">
+            <button
+              type="button"
+              class="px-4 py-2 bg-gray-400 text-white rounded-md cursor-not-allowed"
+            >
+              Dipesan
+            </button>
+          </td>
         </tr>
         <tr>
-          <td>09:00 - 10:00</td>
-          <td><button type="button">Dipesan</button></td>
+          <td class="px-4 py-2 text-center">09:00 - 10:00</td>
+          <td class="px-4 py-2 text-center">
+            <button
+              type="button"
+              class="px-4 py-2 bg-gray-400 text-white rounded-md cursor-not-allowed"
+            >
+              Dipesan
+            </button>
+          </td>
         </tr>
         <tr>
-          <td>10:00 - 11:00</td>
-          <td><button type="button">Dipesan</button></td>
+          <td class="px-4 py-2 text-center">10:00 - 11:00</td>
+          <td class="px-4 py-2 text-center">
+            <button
+              type="button"
+              class="px-4 py-2 bg-gray-400 text-white rounded-md cursor-not-allowed"
+            >
+              Dipesan
+            </button>
+          </td>
         </tr>
         <tr>
-          <td>11:00 - 12:00</td>
-          <td><button type="button">Next</button></td>
+          <td class="px-4 py-2 text-center">11:00 - 12:00</td>
+          <td class="px-4 py-2 text-center">
+            <button
+              type="button"
+              class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+            >
+              Next
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
-    {% block content %} {% endblock content %}
-  </body>
-</html>
+  </div>
+</body>
+{% endblock content %}

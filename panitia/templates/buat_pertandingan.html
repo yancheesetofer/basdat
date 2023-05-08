@@ -1,30 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    {% block meta %} {% endblock meta %}
-    <title>PEMBUATAN PERTANDINGAN</title>
-  </head>
-  <body>
-    <h1>PEMBUATAN PERTANDINGAN</h1>
-    <form action="#" method="POST">
-      {% csrf_token %}
-      <div>
-        <label for="stadium">Stadium:</label>
-        <select name="stadium" id="stadium">
-          <option value="Stadium 1">Stadium 1</option>
-          <option value="Stadium 2">Stadium 2</option>
-          <option value="Stadium 3">Stadium 3</option>
-        </select>
-      </div>
-      <div>
-        <label for="date">Date:</label>
-        <input type="date" id="date" name="date" required />
-      </div>
-      <button type="submit">SUBMIT</button>
-    </form>
-    {% block content %} {% endblock content %}
-  </body>
-</html>
+{% extends "base.html" %} {% block content %}
+<head>
+  <title>PEMBUATAN PERTANDINGAN</title>
+</head>
+<body class="bg-gray-200">
+  {% include 'navbar_panitia.html' %}
+  <h1 class="text-3xl text-center font-bold my-6">PEMBUATAN PERTANDINGAN</h1>
+  <form
+    action="#"
+    method="POST"
+    class="flex flex-col items-center justify-center"
+  >
+    {% csrf_token %}
+    <div class="my-4">
+      <label for="stadium" class="mr-2 font-bold">Stadium:</label>
+      <select
+        name="stadium"
+        id="stadium"
+        class="px-2 py-1 border border-gray-300 rounded-md"
+      >
+        <option value="Stadium 1">Stadium 1</option>
+        <option value="Stadium 2">Stadium 2</option>
+        <option value="Stadium 3">Stadium 3</option>
+      </select>
+    </div>
+    <div class="my-4">
+      <label for="date" class="mr-2 font-bold">Date:</label>
+      <input
+        type="date"
+        id="date"
+        name="date"
+        required
+        class="px-2 py-1 border border-gray-300 rounded-md"
+      />
+    </div>
+    <button
+      type="submit"
+      class="px-4 py-2 bg-blue-500 text-white rounded-md mt-4 hover:bg-blue-700 focus:outline-none focus:bg-blue-700"
+    >
+      SUBMIT
+    </button>
+  </form>
+</body>
+{% endblock content %}

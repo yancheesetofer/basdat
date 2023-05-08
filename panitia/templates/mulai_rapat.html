@@ -1,33 +1,35 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    {% block meta %} {% endblock meta %}
-  </head>
+{% extends 'base.html' %} {% block content %}
+<head>
+  <title>Mulai Rapat</title>
+</head>
 
-  <body>
-    <h1>PILIH PERTANDINGAN</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>Tim Bertanding</th>
-          <th>Stadium</th>
-          <th>Tanggal dan Waktu</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>A vs B</td>
-          <td>Stadium GBK</td>
-          <td>5 Juli 2023, 07.00 - 09.00</td>
-          <td><button>Mulai Rapat</button></td>
-        </tr>
-        <!-- Add more rows as needed -->
-      </tbody>
-    </table>
-  </body>
-</html>
+<body class="bg-gray-100">
+  {% include 'navbar_panitia.html' %}
+  <h1 class="text-3xl font-bold mt-8 mb-4 text-center">PILIH PERTANDINGAN</h1>
+  <table class="w-full border-collapse border border-gray-400">
+    <thead>
+      <tr class="bg-gray-200">
+        <th class="p-3 text-left">Tim Bertanding</th>
+        <th class="p-3 text-left">Stadium</th>
+        <th class="p-3 text-left">Tanggal dan Waktu</th>
+        <th class="p-3 text-center">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="p-3 border-t border-gray-400">A vs B</td>
+        <td class="p-3 border-t border-gray-400">Stadium GBK</td>
+        <td class="p-3 border-t border-gray-400">5 Juli 2023, 07.00 - 09.00</td>
+        <td class="p-3 border-t border-gray-400 text-center">
+          <button
+            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+          >
+            Mulai Rapat
+          </button>
+        </td>
+      </tr>
+      <!-- Add more rows as needed -->
+    </tbody>
+  </table>
+</body>
+{% endblock content %}

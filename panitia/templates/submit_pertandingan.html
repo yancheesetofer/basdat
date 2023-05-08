@@ -1,68 +1,104 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    {% block meta %} {% endblock meta %}
-  </head>
-
-  <body>
-    <h1>BUAT PERTANDINGAN</h1>
-    <form method="post">
-      {% csrf_token %}
-      <label for="wasit-utama">Pilih Wasit Utama:</label>
-      <select name="wasit-utama" id="wasit-utama">
+{% extends "base.html" %} {% block content %}
+<head>
+  <title>BUAT PERTANDINGAN</title>
+</head>
+<body class="bg-gray-200 flex flex-col justify-center items-center h-screen">
+  {% include 'navbar_panitia.html' %}
+  <h1 class="text-4xl font-bold mb-8">BUAT PERTANDINGAN</h1>
+  <form method="post" class="bg-white rounded-lg p-8 shadow-md">
+    {% csrf_token %}
+    <div class="mb-4">
+      <label for="wasit-utama" class="block font-bold mb-2"
+        >Pilih Wasit Utama:</label
+      >
+      <select
+        name="wasit-utama"
+        id="wasit-utama"
+        class="w-full p-2 border border-gray-300 rounded-lg"
+      >
         <option value="">-- Pilih Wasit Utama --</option>
         <!-- populate with available referees -->
       </select>
-      <br />
-      <label for="wasit-pembantu1">Pilih Wasit Pembantu/Hakim Garis:</label>
-      <select name="wasit-pembantu1" id="wasit-pembantu1">
+    </div>
+    <div class="mb-4">
+      <label for="wasit-pembantu1" class="block font-bold mb-2"
+        >Pilih Wasit Pembantu/Hakim Garis:</label
+      >
+      <select
+        name="wasit-pembantu1"
+        id="wasit-pembantu1"
+        class="w-full p-2 border border-gray-300 rounded-lg"
+      >
         <option value="">-- Pilih Wasit Pembantu/Hakim Garis --</option>
         <!-- populate with available referees -->
       </select>
-      <br />
-      <label for="wasit-pembantu2">Pilih Wasit Pembantu/Hakim Garis:</label>
-      <select name="wasit-pembantu2" id="wasit-pembantu2">
+    </div>
+    <div class="mb-4">
+      <label for="wasit-pembantu2" class="block font-bold mb-2"
+        >Pilih Wasit Pembantu/Hakim Garis:</label
+      >
+      <select
+        name="wasit-pembantu2"
+        id="wasit-pembantu2"
+        class="w-full p-2 border border-gray-300 rounded-lg"
+      >
         <option value="">-- Pilih Wasit Pembantu/Hakim Garis --</option>
         <!-- populate with available referees -->
       </select>
-      <br />
-      <label for="wasit-cadangan">Pilih Wasit Cadangan:</label>
-      <select name="wasit-cadangan" id="wasit-cadangan">
+    </div>
+    <div class="mb-4">
+      <label for="wasit-cadangan" class="block font-bold mb-2"
+        >Pilih Wasit Cadangan:</label
+      >
+      <select
+        name="wasit-cadangan"
+        id="wasit-cadangan"
+        class="w-full p-2 border border-gray-300 rounded-lg"
+      >
         <option value="">-- Pilih Wasit Cadangan --</option>
         <!-- populate with available referees -->
       </select>
-      <br />
-      <h2>Pilih Tim:</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Tim 1</th>
-            <th>Tim 2</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <select name="tim-1" id="tim-1">
-                <option value="">-- Pilih Tim --</option>
-                <!-- populate with available teams -->
-              </select>
-            </td>
-            <td>
-              <select name="tim-2" id="tim-2">
-                <option value="">-- Pilih Tim --</option>
-                <!-- populate with available teams -->
-              </select>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <br />
-      <button type="submit">SUBMIT</button>
-    </form>
-  </body>
-</html>
+    </div>
+    <h2 class="text-2xl font-bold mb-4">Pilih Tim:</h2>
+    <table class="w-full mb-4">
+      <thead>
+        <tr>
+          <th class="text-left font-bold">Tim 1</th>
+          <th class="text-left font-bold">Tim 2</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <select
+              name="tim-1"
+              id="tim-1"
+              class="w-full p-2 border border-gray-300 rounded-lg"
+            >
+              <option value="">-- Pilih Tim --</option>
+              <!-- populate with available teams -->
+            </select>
+          </td>
+          <td>
+            <select
+              name="tim-2"
+              id="tim-2"
+              class="w-full p-2 border border-gray-300 rounded-lg"
+            >
+              <option value="">-- Pilih Tim --</option>
+              <!-- populate with available teams -->
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+    <button
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-10"
+      type="submit"
+    >
+      SUBMIT
+    </button>
+  </form>
+</body>
+{% endblock content %}

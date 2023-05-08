@@ -1,46 +1,74 @@
-{% load static %}
-
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    {% block meta %} {% endblock meta %}
-    <title>List Waktu Stadium {{ stadium_name }}</title>
-  </head>
-  <body>
-    <h1>List Waktu Stadium {{ stadium_name }}</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>List Waktu</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>07:00 - 08:00</td>
-          <td><button type="button">Pesan</button></td>
-        </tr>
-        <tr>
-          <td>08:00 - 09:00</td>
-          <td><button type="button">Pesan</button></td>
-        </tr>
-        <tr>
-          <td>09:00 - 10:00</td>
-          <td><button type="button">Pesan</button></td>
-        </tr>
-        <tr>
-          <td>10:00 - 11:00</td>
-          <td><button type="button">Pesan</button></td>
-        </tr>
-        <tr>
-          <td>11:00 - 12:00</td>
-          <td><button type="button">Pesan</button></td>
-        </tr>
-      </tbody>
-    </table>
-    {% block content %} {% endblock content %}
-  </body>
-</html>
+{% extends "base.html" %} {% block content %}
+<head>
+  <title>List Waktu Stadium {{ stadium_name }}</title>
+</head>
+<body class="bg-gray-100">
+  {% include 'navbar_manager.html' %}
+  <h1 class="text-3xl font-bold mt-6">{{ stadium_name }} Stadium</h1>
+  <table class="table-auto mt-8 mx-auto">
+    <thead>
+      <tr>
+        <th class="px-4 py-2">List Waktu</th>
+        <th class="px-4 py-2">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="border px-4 py-2">07:00 - 08:00</td>
+        <td class="border px-4 py-2">
+          <button
+            type="button"
+            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Pesan
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td class="border px-4 py-2">08:00 - 09:00</td>
+        <td class="border px-4 py-2">
+          <button
+            type="button"
+            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Pesan
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td class="border px-4 py-2">09:00 - 10:00</td>
+        <td class="border px-4 py-2">
+          <button
+            type="button"
+            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Pesan
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td class="border px-4 py-2">10:00 - 11:00</td>
+        <td class="border px-4 py-2">
+          <button
+            type="button"
+            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Pesan
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td class="border px-4 py-2">11:00 - 12:00</td>
+        <td class="border px-4 py-2">
+          <button
+            type="button"
+            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Pesan
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+{% endblock content %}

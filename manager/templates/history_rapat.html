@@ -1,50 +1,43 @@
-{% load static %}
-
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    {% block meta %} {% endblock meta %}
-    <title>LIST RAPAT</title>
-  </head>
-  <body>
-    <h1>LIST RAPAT</h1>
-    <table>
-      <thead>
-        <tr>
-          <th>RAPAT TEAM</th>
-          <th>Nama Panitia</th>
-          <th>Stadium</th>
-          <th>Tanggal dan waktu</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>A vs B</td>
-          <td>XYZ</td>
-          <td>stadium GBK</td>
-          <td>5 Juli 2023, 07.00 - 09.00</td>
-          <td><button>Lihat Laporan Rapat</button></td>
-        </tr>
-         <tr>
-          <td>C vs D</td>
-          <td>XYZ</td>
-          <td>stadium Siliwangi</td>
-          <td>5 Juli 2023, 07.00 - 09.00</td>
-          <td><button>Lihat Laporan Rapat</button></td>
-        </tr>
-         <tr>
-          <td>E vs F</td>
-          <td>XYZ</td>
-          <td>stadium Cendrawasih</td>
-          <td>5 Juli 2023, 07.00 - 09.00</td>
-          <td><button>Lihat Laporan Rapat</button></td>
-        </tr>
-      </tbody>
-    </table>
-    {% block content %} {% endblock content %}
-  </body>
-</html>
+{% extends "base.html" %} {% block content %}
+<head>
+  <title>LIST RAPAT</title>
+</head>
+<body class="bg-gray-100">
+  {% include 'navbar_manager.html' %}
+  <h1 class="text-2xl font-bold mt-4 mb-8">LIST RAPAT</h1>
+  <table class="table-auto mx-auto border-collapse border border-gray-400">
+    <thead>
+      <tr>
+        <th class="border border-gray-400 px-4 py-2">RAPAT TEAM</th>
+        <th class="border border-gray-400 px-4 py-2">Nama Panitia</th>
+        <th class="border border-gray-400 px-4 py-2">Stadium</th>
+        <th class="border border-gray-400 px-4 py-2">Tanggal dan waktu</th>
+        <th class="border border-gray-400 px-4 py-2">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="border border-gray-400 px-4 py-2">A vs B</td>
+        <td class="border border-gray-400 px-4 py-2">XYZ</td>
+        <td class="border border-gray-400 px-4 py-2">stadium GBK</td>
+        <td class="border border-gray-400 px-4 py-2">5 Juli 2023, 07.00 - 09.00</td>
+        <td class="border border-gray-400 px-4 py-2"><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Lihat Laporan Rapat</button></td>
+      </tr>
+      <tr>
+        <td class="border border-gray-400 px-4 py-2">C vs D</td>
+        <td class="border border-gray-400 px-4 py-2">XYZ</td>
+        <td class="border border-gray-400 px-4 py-2">stadium Siliwangi</td>
+        <td class="border border-gray-400 px-4 py-2">5 Juli 2023, 07.00 - 09.00</td>
+        <td class="border border-gray-400 px-4 py-2"><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Lihat Laporan Rapat</button></td>
+      </tr>
+      <tr>
+        <td class="border border-gray-400 px-4 py-2">E vs F</td>
+        <td class="border border-gray-400 px-4 py-2">XYZ</td>
+        <td class="border border-gray-400 px-4 py-2">stadium Cendrawasih</td>
+        <td class="border border-gray-400 px-4 py-2">5 Juli 2023, 07.00 - 09.00</td>
+        <td class="border border-gray-400 px-4 py-2"><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Lihat Laporan Rapat</button></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+{% endblock content %}

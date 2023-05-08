@@ -45,3 +45,22 @@ def manage_pertandingan(request):
 
 def list_peristiwa(request):
     return render(request, "list_peristiwa.html")
+
+
+def buat_pertandingan(request):
+    return render(request, "buat_pertandingan.html")
+
+def list_pertandingan(request):
+    return render(request, "list_pertandingan.html")
+
+def mulai_rapat(request):
+    return render(request, "mulai_rapat.html")
+
+def nota_rapat(request):
+    return render(request, "nota_rapat.html")
+
+def submit_pertandingan(request):
+    return render(request, "submit_pertandingan.html")
+
+def schedule_list(request):
+    return render(request, "schedule_list.html")
