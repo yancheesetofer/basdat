@@ -39,4 +39,5 @@ def show_profile(request):
     list_pertandingan = [pertandingan1, pertandingan2]
 
     context = {"list_pertandingan": list_pertandingan}
+    context = {}
     return render(request, "dashboardPenonton.html", context)

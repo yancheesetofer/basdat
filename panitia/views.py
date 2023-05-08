@@ -33,7 +33,7 @@ def show_profile(request):
         'list_rapat' : list_rapat
     }
     # Jika rapaat belum ada
-    # context = {}
+    context = {}
 
     return render(request, 'dashboard_panitia.html', context=context)
 
