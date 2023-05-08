@@ -21,7 +21,7 @@ def show_profile(request):
         'list_pemain' : list_pemain,
     }
     # jika belum ada tim terdaftar
-    context = {}
+    # context = {}
 
     
     return render(request, 'dashboard_manager.html', context)
