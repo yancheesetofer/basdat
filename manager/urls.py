@@ -11,4 +11,7 @@ urlpatterns = [
     path("detail/",detailTim, name="detailTim"),
     path("pemain/",pilihPemain, name="pilihPemain"),
     path("pelatih/",pilihPelatih, name="pilihPelatih"),
+    path("historyRapat/",historyRapat, name="historyRapat"),
+    path("scheduleBooking/",scheduleBooking, name="scheduleBooking"),
+    path("stadiumBooking/",stadiumBooking, name="stadiumBooking"),
 ]

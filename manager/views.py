@@ -37,3 +37,24 @@ def pilihPemain(request):
 
 def pilihPelatih(request):
     return render(request, "pelatih.html")
+
+def bookingList(request):
+    return render(request, "booking_list.html")
+
+def historyRapat(request):
+    return render(request, "history_rapat.html")
+
+def scheduleBooking(request):
+    return render(request, "schedule_booking.html")
+
+def stadiumBooking(request):
+    return render(request, 'stadium_booking.html')
+
+def historyRapat(request):
+    return render(request, 'history_rapat.html')
+
+def schedule_booking(request):
+    return render(request, 'schedule_booking.html')
+
+def stadium_booking(request):
+    return render(request, 'stadium_booking.html')
