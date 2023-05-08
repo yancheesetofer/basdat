@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block meta %}
+
+{% endblock meta %}
+
+{% block content %}
+<head>
+  <style type="text/css">
+    .tg  {border-collapse:collapse;border-color:#93a1a1;border-spacing:0;}
+    .tg td{background-color:#fdf6e3;border-color:#93a1a1;border-style:solid;border-width:1px;color:#002b36;
+      font-family:Arial, sans-serif;font-size:14px;overflow:hidden;padding:10px 5px;word-break:normal;}
+    .tg th{background-color:#657b83;border-color:#93a1a1;border-style:solid;border-width:1px;color:#fdf6e3;
+      font-family:Arial, sans-serif;font-size:14px;font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+    .tg .tg-7k10{background-color:#036400;border-color:inherit;text-align:center;vertical-align:top}
+    .tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:top}
+    .tg .tg-5w3z{background-color:#ecf4ff;border-color:inherit;text-align:center;vertical-align:top}
+    .tg .tg-7od5{background-color:#9aff99;border-color:inherit;text-align:left;vertical-align:top}
+    .tg .tg-ksrh{background-color:#000000;border-color:inherit;text-align:center;vertical-align:top}
+    .tg .tg-4m7p{background-color:#9aff99;border-color:inherit;text-align:center;vertical-align:top}
+    .tg {
+        margin-left: auto; 
+        margin-right: auto;
+      }
+    div{position: absolute;
+      left: 50%;
+      bottom: 20px;
+      transform: translate(-50%, -50%);
+      margin: 0 auto;}
+</style>
+</head>
+
+<body>
+  <table class="tg">
+    <thead>
+      <tr>
+        <th class="tg-c3ow" colspan="8">TIM</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="tg-ksrh" colspan="8"><span style="color:#FFF">PEMAIN</span></td>
+      </tr>
+      <tr>
+        <td class="tg-5w3z">Nama Pemain</td>
+        <td class="tg-5w3z">No HP</td>
+        <td class="tg-5w3z">Tanggal Lahir</td>
+        <td class="tg-5w3z">Is Captain</td>
+        <td class="tg-5w3z">Posisi</td>
+        <td class="tg-5w3z">NPM</td>
+        <td class="tg-5w3z">Jenjang</td>
+        <td class="tg-5w3z">Action</td>
+      </tr>
+      <tr>
+        <td class="tg-5w3z">Sinta Jojo</td>
+        <td class="tg-5w3z">085365478990</td>
+        <td class="tg-5w3z">09/08/2001</td>
+        <td class="tg-5w3z">Yes</td>
+        <td class="tg-5w3z">Striker</td>
+        <td class="tg-5w3z">2008996742</td>
+        <td class="tg-5w3z">S-1</td>
+        <td class="tg-5w3z"><a href="#" style="color: brown;"><u>Make Captain</u></a><br><a href="#" style="color: brown;"><u>Delete</u></a></td>
+      </tr>
+      <tr>
+        <td class="tg-5w3z">Ahmad Burhan</td>
+        <td class="tg-5w3z">081264780089</td>
+        <td class="tg-5w3z">10/01/2008</td>
+        <td class="tg-5w3z">No</td>
+        <td class="tg-5w3z">Back</td>
+        <td class="tg-5w3z">1906656161</td>
+        <td class="tg-5w3z">S-2</td>
+        <td class="tg-5w3z"><a href="#" style="color: brown;"><u>Make Captain</u></a><br><a href="#" style="color: brown;"><u>Delete</u></a></td>
+      </tr>
+      <tr>
+        <td class="tg-7k10" colspan="8"><span style="color:#FFF">PELATIH</span></td>
+      </tr>
+      <tr>
+        <td class="tg-4m7p">Nama Pelatih</td>
+        <td class="tg-4m7p">No HP</td>
+        <td class="tg-4m7p">Email</td>
+        <td class="tg-4m7p">Spesialiasi</td>
+        <td class="tg-4m7p" colspan="4">Action</td>
+      </tr>
+      <tr>
+        <td class="tg-4m7p">Mahmud</td>
+        <td class="tg-7od5">0849993833</td>
+        <td class="tg-7od5">mahmud56@gmail.com</td>
+        <td class="tg-7od5">tendangan</td>
+        <td class="tg-4m7p" colspan="4"><a href="#" style="color: brown;"><u>Delete</u></a></td>
+      </tr>
+    </tbody>
+    <div class="text-center p-6 space-y-4 md:space-y-6 sm:p-8">
+      <ul class="items-center flex-block">
+          <li class="py-3">
+              <a href="#">
+                  <button href="#" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                      PEMAIN
+                  </button>
+              </a>
+          </li>
+          <li class="py-3">
+              <a href="#">
+                  <button href="#" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                      PELATIH
+                  </button>
+              </a>
+          </li>
+      </ul>
+  </div>
+</body>
+{% endblock content %}
+

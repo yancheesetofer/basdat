@@ -25,3 +25,15 @@ def show_profile(request):
 
     
     return render(request, 'dashboard_manager.html', context)
+
+def registerTim(request):
+    return render(request, "registerTim.html")
+
+def detailTim(request):
+    return render(request, "detailTim.html")
+
+def pilihPemain(request):
+    return render(request, "pemain.html")
+
+def pilihPelatih(request):
+    return render(request, "pelatih.html")

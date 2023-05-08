@@ -7,4 +7,8 @@ urlpatterns = [
     path("", index, name="index"),
     path("semuaPertandingan/", listSemuaPertandingan, name="semuaPertandingan"),
     path("profile/", show_profile, name="profile"),
+    path("register/", registerTim, name="daftarTim"),
+    path("detail/",detailTim, name="detailTim"),
+    path("pemain/",pilihPemain, name="pilihPemain"),
+    path("pelatih/",pilihPelatih, name="pilihPelatih"),
 ]
