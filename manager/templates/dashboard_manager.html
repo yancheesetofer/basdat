@@ -5,21 +5,20 @@
 {% endblock meta %}
 
 {% block content %}
-{% include 'navbar_manager.html' %}
 <head>
-    <script
-        defer
-        src="https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js"
-      ></script>
+  <script
+  defer
+  src="https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js"
+  ></script>
   
-      <!-- Alpine CDN -->
-      <script
-        defer
-        src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
-      ></script>
-  </head>
-    <body class="bg-gray-200">   
-
+  <!-- Alpine CDN -->
+  <script
+  defer
+  src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+  ></script>
+</head>
+<body class="bg-gray-200">   
+        {% include 'navbar_manager.html' %}
         <div class=" container mx-auto my-5 p-5 self-center, items-center">
         <div class="md:flex no-wrap md:-mx-1 ">
             <!-- Left Side -->
