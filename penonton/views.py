@@ -20,7 +20,7 @@ def tiketPertandingan(request):
 
 
 def listSemuaPertandingan(request):
-    return render(request, "listSemuaPertandingan.html")
+    return render(request, "semuaPertandingan.html")
 
 
 def show_profile(request):

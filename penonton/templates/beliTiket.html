@@ -3,9 +3,8 @@
   <title>Beli Tiket</title>
 </head>
 <body>
-  <h1 class="text-3xl font-bold flex justify-center mt-10">
-    Beli Tiket
-  </h1>
+  {% include 'navbar_penonton.html' %}
+  <h1 class="text-3xl font-bold flex justify-center mt-10">Beli Tiket</h1>
   <div class="mx-auto mt-10 w-3/5">
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
       <table class="w-full text-sm text-gray-500 dark:text-gray-400">
@@ -28,9 +27,7 @@
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 name="stadium"
               >
-                <option selected >
-                  Pilihan jenis tiket
-                </option>
+                <option selected>Pilihan jenis tiket</option>
                 <option value="US">VIP</option>
                 <option value="CA">Main East</option>
                 <option value="FR">Kategori 1</option>
