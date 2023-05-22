@@ -1,6 +1,11 @@
 from django.shortcuts import render
-
+from django.conf import settings
+import psycopg2
 # Create your views here.
+conn = settings.CONN
+cursor = conn.cursor()
+
+
 
 def index(request):
     return render(request, "list_pertandingan.html")
@@ -12,28 +17,25 @@ def peristiwa(request):
     return render(request, "peristiwaTimBertanding.html")
 
 def show_profile(request):
-    rapat1 = {
-        'id_pertandingan' : 11,
-        'hari' : "Sabtu, 6 Mei 2023",
-        'jam' : '16.30',
-        "manajera" : "Tuchel (2)",
-        'manajerb' : 'Klopp (3)'
-    }
-    rapat2 = {
-        'id_pertandingan' : 11,
-        'hari' : "Senin 8 Mei 2023",
-        'jam' : '19.00',
-        "manajera" : "Tuchel (2)",
-        'manajerb' : 'Klopp (3)'
-    }
+    cursor.execute("SELECT * FROM rapat")
+    list_rapat = []
+    allrapat = cursor.fetchall()
+    for i in allrapat:
+        rapat = {
+            'id_pertandingan' : i[0],
+            'waktu' : i[1],
+            "manajera" : i[3],
+            'manajerb' : i[4],
+            'isi' : i[5]
+        }
+        list_rapat.append(rapat)
 
-    list_rapat = [rapat1, rapat2]
+    conn.commit()
+    cursor.close()
 
     context = {
         'list_rapat' : list_rapat
     }
-    # Jika rapaat belum ada
-    context = {}
 
     return render(request, 'dashboard_panitia.html', context=context)
 
