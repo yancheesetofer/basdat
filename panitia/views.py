@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.conf import settings
-import psycopg2
+from django.db import *
+
 # Create your views here.
-conn = settings.CONN
-cursor = conn.cursor()
+
 
 
 
@@ -17,6 +17,7 @@ def peristiwa(request):
     return render(request, "peristiwaTimBertanding.html")
 
 def show_profile(request):
+    cursor = connection.cursor()
     cursor.execute("SELECT * FROM rapat")
     list_rapat = []
     allrapat = cursor.fetchall()
@@ -29,9 +30,6 @@ def show_profile(request):
             'isi' : i[5]
         }
         list_rapat.append(rapat)
-
-    conn.commit()
-    cursor.close()
 
     context = {
         'list_rapat' : list_rapat
