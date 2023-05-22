@@ -47,15 +47,11 @@ def loginPage(request):
         except Exception as e:
             cursor = connection.cursor()
         response = cursor.fetchone()
-        print(response)
-        print(response[0])
-        print(response[1])
         if response is not None:
             # save in session
             request.session["username"] = response[0]
             request.session["password"] = response[1]
             request.session["is_authenticated"] = True
-
             # search for user role
             # try for role manajer
             try :
@@ -68,9 +64,8 @@ def loginPage(request):
                     [response[0]]
                 )
             except Exception as e:
-                print("asdasda")
+                cursor = connection.cursor()
             data = cursor.fetchone()
-            print(data)
             if data is not None:
                 id_manajer = data[0]
                 request.session["role"] = "manajer"
@@ -127,10 +122,8 @@ def loginPage(request):
                         [response[0]]
                     )
                 except Exception as e:
-                    print("asdasda")
+                    cursor = connection.cursor()
                 data = cursor.fetchone()
-                print(data)
-                print("ini data panitia ")
                 if data is not None:
                     id_panitia = data[0]
                     jabatan = data[1]
@@ -165,17 +158,9 @@ def loginPage(request):
                         )
                     except Exception as e:
                         cursor = connection.cursor()
+
                     statusPanitiaData = cursor.fetchone()
                     status = statusPanitiaData[1]
-                    
-
-                    print("nama depan " + namaDepan)
-                    print("nama belakang " + namaBelakang)
-                    print("nomor hp " + nomorHP)
-                    print("email " + email)
-                    print("alamat " + alamat)
-                    print("status " + status)
-                    print("jabatan " + jabatan)
                     return render(request, "../../panitia/templates/dashboard_panitia.html", context={
                         'namaDepan': namaDepan,
                         'namaBelakang': namaBelakang,
@@ -197,13 +182,12 @@ def loginPage(request):
                             [response[0]]
                         )
                     except Exception as e:
-                        print("asdasda")
+                        cursor = connection.cursor()
                     data = cursor.fetchone()
-                    print(data)
-                    print("ini data panitia ")
+
                     if data is not None:
                         id_penonton = data[0]
-                        request.session["role"] = "panitia"
+                        request.session["role"] = "penonton"
                         try:
                             cursor.execute(
                                 f"""
@@ -234,16 +218,9 @@ def loginPage(request):
                             )
                         except Exception as e:
                             cursor = connection.cursor()
+
                         statusPenontonData = cursor.fetchone()
                         status = statusPenontonData[1]
-                        
-
-                        print("nama depan " + namaDepan)
-                        print("nama belakang " + namaBelakang)
-                        print("nomor hp " + nomorHP)
-                        print("email " + email)
-                        print("alamat " + alamat)
-                        print("status " + status)
                         return render(request, "../../penonton/templates/dashboardPenonton.html", context={
                             'namaDepan': namaDepan,
                             'namaBelakang': namaBelakang,
@@ -253,8 +230,6 @@ def loginPage(request):
                             'status': status
                         })
 
-
-                # Check is 
         else:
             messages.error("Email atau password yang dimasukkan salah")
 
