@@ -1,43 +1,56 @@
 {% extends "base.html" %} {% block content %}
-<head>
-  <title>LIST RAPAT</title>
-</head>
-<body class="bg-gray-100">
-  {% include 'navbar_manager.html' %}
-  <h1 class="text-2xl font-bold mt-4 mb-8">LIST RAPAT</h1>
-  <table class="table-auto mx-auto border-collapse border border-gray-400">
-    <thead>
-      <tr>
-        <th class="border border-gray-400 px-4 py-2">RAPAT TEAM</th>
-        <th class="border border-gray-400 px-4 py-2">Nama Panitia</th>
-        <th class="border border-gray-400 px-4 py-2">Stadium</th>
-        <th class="border border-gray-400 px-4 py-2">Tanggal dan waktu</th>
-        <th class="border border-gray-400 px-4 py-2">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="border border-gray-400 px-4 py-2">A vs B</td>
-        <td class="border border-gray-400 px-4 py-2">XYZ</td>
-        <td class="border border-gray-400 px-4 py-2">stadium GBK</td>
-        <td class="border border-gray-400 px-4 py-2">5 Juli 2023, 07.00 - 09.00</td>
-        <td class="border border-gray-400 px-4 py-2"><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Lihat Laporan Rapat</button></td>
-      </tr>
-      <tr>
-        <td class="border border-gray-400 px-4 py-2">C vs D</td>
-        <td class="border border-gray-400 px-4 py-2">XYZ</td>
-        <td class="border border-gray-400 px-4 py-2">stadium Siliwangi</td>
-        <td class="border border-gray-400 px-4 py-2">5 Juli 2023, 07.00 - 09.00</td>
-        <td class="border border-gray-400 px-4 py-2"><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Lihat Laporan Rapat</button></td>
-      </tr>
-      <tr>
-        <td class="border border-gray-400 px-4 py-2">E vs F</td>
-        <td class="border border-gray-400 px-4 py-2">XYZ</td>
-        <td class="border border-gray-400 px-4 py-2">stadium Cendrawasih</td>
-        <td class="border border-gray-400 px-4 py-2">5 Juli 2023, 07.00 - 09.00</td>
-        <td class="border border-gray-400 px-4 py-2"><button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Lihat Laporan Rapat</button></td>
-      </tr>
-    </tbody>
-  </table>
-</body>
+    {#TODO: R History Rapat Manager#}
+    <head>
+        <title>LIST RAPAT</title>
+    </head>
+    <body class="bg-gray-100">
+    {% include 'navbar_manager.html' %}
+    <h1 class="text-2xl font-bold mt-4 mb-8">LIST RAPAT</h1>
+    <table class="table-auto mx-auto border-collapse border border-gray-400">
+        <thead>
+        <tr>
+            <th class="border border-gray-400 px-4 py-2">RAPAT TEAM</th>
+            <th class="border border-gray-400 px-4 py-2">Nama Panitia</th>
+            <th class="border border-gray-400 px-4 py-2">Stadium</th>
+            <th class="border border-gray-400 px-4 py-2">Tanggal dan waktu</th>
+            <th class="border border-gray-400 px-4 py-2">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="border border-gray-400 px-4 py-2">A vs B</td>
+            <td class="border border-gray-400 px-4 py-2">XYZ</td>
+            <td class="border border-gray-400 px-4 py-2">stadium GBK</td>
+            <td class="border border-gray-400 px-4 py-2">5 Juli 2023, 07.00 - 09.00</td>
+            <td class="border border-gray-400 px-4 py-2">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Lihat Laporan
+                    Rapat
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td class="border border-gray-400 px-4 py-2">C vs D</td>
+            <td class="border border-gray-400 px-4 py-2">XYZ</td>
+            <td class="border border-gray-400 px-4 py-2">stadium Siliwangi</td>
+            <td class="border border-gray-400 px-4 py-2">5 Juli 2023, 07.00 - 09.00</td>
+            <td class="border border-gray-400 px-4 py-2">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Lihat Laporan
+                    Rapat
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td class="border border-gray-400 px-4 py-2">E vs F</td>
+            <td class="border border-gray-400 px-4 py-2">XYZ</td>
+            <td class="border border-gray-400 px-4 py-2">stadium Cendrawasih</td>
+            <td class="border border-gray-400 px-4 py-2">5 Juli 2023, 07.00 - 09.00</td>
+            <td class="border border-gray-400 px-4 py-2">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Lihat Laporan
+                    Rapat
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    </body>
 {% endblock content %}
