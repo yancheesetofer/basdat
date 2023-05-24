@@ -1,0 +1,43 @@
+{% extends "base.html" %} {% block content %}
+    {#TODO: CR Pembelian tiket Penonton#}
+    <head>
+        <title>Pilih Stadium</title>
+    </head>
+    <body>
+    {% include 'navbar_penonton.html' %}
+    <h1 class="text-3xl font-bold flex justify-center mt-10">Pilih Stadium</h1>
+    <div class="w-3/5 mx-auto">
+        <div class="flex justify-evenly mt-10">
+            <select
+                    id="countries"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    name="stadium"
+            >
+                <option selected>Stadium pilihan</option>
+                <option>Stadium GBK</option>
+                <option>Stadium B</option>
+                <option>Stadium C</option>
+                <option>Stadium D</option>
+            </select>
+            <select
+                    id="countries"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-auto p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    name="tanggal"
+            >
+                <option selected>Tanggal</option>
+                <option>21 Januari 2021</option>
+                <option>23 Januari 2021</option>
+                <option>26 Januari 2021</option>
+                <option>30 Januari 2021</option>
+            </select>
+        </div>
+    </div>
+    <div class="flex justify-center">
+        <button
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-10"
+        >
+            Submit
+        </button>
+    </div>
+    </body>
+{% endblock content %}

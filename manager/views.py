@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.db import *
+from django.db import connection
 from pprint import pprint
 
 # Create your views here.
@@ -30,7 +30,7 @@ def index(request):
 
 
 def listSemuaPertandingan(request):
-    return render(request, "listSemuaPertandingan.html")
+    return render(request, "list_semua_pertandingan.html")
 
 
 def show_profile(request):
