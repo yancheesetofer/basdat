@@ -2,7 +2,10 @@ from django.shortcuts import render
 from django.db import *
 from django.contrib import messages
 from pprint import pprint
+from django.shortcuts import redirect
 import psycopg2
+from django.urls import reverse
+from django.template.loader import render_to_string
 
 
 # Create your views here.
@@ -69,47 +72,9 @@ def loginPage(request):
             if data is not None:
                 id_manajer = data[0]
                 request.session["role"] = "manajer"
-                try:
-                    cursor.execute(
-                        f"""
-                        select *
-                        from non_pemain
-                        where non_pemain.id = %s
-                        """,
-                        [str(id_manajer)]
-                    )
-                except Exception as e:
-                    cursor = connection.cursor()
+                request.session["id"] = str(id_manajer)
 
-                manajerData = cursor.fetchone()
-                namaDepan = manajerData[1]
-                namaBelakang = manajerData[2]
-                nomorHP = manajerData[3]
-                email = manajerData[4]
-                alamat = manajerData[5]
-
-                try:
-                    cursor.execute(
-                        f"""
-                        select *
-                        from status_non_pemain
-                        where id_non_pemain = %s
-                        """,
-                        [str(id_manajer)]
-                    )
-                except Exception as e:
-                    cursor = connection.cursor()
-
-                statusManajerData = cursor.fetchone()
-                status = statusManajerData[1]
-                return render(request, "../../manager/templates/dashboard_manager.html", context={
-                    'namaDepan': namaDepan,
-                    'namaBelakang': namaBelakang,
-                    'nomorHP': nomorHP,
-                    'email': email,
-                    'alamat': alamat,
-                    'status': status
-                })
+                return redirect("/manager/profile")
             else :
                 # try for role panitia
                 try :
