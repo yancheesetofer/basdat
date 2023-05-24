@@ -36,7 +36,7 @@ def show_profile(request):
         'list_rapat' : list_rapat
     }
 
-    return render(request, 'dashboard_panitia.html', context=context)
+    return render(request, 'dashboard_panitia.html')
 
 def manage_pertandingan(request):
     context = {
