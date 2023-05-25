@@ -18,6 +18,7 @@ def peristiwa(request):
 
 def show_profile(request):
     cursor = connection.cursor()
+    # cursor.execute("SET search_path TO SIREST")
     cursor.execute("SELECT * FROM rapat")
     list_rapat = []
     allrapat = cursor.fetchall()
