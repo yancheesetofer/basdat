@@ -7,7 +7,7 @@ import psycopg2
 
 
 def get_database():
-    conn = psycopg2.connect(database="tk3_sepakbola", user="postgres", password="postgres")
+    conn = connection.connect(database="tk3_sepakbola", user="postgres", password="postgres")
     return conn
 
 

@@ -7,7 +7,7 @@ from pprint import pprint
 # Create your views here.
 
 def get_database():
-    conn = psycopg2.connect(database="tk3_sepakbola", user="postgres", password="postgres")
+    conn = connection.connect(database="tk3_sepakbola", user="postgres", password="postgres")
     return conn
 
 
@@ -70,9 +70,11 @@ def list_pertandingan_manager_id(request, id):
                 JOIN Pertandingan P ON TP1.ID_Pertandingan = P.ID_Pertandingan
                 JOIN Stadium S ON P.Stadium = S.ID_Stadium
             WHERE %s in 
-            (SELECT id_manajer FROM tim_manajer WHERE 
+            (SELECT username FROM tim_manajer
+             JOIN manajer m on tim_manajer.id_manajer = m.id_manajer
+             WHERE 
                 (t1.nama_tim = tim_manajer.nama_tim OR t2.nama_tim = tim_manajer.nama_tim));
-        """, [id])
+        """, [request.session["username"]])
         pertandingan = cursor.fetchall()
 
     print("pertandingan", pertandingan)
