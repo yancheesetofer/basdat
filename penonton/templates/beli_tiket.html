@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <head>
+        <title>Beli Tiket</title>
+    </head>
+
+    <body>
+    {% include 'navbar_penonton.html' %}
+    <h1 class="text-3xl font-bold flex justify-center mt-10">Beli Tiket</h1>
+
+    <div class="mx-auto mt-10 w-3/5">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table class="w-full text-sm text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3 bg-gray-200">Jenis Tiket</th>
+                        <th scope="col" class="px-6 py-3 bg-gray-200">Pembayaran</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                        <th scope="row"
+                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white flex justify-center">
+                            {{ form.jenis_tiket }}
+                        </th>
+                        <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white mx-10">
+                            {{ form.pembayaran }}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="flex justify-center">
+                <button type="submit"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-10">Beli
+                </button>
+            </div>
+        </form>
+    </div>
+    </body>
+{% endblock content %}
