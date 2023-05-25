@@ -37,9 +37,8 @@ def pilih_stadium(request):
         form = StadiumForm(request.POST)
         if form.is_valid():
             request.session['stadium'] = form.cleaned_data['stadium']
-            request.session['tanggal'] = form.cleaned_data['tanggal']
-            request.session.modified = True
-            return redirect(request, 'list_waktu_stadium')  # redirect to next page
+            request.session['tanggal'] = form.cleaned_data['tanggal'].strftime('%Y-%m-%d')
+            return redirect('/penonton/cr_pembelian_tiket/list_waktu_stadium')  # redirect to next page
     else:
         form = StadiumForm()
     return render(request, 'pilih_stadium.html', {'form': form})
@@ -56,11 +55,13 @@ def list_waktu_stadium(request):
     else:
         with get_database().cursor() as cursor:
             cursor.execute("""
-                SELECT start_datetime ||' to ' || end_datetime 
+                SELECT start_datetime, end_datetime 
                 FROM Pertandingan 
-            """)
-            # WHERE Stadium = %s AND DATE(start_datetime) = %s , [stadium, tanggal]
+                WHERE Stadium = %s AND DATE(start_datetime) = %s; 
+            """, [stadium, tanggal])
             waktu_list = cursor.fetchall()
+    if not waktu_list:
+        waktu_list = [(" ", " ")]
     print(f"WAKTU LIST{waktu_list} ")
     return render(request, 'list_waktu_stadium.html', {'waktu_list': waktu_list})
 
@@ -68,12 +69,11 @@ def list_waktu_stadium(request):
 def pilih_pertandingan(request):
     stadium = request.session.get('stadium')
     tanggal = request.session.get('tanggal')
-    waktu = request.session.get('waktu')
     if request.method == 'POST':
         pertandingan = request.POST['pertandingan']
         request.session['pertandingan'] = pertandingan
         request.session.modified = True
-        return redirect('beli_tiket')  # redirect to next page
+        return redirect('/penonton/cr_pembelian_tiket/beli_tiket')  # redirect to next page
     else:
         print("STADIUM TANGGAL", stadium if stadium else "kosong", tanggal if tanggal else "kosong")
         with get_database().cursor() as cursor:
@@ -86,7 +86,7 @@ def pilih_pertandingan(request):
                 WHERE tp1.Nama_Tim <> tp2.Nama_Tim AND tp1.ID_Pertandingan IN (
                     SELECT ID_Pertandingan 
                     FROM Pertandingan p
-                    WHERE p.Stadium = %s AND DATE(p.start_datetime) = %s
+                    WHERE p.Stadium = %s AND DATE(p.start_datetime) = DATE(%s)
                 )
             """, [stadium, tanggal])
             pertandingan_list = cursor.fetchall()
@@ -105,10 +105,13 @@ def beli_tiket(request):
                 cursor.execute("""
                     INSERT INTO Pembelian_Tiket(Nomor_Receipt, ID_Penonton, Jenis_Tiket, Jenis_Pembayaran, ID_Pertandingan) 
                     VALUES (%s, (SELECT ID_Penonton FROM Penonton WHERE Username = %s), %s, %s, 
-                    (SELECT ID_Pertandingan FROM Pertandingan WHERE Stadium = (SELECT ID_Stadium FROM Stadium WHERE Nama = %s) AND DATE(Start_Datetime) = %s AND TIME(Start_Datetime) = %s))
+                    (SELECT ID_Pertandingan 
+                        FROM Pertandingan 
+                        WHERE Stadium = (SELECT ID_Stadium FROM Stadium WHERE Nama = %s)
+                        AND DATE(Start_Datetime) = DATE(%s)))
                 """, [nomor_receipt, request.user.username, jenis_tiket, pembayaran, request.session['stadium'],
-                      request.session['tanggal'], request.session['waktu']])
-            return redirect('dashboard')  # redirect to dashboard page
+                      request.session['tanggal']])
+            return redirect('/penonton/profile')  # redirect to dashboard page
     else:
         form = PembayaranForm()
     return render(request, 'beli_tiket.html', {'form': form})
@@ -132,4 +135,3 @@ def list_pertandingan_penonton(request):
         pertandingan = cursor.fetchall()
         print("pertandingan", pertandingan)
     return render(request, 'list_pertandingan_penonton.html', {'pertandingan': pertandingan})
-

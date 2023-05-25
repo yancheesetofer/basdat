@@ -4,6 +4,7 @@ from django.urls import path
 app_name = "penonton"
 
 urlpatterns = [
+    path('dashboard/', show_profile, name='dashboard'),
     path('profile/', show_profile, name='profile'),
     path('cr_pembelian_tiket/pilih_stadium/', pilih_stadium, name='pilih_stadium'),
     path('cr_pembelian_tiket/list_waktu_stadium/', list_waktu_stadium, name='list_waktu_stadium'),

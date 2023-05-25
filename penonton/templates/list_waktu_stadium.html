@@ -21,12 +21,12 @@
                     <tbody>
                     <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                            {{ waktu }}
+                            {{ waktu.0 }} to {{ waktu.1 }}
                         </th>
                         <td class="px-6 py-4 flex justify-center">
                             <form method="post">
                                 {% csrf_token %}
-                                <input type="hidden" name="waktu" value="{{ waktu }}">
+                                <input type="hidden" name="waktu" value="{{ waktu.0 }}">
                                 <button type="submit" class="bg-blue-500 rounded-md py-1 px-2 text-white font-bold">
                                     Next
                                 </button>
