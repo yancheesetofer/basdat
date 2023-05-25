@@ -8,7 +8,7 @@ from django.db import *
 
 
 def index(request):
-    return render(request, "list_pertandingan.html")
+    return render(request, "list_pertandingan_penonton.html")
 
 def mulai(request):
     return render(request, "mulaiPertandingan.html")
@@ -51,7 +51,7 @@ def buat_pertandingan(request):
     return render(request, "buat_pertandingan.html")
 
 def list_pertandingan(request):
-    return render(request, "list_pertandingan.html")
+    return render(request, "list_pertandingan_penonton.html")
 
 def mulai_rapat(request):
     return render(request, "mulai_rapat.html")

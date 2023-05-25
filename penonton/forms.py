@@ -1,9 +1,15 @@
+import psycopg2
 from django import forms
 from django.db import connection
 
 
+def get_database():
+    conn = psycopg2.connect(database="tk3_sepakbola", user="postgres", password="postgres")
+    return conn
+
+
 def get_stadiums():
-    with connection.cursor() as cursor:
+    with get_database().cursor() as cursor:
         cursor.execute('SELECT nama FROM Stadium')
         list_stadium = cursor.fetchall()
         return list_stadium

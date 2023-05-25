@@ -29,8 +29,8 @@ def index(request):
     })
 
 
-def listSemuaPertandingan(request):
-    return render(request, "list_pertandingan.html")
+def list_pertandingan_manager(request):
+    return render(request, "list_pertandingan_penonton.html")
 
 
 def show_profile(request):
