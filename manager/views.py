@@ -36,7 +36,47 @@ def index(request):
 
 
 def list_pertandingan_manager(request):
-    return render(request, "list_pertandingan_penonton.html")
+    with get_database().cursor() as cursor:
+        cursor.execute("""
+            SELECT 
+                T1.Nama_Tim || ' vs ' || T2.Nama_Tim AS "Tim Bertanding",
+                S.Nama AS "Stadium",
+                P.Start_Datetime || ' - ' || P.End_Datetime AS "Tanggal dan Waktu"
+            FROM 
+                Tim_Pertandingan TP1 
+                JOIN Tim T1 ON TP1.Nama_Tim = T1.Nama_Tim
+                JOIN Tim_Pertandingan TP2 ON TP1.ID_Pertandingan = TP2.ID_Pertandingan AND TP1.Nama_Tim != TP2.Nama_Tim
+                JOIN Tim T2 ON TP2.Nama_Tim = T2.Nama_Tim
+                JOIN Pertandingan P ON TP1.ID_Pertandingan = P.ID_Pertandingan
+                JOIN Stadium S ON P.Stadium = S.ID_Stadium;
+        """)
+        pertandingan = cursor.fetchall()
+    print("pertandingan", pertandingan)
+    return render(request, 'list_pertandingan_manager.html', {'pertandingan': pertandingan})
+
+
+def list_pertandingan_manager_id(request, id):
+    with get_database().cursor() as cursor:
+        cursor.execute("""
+            SELECT 
+                T1.Nama_Tim || ' vs ' || T2.Nama_Tim AS "Tim Bertanding",
+                S.Nama AS "Stadium",
+                P.Start_Datetime || ' - ' || P.End_Datetime AS "Tanggal dan Waktu"
+            FROM 
+                Tim_Pertandingan TP1 
+                JOIN Tim T1 ON TP1.Nama_Tim = T1.Nama_Tim
+                JOIN Tim_Pertandingan TP2 ON TP1.ID_Pertandingan = TP2.ID_Pertandingan AND TP1.Nama_Tim != TP2.Nama_Tim
+                JOIN Tim T2 ON TP2.Nama_Tim = T2.Nama_Tim
+                JOIN Pertandingan P ON TP1.ID_Pertandingan = P.ID_Pertandingan
+                JOIN Stadium S ON P.Stadium = S.ID_Stadium
+            WHERE %s in 
+            (SELECT id_manajer FROM tim_manajer WHERE 
+                (t1.nama_tim = tim_manajer.nama_tim OR t2.nama_tim = tim_manajer.nama_tim));
+        """, [id])
+        pertandingan = cursor.fetchall()
+
+    print("pertandingan", pertandingan)
+    return render(request, 'list_pertandingan_manager.html', {'pertandingan': pertandingan})
 
 
 def show_profile(request):

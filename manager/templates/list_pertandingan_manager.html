@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <head>
+        <title>List Waktu Stadium A</title>
+    </head>
+    <body>
+    {% include 'navbar_penonton.html' %}
+    <h1 class="text-3xl font-bold flex justify-center mt-10">
+        List Pertandingan
+    </h1>
+    <div class="mx-auto mt-10 w-3/5">
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table class="w-full text-sm text-gray-500 dark:text-gray-400">
+                <thead
+                        class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+                >
+                <tr>
+                    <th scope="col" class="px-6 py-3 bg-gray-200">
+                        Tim Bertanding
+                    </th>
+                    <th scope="col" class="px-6 py-3 bg-gray-200">Stadium</th>
+                    <th scope="col" class="px-6 py-3 bg-gray-200">Tanggal dan Waktu</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for match in pertandingan %}
+                    <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                        <th
+                                scope="row"
+                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                        >
+                            {{ match.0 }}
+                        </th>
+                        <th
+                                scope="row"
+                                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                        >
+                            {{ match.1 }}
+                        </th>
+                        <td class="px-6 py-4 flex justify-center">
+                            <a
+                                    href="#"
+                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                            >{{ match.2 }}</a
+                            >
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </body>
+{% endblock content %}
