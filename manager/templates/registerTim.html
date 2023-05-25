@@ -27,19 +27,23 @@
                     <h1 class="items-center self-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                         Daftarkan Tim Kampusmu!
                     </h1>
+
+                    <form method="POST" action="{% url 'manager:daftarTim' %}">
+                    {% csrf_token %}
                     <ul class="items-center flex-block">
                         <div class="mb-3">
                             <label style ="color: aliceblue;"for="InputNamaTim" class="form-label">Nama Tim</label>
-                            <input type="email" class="form-control" id="InputNamaTim" name="namaTim" required>
+                            <input maxlength="50"  class="form-control" id="InputNamaTim" name="namaTim" required>
                           </div>
                         <div class="mb-3">
                             <label style ="color: aliceblue;"for="InputNamaTim"  class="form-label">Nama Universitas</label>
-                            <input type="email" class="form-control" id="InputNamaUniv" name="namaUniv" required>
+                            <input maxlength="50" class="form-control" id="InputNamaUniv" name="namaUniv" required>
                         </div>
-                        <button  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                             Register
                         </button>
                     </ul>
+                    </form>
                     
                 </div>
             </div>

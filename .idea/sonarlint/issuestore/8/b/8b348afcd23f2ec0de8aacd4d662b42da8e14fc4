@@ -1,0 +1,13 @@
+
+dpython:S2208"GImport only needed names or import the module and then use its members.(í­Ÿıÿÿÿÿ
+bpython:S3457"EAdd replacement fields or use a normal string instead of an f-string.(Îµôóşÿÿÿÿ
+spython:S1542 "[Rename function "listSemuaPertandingan" to match the regular expression ^[a-z_][a-z0-9_]*$.(—¸ä
+npython:S1542="QRename function "registerTim" to match the regular expression ^[a-z_][a-z0-9_]*$.(ÏƒÜßúÿÿÿÿ
+gpython:S1542A"ORename function "detailTim" to match the regular expression ^[a-z_][a-z0-9_]*$.(îş‡­
+npython:S1542E"QRename function "pilihPemain" to match the regular expression ^[a-z_][a-z0-9_]*$.(¤´ĞÖúÿÿÿÿ
+jpython:S1542I"RRename function "pilihPelatih" to match the regular expression ^[a-z_][a-z0-9_]*$.(¼¼³Å
+ipython:S1542M"QRename function "bookingList" to match the regular expression ^[a-z_][a-z0-9_]*$.(Œï´
+jpython:S1542Q"RRename function "historyRapat" to match the regular expression ^[a-z_][a-z0-9_]*$.(Úö¥»
+rpython:S1542U"URename function "scheduleBooking" to match the regular expression ^[a-z_][a-z0-9_]*$.(”ò…Šüÿÿÿÿ
+qpython:S1542Y"TRename function "stadiumBooking" to match the regular expression ^[a-z_][a-z0-9_]*$.(½ˆÔ„ùÿÿÿÿ
+jpython:S1542]"RRename function "historyRapat" to match the regular expression ^[a-z_][a-z0-9_]*$.(Úö¥»
