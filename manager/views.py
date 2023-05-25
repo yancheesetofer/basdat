@@ -126,7 +126,7 @@ def bookingList(request):
 
 
 def historyRapat(request):
-    return render(request, "history_rapat.html")
+    return render(request, "history_rapat_all.html")
 
 
 def scheduleBooking(request):
@@ -137,7 +137,7 @@ def stadiumBooking(request):
     return render(request, "stadium_booking.html")
 
 
-def history_rapat_id(request, manajer_id="manajer_id"):
+def history_rapat(request):
     with connection.cursor() as cursor:
         cursor.execute("""
         SELECT 
@@ -155,14 +155,16 @@ def history_rapat_id(request, manajer_id="manajer_id"):
             JOIN user_system AS user_panitia ON panitia.username = user_panitia.username
             JOIN Pertandingan AS pertandingan ON rapat.ID_Pertandingan = pertandingan.ID_Pertandingan
             JOIN Stadium AS stadium ON pertandingan.Stadium = stadium.ID_Stadium
-            WHERE rapat.Manajer_Tim_A = %s OR rapat.Manajer_Tim_B = %s
-        """, [manajer_id, manajer_id])
+            JOIN manajer As manajer_a ON rapat.manajer_tim_a = manajer_a.id_manajer
+            JOIN manajer As manajer_b ON rapat.manajer_tim_b = manajer_b.id_manajer
+            WHERE manajer_a.username = %s OR manajer_b.username = %s
+        """, [request.session["username"], request.session["username"]])
         rapats = cursor.fetchall()
     print(rapats)
-    return render(request, 'history_rapat.html', {'rapats': rapats})
+    return render(request, 'history_rapat_all.html', {'rapats': rapats})
 
 
-def history_rapat(request, manajer_id="manajer_id"):
+def history_rapat_all(request, manajer_id="manajer_id"):
     with connection.cursor() as cursor:
         cursor.execute("""
             SELECT 
@@ -183,7 +185,7 @@ def history_rapat(request, manajer_id="manajer_id"):
         """, )
         rapats = cursor.fetchall()
     print(rapats)
-    return render(request, 'history_rapat.html', {'rapats': rapats})
+    return render(request, 'history_rapat_all.html', {'rapats': rapats})
 
 
 def schedule_booking(request):

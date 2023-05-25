@@ -13,8 +13,8 @@ urlpatterns = [
     path("detail/", detailTim, name="detailTim"),
     path("pemain/", pilihPemain, name="pilihPemain"),
     path("pelatih/", pilihPelatih, name="pilihPelatih"),
-    path("r_history_rapat/<str:manajer_id>/", history_rapat_id, name="history_rapat"),
     path("r_history_rapat/", history_rapat, name="history_rapat"),
+    path("r_history_rapat_all/", history_rapat_all, name="history_rapat_all"),
     path("scheduleBooking/", scheduleBooking, name="scheduleBooking"),
     path("stadiumBooking/", stadiumBooking, name="stadiumBooking"),
 ]
