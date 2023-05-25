@@ -1,9 +1,6 @@
 from django.shortcuts import render, redirect
 from django.conf import settings
 from django.db import *
-<<<<<<< HEAD
-from django.http import HttpResponse
-=======
 from utilities.helper import query
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
@@ -12,7 +9,6 @@ from django.contrib.auth.decorators import login_required
 
 
 
->>>>>>> 2f5212659a6dd84c02ab3156b5e394a55a8d2650
 # Create your views here.
 
 
@@ -179,7 +175,6 @@ FROM stadium;
     return render(request, "buat_pertandingan.html",context)
 
 def list_pertandingan(request):
-<<<<<<< HEAD
     daftar_pertandingan={}
     try:
         cursor = connection.cursor()
@@ -205,9 +200,6 @@ GROUP BY id_pertandingan;
             'lt':list_tim}
     
     return render(request, "list_pertandingan.html",context)
-=======
-    return render(request, "list_pertandingan_penonton.html")
->>>>>>> 2f5212659a6dd84c02ab3156b5e394a55a8d2650
 
 def mulai_rapat(request):
     return render(request, "mulai_rapat.html")
