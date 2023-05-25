@@ -17,135 +17,66 @@
       </tr>
     </thead>
     <tbody>
+      {% for row1, row2 in lt %}
       <tr>
-        <td class="p-3 border-t border-gray-400">A vs B</td>
+        <td class="p-3 border-t border-gray-400">{{row1.0}}</td>
         <td class="p-3 border-t border-gray-400 text-center">
-          <button
-            type="button"
-            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
-          >
-            Update
-          </button>
-          <button
-            type="button"
-            class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700"
-          >
-            Delete
-          </button>
         </td>
-        <td class="p-3 border-t border-gray-400">I vs J</td>
+        <td class="p-3 border-t border-gray-400">{{row2.0}}</td>
         <td class="p-3 border-t border-gray-400 text-center">
-          <button
-            type="button"
-            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
-          >
-            Update
-          </button>
-          <button
-            type="button"
-            class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700"
-          >
-            Delete
-          </button>
         </td>
       </tr>
-      <tr>
-        <td class="p-3 border-t border-gray-400">C vs D</td>
-        <td class="p-3 border-t border-gray-400 text-center">
-          <button
-            type="button"
-            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
-          >
-            Update
-          </button>
-          <button
-            type="button"
-            class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700"
-          >
-            Delete
-          </button>
-        </td>
-        <td class="p-3 border-t border-gray-400">K vs L</td>
-        <td class="p-3 border-t border-gray-400 text-center">
-          <button
-            type="button"
-            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
-          >
-            Update
-          </button>
-          <button
-            type="button"
-            class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700"
-          >
-            Delete
-          </button>
-        </td>
-      </tr>
-      <tr>
-        <td class="p-3 border-t border-gray-400">E vs F</td>
-        <td class="p-3 border-t border-gray-400 text-center">
-          <button
-            type="button"
-            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
-          >
-            Update
-          </button>
-          <button
-            type="button"
-            class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700"
-          >
-            Delete
-          </button>
-        </td>
-        <td class="p-3 border-t border-gray-400">M vs N</td>
-        <td class="p-3 border-t border-gray-400 text-center">
-          <button
-            type="button"
-            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
-          >
-            Update
-          </button>
-          <button
-            type="button"
-            class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700"
-          >
-            Delete
-          </button>
-        </td>
-      </tr>
-      <tr>
-        <td class="p-3 border-t border-gray-400">G vs H</td>
-        <td class="p-3 border-t border-gray-400 text-center">
-          <button
-            type="button"
-            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
-          >
-            Update
-          </button>
-          <button
-            type="button"
-            class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700"
-          >
-            Delete
-          </button>
-        </td>
-        <td class="p-3 border-t border-gray-400">O vs P</td>
-        <td class="p-3 border-t border-gray-400 text-center">
-          <button
-            type="button"
-            class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
-          >
-            Update
-          </button>
-          <button
-            type="button"
-            class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700"
-          >
-            Delete
-          </button>
-        </td>
-      </tr>
+      {% endfor %}
     </tbody>
+    <thead>
+      <tr class="bg-gray-200">
+        <th class="p-3 text-left">Grup C</th>
+        <th class="p-3 text-center">Action</th>
+        <th class="p-3 text-left">Grup D</th>
+        <th class="p-3 text-center">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td class="p-3 border-t border-gray-400"></td>
+          <td class="p-3 border-t border-gray-400 text-center">
+            <button
+              type="button"
+              class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+            >
+            <a href="{% url 'panitia:buatPertandingan' %}">Add</a>
+            </button>
+          </td>
+          <td class="p-3 border-t border-gray-400"></td>
+          <td class="p-3 border-t border-gray-400 text-center">
+            <button
+              type="button"
+              class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+            >
+            <a href="{% url 'panitia:buatPertandingan' %}">Add</a>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td class="p-3 border-t border-gray-400"></td>
+          <td class="p-3 border-t border-gray-400 text-center">
+            <button
+              type="button"
+              class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">
+              <a href="{% url 'panitia:buatPertandingan' %}">Add</a>
+            </button>
+          </td>
+          <td class="p-3 border-t border-gray-400"></td>
+          <td class="p-3 border-t border-gray-400 text-center">
+            <button
+              type="button"
+              class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+            >
+            <a href="{% url 'panitia:buatPertandingan' %}">Add</a>
+            </button>
+          </td>
+        </tr>
+      </tbody>
   </table>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
 </body>
