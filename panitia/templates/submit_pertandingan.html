@@ -2,8 +2,9 @@
 <head>
   <title>BUAT PERTANDINGAN</title>
 </head>
+{% include 'navbar_panitia.html' %}
+
 <body class="bg-gray-200 flex flex-col justify-center items-center h-screen">
-  {% include 'navbar_panitia.html' %}
   <h1 class="text-4xl font-bold mb-8">BUAT PERTANDINGAN</h1>
   <form method="post" class="bg-white rounded-lg p-8 shadow-md">
     {% csrf_token %}
