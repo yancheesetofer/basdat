@@ -17,5 +17,6 @@ urlpatterns = [
     path("r_history_rapat_all/", history_rapat_all, name="history_rapat_all"),
     path("scheduleBooking/", scheduleBooking, name="scheduleBooking"),
     path("stadiumBooking/", stadiumBooking, name="stadiumBooking"),
+    path("bookingConfirmation/", bookingConfirmation, name="bookingConfirmation"), 
     path('makecaptain/', makecaptain, name='makecaptain')
 ]

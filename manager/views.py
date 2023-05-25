@@ -489,7 +489,6 @@ def scheduleBooking(request):
 
         id_stadium = cursor.fetchone()
 
-        print("idstadium " + str(id_stadium[0]))
         return render(
             request,
             "schedule_booking.html",
@@ -498,7 +497,6 @@ def scheduleBooking(request):
                 "date": date,
             },
         )
-    print("KOK SINI")
     return HttpResponseForbidden("kenot")
 
 

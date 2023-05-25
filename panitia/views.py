@@ -6,6 +6,7 @@ from utilities.helper import query
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
 
 
 
@@ -83,7 +84,6 @@ def show_profile(request):
     context = {
         'list_rapat' : list_rapat
     }
-    print(user_info)
     return render(request, 'dashboard_panitia.html',context)
 
 def manage_pertandingan(request):
@@ -279,13 +279,19 @@ def mulai_rapat(request):
         except Exception as e:
             cursor = connection.cursor()
         rapat = cursor.fetchone()
+
+        timA = keduaTim[0][0]
+        timB = keduaTim[1][0]
+
         if rapat != None:
             result= {
-            "timBertanding": keduaTim[0][0] + " vs " + keduaTim[1][0],
+            "timBertanding": timA + " vs " + timB,
             "stadium": namaStadium[0],
             "tanggalWaktu": str(exactdate) + " " + str(startDate) + " - " + str(endDate),
-            "isPertandingan": id,
-            "rapat": rapat[0]
+            "idPertandingan": id,
+            "rapat": rapat[0],
+            "timA": timA,
+            "timB": timB
             }
         else :
             result= {
@@ -293,7 +299,9 @@ def mulai_rapat(request):
                 "stadium": namaStadium[0],
                 "tanggalWaktu": str(exactdate) + " " + str(startDate) + " - " + str(endDate),
                 "idPertandingan": id,
-                "rapat": None
+                "rapat": None,
+                "timA": timA,
+                "timB": timB
         }
         listResponseWanted.append(result)
 
@@ -303,7 +311,79 @@ def mulai_rapat(request):
     })
 
 def nota_rapat(request):
-    return render(request, "nota_rapat.html")
+    if request.method == "POST":
+        idPertandingan = request.POST.get("idPertandingan")
+        nama = request.POST.get("stadium")
+        timA = request.POST.get("timA")
+        timB = request.POST.get("timB")
+        print("cabo")
+        print(idPertandingan)
+        print(nama)
+        print("hai")
+        print(timA)
+        print("halo")
+        print(timB)
+
+    return render(request, "nota_rapat.html", {
+        "idPertandingan": idPertandingan,
+        "nama": nama,
+        "timA": timA,
+        "timB": timB
+    })
+
+def confirmationRapat(request):
+    if request.method == "POST":
+        idPertandingan = request.POST.get("idPertandingan")
+        nama = request.POST.get("stadium")
+        timA = request.POST.get("timA")
+        timB = request.POST.get("timB")
+        notaRapat = request.POST.get("notaRapat")
+        perwakilanPanitia = request.session.get("id")
+        datetime = timezone.now()
+
+        cursor = connection.cursor()
+
+        try:
+            cursor.execute(
+                f"""
+                select id_manajer
+                from tim_manajer
+                where nama_tim = %s
+                """,
+                [timA]
+            )
+        except Exception as e:
+            cursor = connection.cursor()
+        
+        manajerA = cursor.fetchone()
+
+        try:
+            cursor.execute(
+                f"""
+                select id_manajer
+                from tim_manajer
+                where nama_tim = %s
+                """,
+                [timB]
+            )
+        except Exception as e:
+            cursor = connection.cursor()
+        
+        manajerB = cursor.fetchone()
+        
+
+        try:
+            cursor.execute(
+                f"""
+                INSERT INTO rapat (id_pertandingan, datetime, perwakilan_panitia, manajer_tim_a, manajer_tim_b, isi_rapat)
+                values (%s, %s, %s, %s, %s, %s)
+                """,
+                [idPertandingan, datetime, perwakilanPanitia, manajerA, manajerB, notaRapat]
+            )
+        except Exception as e:
+            cursor = connection.cursor()
+
+    return redirect("/panitia/profile")
 
 def submit_pertandingan(request):
     daftar_wasit={}

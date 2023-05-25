@@ -19,13 +19,16 @@
 
       <form method="POST" action="{% url 'panitia:notaRapat' %}">
       {% for response in listResponse %}
+      {% csrf_token %}
       <tr>
         <td class="p-3 border-t border-gray-400">{{response.timBertanding}}</td>
         <td class="p-3 border-t border-gray-400">{{response.stadium}}</td>
         <td class="p-3 border-t border-gray-400">{{response.tanggalWaktu}}</td>
         <input type="hidden" name="idPertandingan" value="{{response.idPertandingan}}" />
-          <input type="hidden" name="end_datetime" value="{{date}} 18:00:00.000000"/>
-          <input type="hidden" name="stadium" value="{{stadium}}"/>
+        <input type="hidden" name="stadium" value="{{response.stadium}}"/>
+        <input type="hidden" name="timA" value="{{response.timA}}"/>
+        <input type="hidden" name="timB" value="{{response.timB}}"/>
+
         <td class="p-3 border-t border-gray-400 text-center">
           {% if response.rapat %}
             Rapat Selesai
@@ -40,8 +43,8 @@
           {% endif %}
         </td>
       </tr>
-    </form>
       {% endfor %}
+    </form>
       <!-- Add more rows as needed -->
     </tbody>
   </table>
