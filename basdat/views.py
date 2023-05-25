@@ -2,4 +2,4 @@ from django.shortcuts import redirect
 
 
 def home(request):
-    return redirect("/user/login")
+    return redirect("/user/")
