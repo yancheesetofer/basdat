@@ -4,42 +4,49 @@
 </head>
 <body>
   {% include 'navbar_panitia.html' %}
-  <div class="page-title">
-    <h1>Mulai Pertandingan</h1>
-  </div>
+  <div class="flex items-center justify-center h-screen">
+    <div class="border border-gray-300 p-8">
+      <div class="page-title">
+        <h1 class="text-3xl font-bold">Mulai Pertandingan</h1>
+      </div>
 
-  <div class="wrapper">
-    <div class="box-content">
-      <div class="content">
-        <div>
-          <table>
+      <div class="mt-8">
+        <table class="table-auto w-full">
+          <thead>
             <tr>
-              <th>Tim 1</th>
-              <th>Tim 2</th>
+              <th class="px-4 py-2">Tim 1</th>
+              <th class="px-4 py-2">Tim 2</th>
               <th></th>
             </tr>
+          </thead>
+          <tbody>
             <tr>
-              <td>{{data.nama_tim.0}}</td>
-              <td>{{data.nama_tim.1}}</td>
-              <td>
+              <td class="px-4 py-2">{{data.nama_tim.0}}</td>
+              <td class="px-4 py-2">{{data.nama_tim.1}}</td>
+              <td class="px-4 py-2">
                 <a
                   href="{% url 'panitia:peristiwa' id_pertandingan=data.id_pertandingan nama_tim=data.nama_tim.0 %}"
-                >
-                  Masukkan Peristiwa Tim 1</a
+                  class="text-blue-600 hover:underline"
+                  >Masukkan Peristiwa Tim 1</a
                 ><br /><br />
                 <a
                   href="{% url 'panitia:peristiwa' id_pertandingan=data.id_pertandingan nama_tim=data.nama_tim.1 %}"
-                >
-                  Masukkan Peristiwa Tim 2</a
+                  class="text-blue-600 hover:underline"
+                  >Masukkan Peristiwa Tim 2</a
                 >
               </td>
             </tr>
-          </table>
+          </tbody>
+        </table>
 
-          <button onclick="window.location.href='#'">Submit</button>
-        </div>
+        <button
+          onclick="window.location.href='#'"
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+        >
+          Submit
+        </button>
       </div>
     </div>
   </div>
-  {% endblock content %}
 </body>
+{% endblock content %}

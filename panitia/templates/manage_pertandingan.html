@@ -1,10 +1,11 @@
-{% extends 'base.html' %} {% block meta %}
+{% extends 'base.html' %} 
+{% block meta %}
 <title>Manage Pertandingan</title>
+{% endblock meta %} 
 
-{% endblock meta %} {% block content %}
+{% block content %}
 {% include 'navbar_panitia.html' %}
 <div class="page-title">
-  <h1>Manage Pertandingan</h1>
 </div>
 
 {% if jumlahPertandingan %}
@@ -14,59 +15,60 @@
     <div class="content">
       <div style="text-align: center; margin: 20px">
         <div class="content-title" style="margin: 10px">
-          <h4>List Pertandingan Grup Stage</h4>
+          <h4 class="text-lg font-bold">List Pertandingan Grup Stage</h4>
         </div>
 
-        <table>
-          <tr style="color: #55509c">
-            <th>Grup</th>
-            <th>Tim</th>
-            <th>Waktu</th>
-            <th>Pemenang</th>
-            <th>Action</th>
-          </tr>
+        <table class="table-auto w-full">
+          <thead>
+            <tr class="text-purple-600">
+              <th class="px-4 py-2">Grup</th>
+              <th class="px-4 py-2">Tim</th>
+              <th class="px-4 py-2">Waktu</th>
+              <th class="px-4 py-2">Pemenang</th>
+              <th class="px-4 py-2">Action</th>
+            </tr>
+          </thead>
 
-          {% for data in pertandingan %}
-          <tr>
-            <td>A</td>
-            <td>{{ data.tim.0 }} vs {{ data.tim.1 }}</td>
-            <td>{{ data.start_datetime }}</td>
-            <!-- Cek siapa pemenangnya dengan menyamakan id_pertandingan pada data dan dictionary pemenang -->
-            {% for key, value in pemenang.items %} 
-            {% if key == data.id_pertandingan %}
-            <td>{{value}}</td>
-            <td>
-              <a href="{% url 'panitia:list_peristiwa' id_pertandingan=data.id_pertandingan nama_tim=data.tim.0 %}">Lihat Peristiwa Tim 1</a><br><br>
-              <a href="{% url 'panitia:list_peristiwa' id_pertandingan=data.id_pertandingan nama_tim=data.tim.1 %}">Lihat Peristiwa Tim 2</a><br><br>
-           </td>
-            {% endif %}
+          <tbody>
+            {% for data in pertandingan %}
+            <tr>
+              <td class="px-4 py-2">A</td>
+              <td class="px-4 py-2">{{ data.tim.0 }} vs {{ data.tim.1 }}</td>
+              <td class="px-4 py-2">{{ data.start_datetime }}</td>
+              <!-- Cek siapa pemenangnya dengan menyamakan id_pertandingan pada data dan dictionary pemenang -->
+              {% for key, value in pemenang.items %} 
+              {% if key == data.id_pertandingan %}
+              <td class="px-4 py-2">{{ value }}</td>
+              <td class="px-4 py-2">
+                <a href="{% url 'panitia:list_peristiwa' id_pertandingan=data.id_pertandingan nama_tim=data.tim.0 %}" class="text-blue-600 hover:underline">Lihat Peristiwa Tim 1</a><br><br>
+                <a href="{% url 'panitia:list_peristiwa' id_pertandingan=data.id_pertandingan nama_tim=data.tim.1 %}" class="text-blue-600 hover:underline">Lihat Peristiwa Tim 2</a><br><br>
+              </td>
+              {% endif %}
+              {% endfor %}
+              </td>
+            </tr>
             {% endfor %}
-            </td>
-          </tr>
+          </tbody>
+        </table>
 
-          {% endfor %}
-
-        <button
-          onclick="window.location.href"
-          ="{% url 'panitia:show_profile' %}"
-        >
+        <button onclick="window.location.href='{% url 'panitia:show_profile' %}'" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
           Finish
         </button>
       </div>
     </div>
   </div>
 </div>
+
 {% else %}
 <div class="wrapper">
   <div class="box-content">
     <div class="content">
       <div class="announcement">
         <p>
-          Pertandingan Belum Lengkap!<br />Klik Tombol Next untuk Membuat
-          Pertandingan
+          Pertandingan Belum Lengkap!<br />Klik Tombol Next untuk Membuat Pertandingan
         </p>
         <div>
-          <td><button onclick="window.location.href='#'">Next</button></td>
+          <td><button onclick="window.location.href='#'" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Next</button></td>
         </div>
       </div>
     </div>
@@ -75,5 +77,5 @@
 
 <!--case already have winner-->
 {% endif %} 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
+
 {% endblock content %}
