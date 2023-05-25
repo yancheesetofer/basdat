@@ -7,7 +7,7 @@ from pprint import pprint
 # Create your views here.
 
 def get_database():
-    conn = connection.connect(database="tk3_sepakbola", user="postgres", password="postgres")
+    conn = psycopg2.connect(database="tk3_sepakbola", user="postgres", password="postgres")
     return conn
 
 
@@ -35,7 +35,7 @@ def index(request):
     })
 
 
-def list_pertandingan_manager(request):
+def list_pertandingan_manager_all(request):
     with get_database().cursor() as cursor:
         cursor.execute("""
             SELECT 
@@ -55,7 +55,7 @@ def list_pertandingan_manager(request):
     return render(request, 'list_pertandingan_manager.html', {'pertandingan': pertandingan})
 
 
-def list_pertandingan_manager_id(request, id):
+def list_pertandingan_manager(request):
     with get_database().cursor() as cursor:
         cursor.execute("""
             SELECT 
@@ -124,11 +124,6 @@ def pilihPelatih(request):
 def bookingList(request):
     return render(request, "booking_list.html")
 
-
-def historyRapat(request):
-    return render(request, "history_rapat_all.html")
-
-
 def scheduleBooking(request):
     return render(request, "schedule_booking.html")
 
@@ -161,7 +156,7 @@ def history_rapat(request):
         """, [request.session["username"], request.session["username"]])
         rapats = cursor.fetchall()
     print(rapats)
-    return render(request, 'history_rapat_all.html', {'rapats': rapats})
+    return render(request, 'history_rapat.html', {'rapats': rapats})
 
 
 def history_rapat_all(request, manajer_id="manajer_id"):
@@ -185,7 +180,7 @@ def history_rapat_all(request, manajer_id="manajer_id"):
         """, )
         rapats = cursor.fetchall()
     print(rapats)
-    return render(request, 'history_rapat_all.html', {'rapats': rapats})
+    return render(request, 'history_rapat.html', {'rapats': rapats})
 
 
 def schedule_booking(request):

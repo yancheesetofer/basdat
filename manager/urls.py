@@ -6,8 +6,8 @@ app_name = "manager"
 urlpatterns = [
     path("", index, name="index"),
     path("r_list_pertandingan_manager/", list_pertandingan_manager, name="list_pertandingan_manager"),
-    path("r_list_pertandingan_manager/<str:manajer_id>", list_pertandingan_manager_id,
-         name="list_pertandingan_manager_id"),
+    path("r_list_pertandingan_manager_all", list_pertandingan_manager_all,
+         name="list_pertandingan_manager_all"),
     path("profile/", show_profile, name="profile"),
     path("register/", registerTim, name="daftarTim"),
     path("detail/", detailTim, name="detailTim"),
