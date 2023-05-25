@@ -15,7 +15,7 @@ from django.contrib.auth.decorators import login_required
 
 
 def index(request):
-    return render(request, "list_pertandingan.html")
+    return render(request, "list_pertandingan_penonton.html")
 
 def mulai(request, id_pertandingan):
     
@@ -56,6 +56,7 @@ def peristiwa_tim(request, id_pertandingan, nama_tim):
 
 def show_profile(request):
     cursor = connection.cursor()
+    # cursor.execute("SET search_path TO SIREST")
     cursor.execute("SELECT * FROM rapat")
     list_rapat = []
     allrapat = cursor.fetchall()
@@ -154,7 +155,7 @@ def buat_pertandingan(request):
     return render(request, "buat_pertandingan.html")
 
 def list_pertandingan(request):
-    return render(request, "list_pertandingan.html")
+    return render(request, "list_pertandingan_penonton.html")
 
 def mulai_rapat(request):
     return render(request, "mulai_rapat.html")

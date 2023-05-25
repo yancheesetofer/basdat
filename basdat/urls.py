@@ -16,11 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
+from basdat.views import home
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('manager/', include('manager.urls')),
     path('panitia/', include('panitia.urls')),
     path('penonton/', include('penonton.urls')),
-    path('user/', include('user.urls'))
+    path('user/', include('user.urls')),
+    path("", home, name="home"),
 ]
