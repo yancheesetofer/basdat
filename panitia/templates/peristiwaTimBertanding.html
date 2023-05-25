@@ -117,7 +117,6 @@
                 <select name="nama_pemain" id="nama_pemain5">
                   <option value="0" selected>[None]</option>
                   {% for nama in data.nama_pemain %}
-                  <!-- The Option's Value is UUID -->
                   <option value="{{nama.0}}">{{nama.1}} {{nama.2}}</option>
                   {% endfor %}
                 </select>
