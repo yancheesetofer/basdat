@@ -4,7 +4,7 @@ from django.urls import path
 app_name = "manager"
 
 urlpatterns = [
-    path("", index, name="index"),
+    path("listPeminjaman/", listPeminjaman, name="listPeminjaman"),
     path("r_list_pertandingan_manager/", list_pertandingan_manager, name="list_pertandingan_manager"),
     path("r_list_pertandingan_manager_all", list_pertandingan_manager_all,
          name="list_pertandingan_manager_all"),

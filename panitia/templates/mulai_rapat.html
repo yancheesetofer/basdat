@@ -16,18 +16,33 @@
       </tr>
     </thead>
     <tbody>
+
+      <form method="POST" action="{% url 'panitia:notaRapat' %}">
+      {% for response in listResponse %}
       <tr>
-        <td class="p-3 border-t border-gray-400">A vs B</td>
-        <td class="p-3 border-t border-gray-400">Stadium GBK</td>
-        <td class="p-3 border-t border-gray-400">5 Juli 2023, 07.00 - 09.00</td>
+        <td class="p-3 border-t border-gray-400">{{response.timBertanding}}</td>
+        <td class="p-3 border-t border-gray-400">{{response.stadium}}</td>
+        <td class="p-3 border-t border-gray-400">{{response.tanggalWaktu}}</td>
+        <input type="hidden" name="idPertandingan" value="{{response.idPertandingan}}" />
+          <input type="hidden" name="end_datetime" value="{{date}} 18:00:00.000000"/>
+          <input type="hidden" name="stadium" value="{{stadium}}"/>
         <td class="p-3 border-t border-gray-400 text-center">
+          {% if response.rapat %}
+            Rapat Selesai
+          {% else %}
           <button
+            type="submit"
             class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
           >
             Mulai Rapat
           </button>
+
+          {% endif %}
         </td>
       </tr>
+    </form>
+      {% endfor %}
+      <!-- Add more rows as needed -->
     </tbody>
   </table>
 </body>

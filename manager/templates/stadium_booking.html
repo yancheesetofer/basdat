@@ -6,8 +6,8 @@
   {% include 'navbar_manager.html' %}
   <h1 class="text-center text-3xl font-bold my-8">PEMINJAMAN STADIUM</h1>
   <form
-    action="#"
     method="POST"
+    action="{% url 'manager:scheduleBooking' %}"
     class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md"
   >
     {% csrf_token %}
@@ -20,9 +20,9 @@
         id="stadium"
         class="form-select mt-1 block w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0"
       >
-        <option value="Stadium 1">Stadium 1</option>
-        <option value="Stadium 2">Stadium 2</option>
-        <option value="Stadium 3">Stadium 3</option>
+        {% for stadium in allStadium %}
+        <option value="{{stadium.namaStadium}}">{{stadium.namaStadium}}</option>
+        {% endfor %}
       </select>
     </div>
     <div class="mb-4">

@@ -1,3 +1,4 @@
+from datetime import date
 from django.shortcuts import render, redirect
 from django.conf import settings
 from django.db import *
@@ -202,7 +203,104 @@ GROUP BY id_pertandingan;
     return render(request, "list_pertandingan.html",context)
 
 def mulai_rapat(request):
-    return render(request, "mulai_rapat.html")
+    cursor = connection.cursor()
+    listResponseWanted = []
+    
+    try:
+        cursor.execute(
+            f"""
+            select distinct id_pertandingan
+            from tim_pertandingan
+            """
+        )
+    except Exception as e:
+        cursor = connection.cursor()
+    
+    listIDPertandingan = cursor.fetchall()
+
+    for idPertandingan in listIDPertandingan:
+        id = idPertandingan[0]
+        try:
+            cursor.execute(
+                f"""
+                select date(start_datetime), cast(start_datetime as time), cast(end_datetime as time), stadium 
+                from pertandingan
+                where id_pertandingan = %s
+                """,
+                [id]
+            )
+        except Exception as e:
+            cursor = connection.cursor()
+
+        list_pertandingan = cursor.fetchall()
+
+
+        exactdate = list_pertandingan[0][0]
+        startDate = list_pertandingan[0][1]
+        endDate = list_pertandingan[0][2]
+        id_stadium = list_pertandingan[0][3]
+
+        try:
+            cursor.execute(
+                f"""
+                select nama_tim
+                from tim_pertandingan
+                where id_pertandingan = %s
+                """,
+                [id]
+            )
+        except Exception as e:
+            cursor = connection.cursor()
+        
+        keduaTim = cursor.fetchall()
+
+        try:
+            cursor.execute(
+                f"""
+                select nama
+                from stadium
+                where id_stadium = %s
+                """,
+                [id_stadium]
+            )
+        except Exception as e:
+            cursor = connection.cursor()
+        namaStadium = cursor.fetchone()
+
+        try:
+            cursor.execute(
+                f"""
+                select *
+                from rapat
+                where id_pertandingan = %s
+                """,
+                [id]
+            )
+        except Exception as e:
+            cursor = connection.cursor()
+        rapat = cursor.fetchone()
+        if rapat != None:
+            result= {
+            "timBertanding": keduaTim[0][0] + " vs " + keduaTim[1][0],
+            "stadium": namaStadium[0],
+            "tanggalWaktu": str(exactdate) + " " + str(startDate) + " - " + str(endDate),
+            "isPertandingan": id,
+            "rapat": rapat[0]
+            }
+        else :
+            result= {
+                "timBertanding": keduaTim[0][0] + " vs " + keduaTim[1][0],
+                "stadium": namaStadium[0],
+                "tanggalWaktu": str(exactdate) + " " + str(startDate) + " - " + str(endDate),
+                "idPertandingan": id,
+                "rapat": None
+        }
+        listResponseWanted.append(result)
+
+
+    return render(request, "mulai_rapat.html", {
+        "listResponse": listResponseWanted
+    })
 
 def nota_rapat(request):
     return render(request, "nota_rapat.html")
