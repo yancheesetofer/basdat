@@ -59,13 +59,11 @@ def show_profile(request):
     return render(request, "dashboard_manager.html", context)
 
 
-# TODO : UNCOMMENT
-# @login_required(login_url='../../user/login')
+@login_required(login_url='../../user/login')
 def registerTim(request):
     cursor = connection.cursor()
     # check if manager has any teams
-    # TODO: UNCOMMENT
-    # username = request.session["username"]
+    username = request.session["username"]
     username = 'rsamber14'
     try:
         cursor.execute(
@@ -101,20 +99,16 @@ def registerTim(request):
     return render(request, "registerTim.html")
 
 
-# TODO : UNCOMMENT
-# @login_required(login_url='../../user/login')
+@login_required(login_url='../../user/login')
 def detailTim(request):
-    # TODO: UNCOMMENT
-    # username = request.session["username"]
+    username = request.session["username"]
     username = 'rsamber14'
-    # if (request.session["role"] != 'manajer'):  
-    #     return HttpResponseBadRequest("This page is restricted")
+    if (request.session["role"] != 'manajer'):  
+        return HttpResponseBadRequest("This page is restricted")
 
     daftar_pemain = []
     daftar_pelatih = []
-
     cursor = connection.cursor()
-    
     try:
         cursor.execute(
             f"""
@@ -171,22 +165,75 @@ def detailTim(request):
     }
     return render(request, "detailTim.html", context)
 
-# TODO : UNCOMMENT
-# @login_required(login_url='../../user/login')
-def pilihPemain(request):
+def makecaptain(request):
+    nama_tim = request.session["nama_tim"]
+    # nama_tim = 'Hurricanes'
     cursor = connection.cursor()
+    if request.method == "POST":
+        pemain_selected = request.POST.get("pemain")
+        # register pemain to tim
+        try:
+            cursor.execute(
+                f"""
+                select count(p.nama_tim) 
+                from pemain p 
+                join tim t on p.nama_tim = t.nama_tim  
+                where p.nama_tim = '{nama_tim}' 
+                group by p.nama_tim;
+                """
+            )
+            jumlah_pemain = cursor.fetchone()[0]
+            if jumlah_pemain < 14:
+                cursor.execute(
+                    f"""
+                    update pemain set nama_tim = '{nama_tim}' where id_pemain = '{pemain_selected}'; 
+                    """
+                )
+        except Exception as e:
+            return HttpResponseBadRequest(f"Can not registered pemain into Tim {nama_tim}")
+    
+
+@login_required(login_url='../../user/login')
+def pilihPemain(request):
+    nama_tim = request.session["nama_tim"]
+    nama_tim = 'Hurricanes'
+    cursor = connection.cursor()
+    if request.method == "POST":
+        pemain_selected = request.POST.get("pemain")
+        # register pemain to tim
+        try:
+            cursor.execute(
+                f"""
+                select count(p.nama_tim) 
+                from pemain p 
+                join tim t on p.nama_tim = t.nama_tim  
+                where p.nama_tim = '{nama_tim}' 
+                group by p.nama_tim;
+                """
+            )
+            jumlah_pemain = cursor.fetchone()[0]
+            if jumlah_pemain < 14:
+                cursor.execute(
+                    f"""
+                    update pemain set nama_tim = '{nama_tim}' where id_pemain = '{pemain_selected}'; 
+                    """
+                )
+        except Exception as e:
+            return HttpResponseBadRequest(f"Can not registered pemain into Tim {nama_tim}")
+    
     pemain_notim = []
     try:
         cursor.execute(
             f"""
-            select concat(nama_depan, ' ', nama_belakang) as nama_lengkap, posisi 
+            select concat(nama_depan, ' ', nama_belakang) as nama_lengkap, posisi, id_pemain 
             from pemain 
             where nama_tim is null;
             """
         )
         pemain_notim = [{
             'nama_lengkap' : x[0],
-            'posisi' : x[1]
+            'posisi' : x[1],
+            'id_pemain' : x[2]
         }for x in cursor.fetchall()]
         
     except Exception as e:
@@ -197,15 +244,44 @@ def pilihPemain(request):
     }
     return render(request, "pemain.html", context)
 
-# TODO : UNCOMMENT
-# @login_required(login_url='../../user/login')
+@login_required(login_url='../../user/login')
 def pilihPelatih(request):
     cursor = connection.cursor()
+    nama_tim = request.session["nama_tim"]
+    # nama_tim = 'Bears'
+    cursor = connection.cursor()
+    if request.method == "POST":
+        pelatih_selected = request.POST.get("pelatih")
+
+        # register pemain to tim
+        try:
+            cursor.execute(
+                f"""
+                    SELECT spesialisasi from spesialisasi_pelatih where id_pelatih = '{pelatih_selected}'; 
+                    """
+            )
+            spesialisasi = cursor.fetchone()[0]
+            cursor.execute(
+                f"""
+                    SELECT isSpExist('{nama_tim}' spl varchar); 
+                    """
+            )
+            isSpExist = cursor.fetchone()
+            if isSpExist:
+                cursor.execute(
+                    f"""
+                        update SPESIALISASI_PELATIH set nama_tim = '{nama_tim}' where id_pelatih = '{pelatih_selected}'; 
+                        """
+                )
+        except Exception as e:
+            return HttpResponseBadRequest(e)
+
+
     pelatih_notim = []
     try:
         cursor.execute(
             f"""
-            select concat(nama_depan, ' ', nama_belakang) as nama_lengkap, spesialisasi 
+            select p.id_pelatih, concat(nama_depan, ' ', nama_belakang) as nama_lengkap, spesialisasi 
             from pelatih p 
             left outer join spesialisasi_pelatih sp on p.id_pelatih = sp.id_pelatih 
             left outer join non_pemain np on p.id_pelatih = np.id 
@@ -213,8 +289,9 @@ def pilihPelatih(request):
             """
         )
         pelatih_notim = [{
-            'nama_lengkap' : x[0],
-            'spesialisasi' : x[1]
+            'id_pelatih' : x[0],
+            'nama_lengkap' : x[1],
+            'spesialisasi' : x[2]
         }for x in cursor.fetchall()]
     except Exception as e:
         pass

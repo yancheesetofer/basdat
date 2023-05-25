@@ -61,8 +61,10 @@
         <td class="tg-5w3z">{{pemain.posisi}}</td>
         <td class="tg-5w3z">{{pemain.npm}}</td>
         <td class="tg-5w3z">{{pemain.jenjang}}</td>
-        <td class="tg-5w3z"><a href="#" style="color: brown;"><u>Make Captain</u></a><br><a href="#" style="color: brown;"><u>Delete</u></a></td>
-      </tr>
+        <form method="post" action="{% url 'manager:makecaptain' %}">
+        <td class="tg-5w3z"><button type="submit" href="{% url 'manager:makecaptain' %}" style="color: brown;"><u>Make Captain</u></button><br><a href="#" style="color: brown;"><u>Delete</u></a></td>
+        </form>
+    </tr>
       {% endfor %}
       {% endif %}
       <tr>

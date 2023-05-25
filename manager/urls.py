@@ -14,4 +14,5 @@ urlpatterns = [
     path("historyRapat/",historyRapat, name="historyRapat"),
     path("scheduleBooking/",scheduleBooking, name="scheduleBooking"),
     path("stadiumBooking/",stadiumBooking, name="stadiumBooking"),
+    path('makecaptain/', makecaptain, name='makecaptain')
 ]
