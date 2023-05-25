@@ -1,5 +1,4 @@
 {% extends "base.html" %} {% block content %}
-    {#TODO: R History Rapat Manager#}
     <head>
         <title>LIST RAPAT</title>
     </head>
@@ -17,39 +16,19 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td class="border border-gray-400 px-4 py-2">A vs B</td>
-            <td class="border border-gray-400 px-4 py-2">XYZ</td>
-            <td class="border border-gray-400 px-4 py-2">stadium GBK</td>
-            <td class="border border-gray-400 px-4 py-2">5 Juli 2023, 07.00 - 09.00</td>
-            <td class="border border-gray-400 px-4 py-2">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Lihat Laporan
-                    Rapat
-                </button>
-            </td>
-        </tr>
-        <tr>
-            <td class="border border-gray-400 px-4 py-2">C vs D</td>
-            <td class="border border-gray-400 px-4 py-2">XYZ</td>
-            <td class="border border-gray-400 px-4 py-2">stadium Siliwangi</td>
-            <td class="border border-gray-400 px-4 py-2">5 Juli 2023, 07.00 - 09.00</td>
-            <td class="border border-gray-400 px-4 py-2">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Lihat Laporan
-                    Rapat
-                </button>
-            </td>
-        </tr>
-        <tr>
-            <td class="border border-gray-400 px-4 py-2">E vs F</td>
-            <td class="border border-gray-400 px-4 py-2">XYZ</td>
-            <td class="border border-gray-400 px-4 py-2">stadium Cendrawasih</td>
-            <td class="border border-gray-400 px-4 py-2">5 Juli 2023, 07.00 - 09.00</td>
-            <td class="border border-gray-400 px-4 py-2">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Lihat Laporan
-                    Rapat
-                </button>
-            </td>
-        </tr>
+        {% for rapat in rapats %}
+            <tr>
+                <td class="border border-gray-400 px-4 py-2">{{ rapat.0 }} vs {{ rapat.1 }}</td>
+                <td class="border border-gray-400 px-4 py-2">{{ rapat.2 }}</td>
+                <td class="border border-gray-400 px-4 py-2">{{ rapat.3 }}</td>
+                <td class="border border-gray-400 px-4 py-2">{{ rapat.4 }}</td>
+                <td class="border border-gray-400 px-4 py-2">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Lihat Laporan
+                        Rapat
+                    </button>
+                </td>
+            </tr>
+        {% endfor %}
         </tbody>
     </table>
     </body>

@@ -11,7 +11,8 @@ urlpatterns = [
     path("detail/",detailTim, name="detailTim"),
     path("pemain/",pilihPemain, name="pilihPemain"),
     path("pelatih/",pilihPelatih, name="pilihPelatih"),
-    path("historyRapat/",historyRapat, name="historyRapat"),
+    path("r_history_rapat/<str:manajer_id>/",history_rapat_id, name="history_rapat"),
+    path("r_history_rapat/",history_rapat, name="history_rapat"),
     path("scheduleBooking/",scheduleBooking, name="scheduleBooking"),
     path("stadiumBooking/",stadiumBooking, name="stadiumBooking"),
 ]

@@ -132,3 +132,4 @@ def list_pertandingan_penonton(request):
         pertandingan = cursor.fetchall()
         print("pertandingan", pertandingan)
     return render(request, 'list_pertandingan_penonton.html', {'pertandingan': pertandingan})
+
