@@ -144,7 +144,7 @@ def mulai_rapat(request):
                 "timBertanding": keduaTim[0][0] + " vs " + keduaTim[1][0],
                 "stadium": namaStadium[0],
                 "tanggalWaktu": str(exactdate) + " " + str(startDate) + " - " + str(endDate),
-                "isPertandingan": id,
+                "idPertandingan": id,
                 "rapat": None
         }
         listResponseWanted.append(result)
