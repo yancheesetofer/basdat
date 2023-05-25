@@ -10,7 +10,7 @@ def get_database():
 
 def get_stadiums():
     with get_database().cursor() as cursor:
-        cursor.execute('SELECT nama FROM Stadium')
+        cursor.execute('SELECT id_stadium, nama FROM Stadium')
         list_stadium = cursor.fetchall()
         return list_stadium
 
