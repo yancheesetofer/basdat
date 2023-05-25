@@ -13,81 +13,96 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td class="border px-4 py-2">07:00 - 09:00</td>
-        <td class="border px-4 py-2">
-          {% if "07:00:00" not in jamHadir %}
-            Sudah dipesan
-          {% else %}
-          <button
-            type="button"
-            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Pesan
-          </button>
-          {% endif %}
+      <form method="POST" action="{% url 'manager:bookingConfirmation' %}">
+        {% csrf_token %}
+        <tr>
+          <td class="border px-4 py-2">07:00 - 09:00
+          <input type="hidden" name="start_datetime" value="{{date}} 07:00:00.000000" />
+          <input type="hidden" name="end_datetime" value="{{date}} 09:00:00.000000"/>
+          <input type="hidden" name="stadium" value="{{stadium}}"/>
         </td>
-      </tr>
-      <tr>
-        <td class="border px-4 py-2">10:00 - 12:00</td>
-        <td class="border px-4 py-2">
-          {% if "10:00:00" not in jamHadir %}
-            Sudah dipesan
-          {% else %}
-          <button
-            type="button"
-            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Pesan
-          </button>
-          {% endif %}
+          <td class="border px-4 py-2">
+            <button
+              type="submit"
+              class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Pesan
+            </button>
+          </td>
+        </tr>
+      </form>
+      <form method="POST" action="{% url 'manager:bookingConfirmation' %}">
+        {% csrf_token %}
+        <tr>
+          <td class="border px-4 py-2">10:00 - 12:00
+          <input type="hidden" name="start_datetime" value="{{date}} 10:00:00.000000" />
+          <input type="hidden" name="end_datetime" value="{{date}} 12:00:00.000000"/>
+          <input type="hidden" name="stadium" value="{{stadium}}"/>
         </td>
-      </tr>
-      <tr>
-        <td class="border px-4 py-2">13:00 - 15:00</td>
-        <td class="border px-4 py-2">
-          {% if "13:00:00" not in jamHadir %}
-            Sudah dipesan
-          {% else %}
-          <button
-            type="button"
-            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Pesan
-          </button>
-          {% endif %}
+          <td class="border px-4 py-2">
+            <button
+              type="submit"
+              class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Pesan
+            </button>
+          </td>
+        </tr>
+      </form>
+      <form method="POST" action="{% url 'manager:bookingConfirmation' %}">
+        {% csrf_token %}
+        <tr>
+          <td class="border px-4 py-2">13:00 - 15:00
+          <input type="hidden" name="start_datetime" value="{{date}} 13:00:00.000000" />
+          <input type="hidden" name="end_datetime" value="{{date}} 15:00:00.000000"/>
+          <input type="hidden" name="stadium" value="{{stadium}}"/>
         </td>
-      </tr>
-      <tr>
-        <td class="border px-4 py-2">16:00 - 18:00</td>
-        <td class="border px-4 py-2">
-          {% if "16:00:00" not in jamHadir %}
-            Sudah dipesan
-          {% else %}
-          <button
-            type="button"
-            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Pesan
-          </button>
-          {% endif %}
+          <td class="border px-4 py-2">
+            <button
+              type="submit"
+              class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Pesan
+            </button>
+          </td>
+        </tr>
+      </form>
+      <form method="POST" action="{% url 'manager:bookingConfirmation' %}">
+        {% csrf_token %}
+        <tr>
+          <td class="border px-4 py-2">16:00 - 18:00
+          <input type="hidden" name="start_datetime" value="{{date}} 16:00:00.000000" />
+          <input type="hidden" name="end_datetime" value="{{date}} 18:00:00.000000"/>
+          <input type="hidden" name="stadium" value="{{stadium}}"/>
         </td>
-      </tr>
-      <tr>
-        <td class="border px-4 py-2">19:00 - 21:00</td>
-        <td class="border px-4 py-2">
-          {% if "19:00:00" not in jamHadir %}
-            Sudah dipesan
-          {% else %}
-          <button
-            type="button"
-            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Pesan
-          </button>
-          {% endif %}
+          <td class="border px-4 py-2">
+            <button
+              type="submit"
+              class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Pesan
+            </button>
+          </td>
+        </tr>
+      </form>
+      <form method="POST" action="{% url 'manager:bookingConfirmation' %}">
+        {% csrf_token %}
+        <tr>
+          <td class="border px-4 py-2">19:00 - 21:00
+          <input type="hidden" name="start_datetime" value="{{date}} 19:00:00.000000" />
+          <input type="hidden" name="end_datetime" value="{{date}} 21:00:00.000000"/>
+          <input type="hidden" name="stadium" value="{{stadium}}"/>
         </td>
-      </tr>
+          <td class="border px-4 py-2">
+            <button
+              type="submit"
+              class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Pesan
+            </button>
+          </td>
+        </tr>
+      </form>
     </tbody>
   </table>
 </body>

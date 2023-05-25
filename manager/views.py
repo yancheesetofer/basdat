@@ -1,12 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.db import *
 from pprint import pprint
 import datetime
+from django.http import HttpResponseForbidden
+from django.contrib import messages
 
 # Create your views here.
 
 
-def index(request):
+def listPeminjaman(request):
     cursor = connection.cursor()
     id_manajer = request.session.get("id")
     cursor.execute(
@@ -192,27 +194,11 @@ def historyRapat(request):
 
 
 def scheduleBooking(request):
-    print("oi")
-    listStartDate = []
-    listStartDate.append("07:00:00")
-    listStartDate.append("10:00:00")
-    listStartDate.append("13:00:00")
-    listStartDate.append("16:00:00")
-    listStartDate.append("19:00:00")
-
     if request.method == "POST":
+        print("kontol")
         namaStadium = request.POST.get("stadium")
         date = request.POST.get("date")
-        listPertandinganStart = []
-        listPeminjamanStart = []
-
-        print(namaStadium)
-        print(date)
-
-        id_manajer = request.session.get("id")
-
         cursor = connection.cursor()
-
         try:
             cursor.execute(
                 f"""
@@ -222,72 +208,22 @@ def scheduleBooking(request):
                 """,
                 [namaStadium],
             )
-
         except Exception as e:
             cursor = connection.cursor()
+
         id_stadium = cursor.fetchone()
 
-        try:
-            cursor.execute(
-                f"""
-                select start_datetime
-                from pertandingan
-                where stadium = %s AND 
-                date(start_datetime) = %s
-                """,
-                [id_stadium, date],
-            )
-
-        except Exception as e:
-            cursor = connection.cursor()
-
-        if cursor.rowcount > 0:
-            listPertandinganStart = cursor.fetchall()
-
-        try:
-            cursor.execute(
-                f"""
-                select start_datetime
-                from peminjaman
-                where stadium = %s AND
-                date(start_datetime) = %s
-                """,
-                [id_stadium, date],
-            )
-        except Exception as e:
-            cursor = connection.cursor()
-
-        if cursor.rowcount > 0:
-            listPeminjamanStart = cursor.fetchall()
-
-        # for idx in enumerate(listPertandinganStart):
-        #     print(listPertandinganStart[idx][0].time())
-        #     if (listPertandinganStart[idx][0].time() == listStartDate[idx]):
-        #         listStartDate.remove(listPertandinganStart[idx][0])
-
-        for idx, x in enumerate(listPertandinganStart):
-            print(listStartDate[idx])
-            for data in listStartDate:
-                if (str(data) == str(listPertandinganStart[idx][0].time())):
-                    print("ngentot")
-                    listStartDate.remove(data)
-
-        for idx, x in enumerate(listPeminjamanStart):
-            print(listStartDate[idx])
-            for data in listStartDate:
-                if (str(data) == str(listPeminjamanStart[idx][0].time())):
-                    print("ngentot")
-                    listStartDate.remove(data)
-
-
-        print("setelah delete")
-        for i in listStartDate:
-            print(i)
-
-    return render(request, "schedule_booking.html", {
-        "stadium": namaStadium,
-        "jamHadir": listStartDate
-    })
+        print("idstadium " + str(id_stadium[0]))
+        return render(
+            request,
+            "schedule_booking.html",
+            {
+                "stadium": namaStadium,
+                "date": date,
+            },
+        )
+    print("KOK SINI")
+    return HttpResponseForbidden("kenot")
 
 
 def stadiumBooking(request):
@@ -314,3 +250,53 @@ def stadiumBooking(request):
 
 def historyRapat(request):
     return render(request, "history_rapat.html")
+
+
+def bookingConfirmation(request):
+    print("test")
+    if request.method == "POST":
+        print("watefak")
+        start_datetime = request.POST.get("start_datetime")
+        end_datetime = request.POST.get("end_datetime")
+        id_manager = request.session.get("id")
+        stadium = request.POST.get("stadium")
+        cursor = connection.cursor()
+        try:
+            cursor.execute(
+                f"""
+                select id_stadium
+                from stadium
+                where nama = %s
+                """,
+                [stadium],
+            )
+        except Exception as e:
+            cursor = connection.cursor()
+
+        id_stadium = cursor.fetchone()
+
+        response = ""
+
+        try:
+            cursor.execute(
+                f"""
+                INSERT INTO peminjaman (id_manajer, start_datetime, end_datetime, id_stadium) 
+                VALUES (%s, %s, %s, %s);
+                """,
+                [id_manager, start_datetime, end_datetime, id_stadium[0]],
+            )
+        except Exception as e:
+            response = e
+
+        print(start_datetime)
+        print(end_datetime)
+        print(id_stadium[0])
+        print(id_manager)
+        print("ini response sayang")
+        print(response)
+        if response == "":
+            messages.success(request, "Berhasil melakukan peminjaman stadium")
+        else :
+            messages.error(request, response)
+
+    return redirect("/manager/listPeminjaman")

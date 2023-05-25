@@ -16,18 +16,26 @@
       </tr>
     </thead>
     <tbody>
+
+      {% for response in listResponse %}
       <tr>
-        <td class="p-3 border-t border-gray-400">A vs B</td>
-        <td class="p-3 border-t border-gray-400">Stadium GBK</td>
-        <td class="p-3 border-t border-gray-400">5 Juli 2023, 07.00 - 09.00</td>
+        <td class="p-3 border-t border-gray-400">{{response.timBertanding}}</td>
+        <td class="p-3 border-t border-gray-400">{{response.stadium}}</td>
+        <td class="p-3 border-t border-gray-400">{{response.tanggalWaktu}} {{response.rapat}}</td>
         <td class="p-3 border-t border-gray-400 text-center">
+          {% if response.rapat %}
+            Rapat Selesai
+          {% else %}
           <button
             class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
           >
             Mulai Rapat
           </button>
+
+          {% endif %}
         </td>
       </tr>
+      {% endfor %}
       <!-- Add more rows as needed -->
     </tbody>
   </table>
