@@ -30,7 +30,7 @@ def index(request):
 
 
 def listSemuaPertandingan(request):
-    return render(request, "list_semua_pertandingan.html")
+    return render(request, "list_pertandingan.html")
 
 
 def show_profile(request):

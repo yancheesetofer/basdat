@@ -1,75 +1,40 @@
-{% extends "base.html" %} {% block content %}
-    {#TODO: CR Pembelian Tiket Penonton#}
+{% extends "base.html" %}
+{% block content %}
     <head>
-        <title>List Waktu Stadium A</title>
+        <title>List Waktu Stadium</title>
     </head>
     <body>
     {% include 'navbar_penonton.html' %}
     <h1 class="text-3xl font-bold flex justify-center mt-10">
-        List Waktu Stadium A
+        List Waktu Stadium
     </h1>
     <div class="w-3/5 mx-auto mt-8">
         <div class="relative overflow-x-auto shadow-xl sm:rounded-lg">
             <table class="w-full text-sm text-gray-500 dark:text-gray-400">
-                <thead
-                        class="text-xl text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-                >
+                <thead class="text-xl text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     <th scope="col" class="px-6 py-3 m-auto bg-gray-200">List Waktu</th>
                     <th scope="col" class="px-6 py-3 bg-gray-200">Action</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                    <th
-                            scope="row"
-                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                    >
-                        07.00 - 09.00
-                    </th>
-                    <td class="px-6 py-4 flex justify-center">
-                        <button
-                                class="bg-blue-500 rounded-md py-1 px-2 text-white font-bold"
-                        >
-                            Next
-                        </button>
-                    </td>
-                </tr>
-                </tbody>
-                <tbody>
-                <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                    <th
-                            scope="row"
-                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                    >
-                        10.00 - 12.00
-                    </th>
-                    <td class="px-6 py-4 flex justify-center">
-                        <button
-                                class="bg-blue-500 rounded-md py-1 px-2 text-white font-bold"
-                        >
-                            Next
-                        </button>
-                    </td>
-                </tr>
-                </tbody>
-                <tbody>
-                <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                    <th
-                            scope="row"
-                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                    >
-                        13.00 - 15.00
-                    </th>
-                    <td class="px-6 py-4 flex justify-center">
-                        <button
-                                class="bg-blue-500 rounded-md py-1 px-2 text-white font-bold"
-                        >
-                            Next
-                        </button>
-                    </td>
-                </tr>
-                </tbody>
+                {% for waktu in waktu_stadium_list %}
+                    <tbody>
+                    <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {{ waktu }}
+                        </th>
+                        <td class="px-6 py-4 flex justify-center">
+                            <form method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="waktu" value="{{ waktu }}">
+                                <button type="submit" class="bg-blue-500 rounded-md py-1 px-2 text-white font-bold">
+                                    Next
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                {% endfor %}
             </table>
         </div>
     </div>
