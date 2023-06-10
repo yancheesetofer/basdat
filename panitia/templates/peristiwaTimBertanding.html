@@ -1,144 +1,171 @@
-{% extends 'base.html' %} {% block meta %} {% include 'navbar_panitia.html' %}
-
+{% extends 'base.html' %} {% block meta %}
 <title>Mulai Pertandingan</title>
+{% endblock meta %} {% block content %} {% include 'navbar_panitia.html' %}
+<div class="flex justify-center items-center h-screen">
+  <div class="bg-white rounded-lg shadow-lg p-6">
+    <div class="text-center">
+      <h1 class="text-3xl font-bold">
+        Pilih Peristiwa Tim {{ data.nama_tim }}
+      </h1>
+    </div>
 
-{% endblock meta %} {% block content %}
-<div>
-  <div class="page-title">
-    <h1>Pilih Peristiwa Tim {{data.nama_tim}}</h1>
-  </div>
-
-  <div class="wrapper">
-    <div class="box-content">
-      <div class="content">
-        <form
-          id="form-peristiwa"
-          method="POST"
-          action="{% url 'panitia:submit_peristiwa' %}"
-        >
-          <table id="table-peristiwa">
-            <tr>
-              <th>Nama Pemain</th>
-              <th>Peristiwa</th>
-              <th>Waktu</th>
-            </tr>
-            <tr>
-              <td>
-                <select name="nama_pemain" id="nama_pemain1">
-                  <option value="0" selected>[None]</option>
-                  {% for nama in data.nama_pemain %}
-                  <option value="{{nama.0}}">{{nama.1}} {{nama.2}}</option>
-                  {% endfor %}
-                </select>
-              </td>
-              <td>
-                <select name="peristiwa" id="peristiwa1">
-                  <option value="0" selected>[None]</option>
-                  <option value="Kartu Kuning">Kartu Kuning</option>
-                  <option value="Kartu Merah">Kartu Merah</option>
-                  <option value="Assist">Assist</option>
-                  <option value="Gol">Gol</option>
-                </select>
-              </td>
-              <td>
-                <input type="datetime-local" id="waktu1" name="waktu" />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <select name="nama_pemain" id="nama_pemain2">
-                  <option value="0" selected>[None]</option>
-                  {% for nama in data.nama_pemain %}
-                  <!-- The Option's Value is UUID -->
-                  <option value="{{nama.0}}">{{nama.1}} {{nama.2}}</option>
-                  {% endfor %}
-                </select>
-              </td>
-              <td>
-                <select name="peristiwa" id="peristiwa2">
-                  <option value="0" selected>[None]</option>
-                  <option value="Kartu kuning">Kartu Kuning</option>
-                  <option value="Kartu Merah">Kartu Merah</option>
-                  <option value="Assist">Assist</option>
-                  <option value="Gol">Gol</option>
-                </select>
-              </td>
-              <td>
-                <input type="datetime-local" id="waktu2" name="waktu" />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <select name="nama_pemain" id="nama_pemain3">
-                  <option value="0" selected>[None]</option>
-                  {% for nama in data.nama_pemain %}
-                  <option value="{{nama.0}}">{{nama.1}} {{nama.2}}</option>
-                  {% endfor %}
-                </select>
-              </td>
-              <td>
-                <select name="peristiwa" id="peristiwa3">
-                  <option value="0" selected>[None]</option>
-                  <option value="Kartu kuning">Kartu Kuning</option>
-                  <option value="Kartu Merah">Kartu Merah</option>
-                  <option value="Assist">Assist</option>
-                  <option value="Gol">Gol</option>
-                </select>
-              </td>
-              <td>
-                <input type="datetime-local" id="waktu3" name="waktu" />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <select name="nama_pemain" id="nama_pemain4">
-                  <option value="0" selected>[None]</option>
-                  {% for nama in data.nama_pemain %}
-                  <!-- The Option's Value is UUID -->
-                  <option value="{{nama.0}}">{{nama.1}} {{nama.2}}</option>
-                  {% endfor %}
-                </select>
-              </td>
-              <td>
-                <select name="peristiwa" id="peristiwa4">
-                  <option value="0" selected>[None]</option>
-                  <option value="Kartu kuning">Kartu Kuning</option>
-                  <option value="Kartu Merah">Kartu Merah</option>
-                  <option value="Assist">Assist</option>
-                  <option value="Gol">Gol</option>
-                </select>
-              </td>
-              <td>
-                <input type="datetime-local" id="waktu4" name="waktu" />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <select name="nama_pemain" id="nama_pemain5">
-                  <option value="0" selected>[None]</option>
-                  {% for nama in data.nama_pemain %}
-                  <option value="{{nama.0}}">{{nama.1}} {{nama.2}}</option>
-                  {% endfor %}
-                </select>
-              </td>
-              <td>
-                <select name="peristiwa" id="peristiwa5">
-                  <option value="0" selected>[None]</option>
-                  <option value="Kartu kuning">Kartu Kuning</option>
-                  <option value="Kartu Merah">Kartu Merah</option>
-                  <option value="Assist">Assist</option>
-                  <option value="Gol">Gol</option>
-                </select>
-              </td>
-              <td>
-                <input type="datetime-local" id="waktu5" name="waktu" />
-              </td>
-            </tr>
-          </table>
-          <input type="submit" value="Submit" id="submit" />
-        </form>
-        <div class="message" id="message"></div>
-      </div>
+    <div class="mt-8">
+      <form
+        id="form-peristiwa"
+        method="POST"
+        action="{% url 'panitia:submit_peristiwa' %}"
+      >
+        <table id="table-peristiwa" class="mx-auto">
+          <tr>
+            <th class="px-4 py-2">Nama Pemain</th>
+            <th class="px-4 py-2">Peristiwa</th>
+            <th class="px-4 py-2">Waktu</th>
+          </tr>
+          <tr>
+            <td>
+              <select name="nama_pemain" id="nama_pemain1" class="w-full">
+                <option value="0" selected>[None]</option>
+                {% for nama in data.nama_pemain %}
+                <option value="{{ nama.0 }}">{{ nama.1 }} {{ nama.2 }}</option>
+                {% endfor %}
+              </select>
+            </td>
+            <td>
+              <select name="peristiwa" id="peristiwa1" class="w-full">
+                <option value="0" selected>[None]</option>
+                <option value="Kartu Kuning">Kartu Kuning</option>
+                <option value="Kartu Merah">Kartu Merah</option>
+                <option value="Assist">Assist</option>
+                <option value="Gol">Gol</option>
+              </select>
+            </td>
+            <td>
+              <input
+                type="datetime-local"
+                id="waktu1"
+                name="waktu"
+                class="w-full"
+              />
+            </td>
+          </tr>
+          <!-- Add similar rows for nama_pemain2, nama_pemain3, and so on... -->
+          <tr>
+            <td>
+              <select name="nama_pemain" id="nama_pemain2" class="w-full">
+                <option value="0" selected>[None]</option>
+                {% for nama in data.nama_pemain %}
+                <option value="{{ nama.0 }}">{{ nama.1 }} {{ nama.2 }}</option>
+                {% endfor %}
+              </select>
+            </td>
+            <td>
+              <select name="peristiwa" id="peristiwa2" class="w-full">
+                <option value="0" selected>[None]</option>
+                <option value="Kartu Kuning">Kartu Kuning</option>
+                <option value="Kartu Merah">Kartu Merah</option>
+                <option value="Assist">Assist</option>
+                <option value="Gol">Gol</option>
+              </select>
+            </td>
+            <td>
+              <input
+                type="datetime-local"
+                id="waktu1"
+                name="waktu"
+                class="w-full"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <select name="nama_pemain" id="nama_pemain3" class="w-full">
+                <option value="0" selected>[None]</option>
+                {% for nama in data.nama_pemain %}
+                <option value="{{ nama.0 }}">{{ nama.1 }} {{ nama.2 }}</option>
+                {% endfor %}
+              </select>
+            </td>
+            <td>
+              <select name="peristiwa" id="peristiwa3" class="w-full">
+                <option value="0" selected>[None]</option>
+                <option value="Kartu Kuning">Kartu Kuning</option>
+                <option value="Kartu Merah">Kartu Merah</option>
+                <option value="Assist">Assist</option>
+                <option value="Gol">Gol</option>
+              </select>
+            </td>
+            <td>
+              <input
+                type="datetime-local"
+                id="waktu1"
+                name="waktu"
+                class="w-full"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <select name="nama_pemain" id="nama_pemain4" class="w-full">
+                <option value="0" selected>[None]</option>
+                {% for nama in data.nama_pemain %}
+                <option value="{{ nama.0 }}">{{ nama.1 }} {{ nama.2 }}</option>
+                {% endfor %}
+              </select>
+            </td>
+            <td>
+              <select name="peristiwa" id="peristiwa4" class="w-full">
+                <option value="0" selected>[None]</option>
+                <option value="Kartu Kuning">Kartu Kuning</option>
+                <option value="Kartu Merah">Kartu Merah</option>
+                <option value="Assist">Assist</option>
+                <option value="Gol">Gol</option>
+              </select>
+            </td>
+            <td>
+              <input
+                type="datetime-local"
+                id="waktu1"
+                name="waktu"
+                class="w-full"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <select name="nama_pemain" id="nama_pemain5" class="w-full">
+                <option value="0" selected>[None]</option>
+                {% for nama in data.nama_pemain %}
+                <option value="{{ nama.0 }}">{{ nama.1 }} {{ nama.2 }}</option>
+                {% endfor %}
+              </select>
+            </td>
+            <td>
+              <select name="peristiwa" id="peristiwa5" class="w-full">
+                <option value="0" selected>[None]</option>
+                <option value="Kartu Kuning">Kartu Kuning</option>
+                <option value="Kartu Merah">Kartu Merah</option>
+                <option value="Assist">Assist</option>
+                <option value="Gol">Gol</option>
+              </select>
+            </td>
+            <td>
+              <input
+                type="datetime-local"
+                id="waktu1"
+                name="waktu"
+                class="w-full"
+              />
+            </td>
+          </tr>
+        </table>
+        <input
+          type="submit"
+          value="Submit"
+          id="submit"
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 block mx-auto"
+        />
+      </form>
+      <div class="message mt-4 text-center" id="message"></div>
     </div>
   </div>
 </div>
