@@ -440,7 +440,7 @@ def pilihPelatih(request):
             if isSpExist:
                 cursor.execute(
                     f"""
-                        update SPESIALISASI_PELATIH set nama_tim = '{nama_tim}' where id_pelatih = '{pelatih_selected}'; 
+                        update PELATIH set nama_tim = '{nama_tim}' where id_pelatih = '{pelatih_selected}'; 
                         """
                 )
         except Exception as e:
