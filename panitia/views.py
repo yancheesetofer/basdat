@@ -1,4 +1,5 @@
 from datetime import date
+import datetime
 from django.shortcuts import render, redirect
 from django.conf import settings
 from django.db import *
@@ -6,6 +7,7 @@ from utilities.helper import query
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
+from django.utils import timezone
 
 
 
@@ -58,7 +60,69 @@ def peristiwa_tim(request, id_pertandingan, nama_tim):
 def show_profile(request):
     cursor = connection.cursor()
     # cursor.execute("SET search_path TO SIREST")
-    cursor.execute("SELECT * FROM rapat")
+    id_panitia = request.session.get("id")
+    print(id_panitia)
+    try:
+        cursor.execute(
+            f"""
+            select * 
+            from non_pemain
+            where id = %s
+            """,
+            [id_panitia]
+        )
+    except Exception as e:
+        cursor = connection.cursor()
+    dataPanitia = cursor.fetchall()
+    print("data didaapt")
+    print(dataPanitia)
+
+    try:
+        cursor.execute(
+            f"""
+            select jabatan
+            from panitia
+            where id_panitia = %s
+            """,
+            [id_panitia]
+        )
+    except Exception as e:
+        cursor = connection.cursor()
+    jabatanPanitia = cursor.fetchall()
+    print(jabatanPanitia)
+
+    try:
+        cursor.execute(
+            f"""
+            select status
+            from status_non_pemain
+            where id_non_pemain = %s
+            """,
+            [id_panitia]
+        )
+    except Exception as e:
+        cursor = connection.cursor()
+    statusPanitia = cursor.fetchall()
+    print(statusPanitia)
+
+    listDataPanitia = {
+        'namaDepan' : dataPanitia[0][1],
+        'namaBelakang' : dataPanitia[0][2],
+        'nomorHP' : dataPanitia[0][3],
+        'email' : dataPanitia[0][4],
+        'alamat' : dataPanitia[0][5],
+        'status' : statusPanitia[0][0],
+        'jabatan' : jabatanPanitia[0][0]
+    }
+
+    cursor.execute(
+        f"""
+        select *
+        from rapat
+        where perwakilan_panitia = %s
+        """,
+        [id_panitia]
+    )
     list_rapat = []
     allrapat = cursor.fetchall()
     # user_info = query(
@@ -81,7 +145,8 @@ def show_profile(request):
         list_rapat.append(rapat)
 
     context = {
-        'list_rapat' : list_rapat
+        'list_rapat' : list_rapat,
+        'dataPanitia' : listDataPanitia                 
     }
     return render(request, 'dashboard_panitia.html',context)
 
@@ -278,13 +343,19 @@ def mulai_rapat(request):
         except Exception as e:
             cursor = connection.cursor()
         rapat = cursor.fetchone()
+
+        timA = keduaTim[0][0]
+        timB = keduaTim[1][0]
+
         if rapat != None:
             result= {
-            "timBertanding": keduaTim[0][0] + " vs " + keduaTim[1][0],
+            "timBertanding": timA + " vs " + timB,
             "stadium": namaStadium[0],
             "tanggalWaktu": str(exactdate) + " " + str(startDate) + " - " + str(endDate),
-            "isPertandingan": id,
-            "rapat": rapat[0]
+            "idPertandingan": id,
+            "rapat": rapat[0],
+            "timA": timA,
+            "timB": timB
             }
         else :
             result= {
@@ -292,7 +363,9 @@ def mulai_rapat(request):
                 "stadium": namaStadium[0],
                 "tanggalWaktu": str(exactdate) + " " + str(startDate) + " - " + str(endDate),
                 "idPertandingan": id,
-                "rapat": None
+                "rapat": None,
+                "timA": timA,
+                "timB": timB
         }
         listResponseWanted.append(result)
 
@@ -302,7 +375,140 @@ def mulai_rapat(request):
     })
 
 def nota_rapat(request):
-    return render(request, "nota_rapat.html")
+    if request.method == "POST":
+        idPertandingan = request.POST.get("idPertandingan")
+        nama = request.POST.get("stadium")
+        timA = request.POST.get("timA")
+        timB = request.POST.get("timB")
+        print("cabo")
+        print(idPertandingan)
+        print(nama)
+        print("hai")
+        print(timA)
+        print("halo")
+        print(timB)
+
+    return render(request, "nota_rapat.html", {
+        "idPertandingan": idPertandingan,
+        "nama": nama,
+        "timA": timA,
+        "timB": timB
+    })
+
+def prosesNotaRapat(request):
+    if request.method == "POST":
+        idPanitia = request.session.get("id")
+        nowDatetime = datetime.datetime.now()
+        idPertandingan = request.POST.get("idPertandingan")
+        namaTimA = request.POST.get("timA")
+        namaTimB = request.POST.get("timB")
+        isiRapat = request.POST.get("isi_rapat")
+        print(idPanitia + " idPanitia")
+        print(nowDatetime)
+        print(idPertandingan + " id pertandingan")
+        print(namaTimA)
+        print(namaTimB)
+        print(isiRapat + " isi rapat")
+
+        cursor = connection.cursor()
+        try:
+            cursor.execute(
+                f"""
+                select id_manajer
+                from tim_manajer
+                where nama_tim = %s
+                """,
+                [namaTimA]
+            )
+        except Exception as e:
+            cursor = connection.cursor()
+
+        idManajerTimA = cursor.fetchone()
+        print(idManajerTimA[0])
+
+        cursor = connection.cursor()
+        try:
+            cursor.execute(
+                f"""
+                select id_manajer
+                from tim_manajer
+                where nama_tim = %s
+                """,
+                [namaTimB]
+            )
+        except Exception as e:
+            cursor = connection.cursor()
+
+        idManajerTimB = cursor.fetchone()
+        print(idManajerTimB[0])
+
+        try:
+            cursor.execute(
+                f"""
+                INSERT INTO rapat (id_pertandingan, datetime, perwakilan_panitia, manajer_tim_a, manajer_tim_b, isi_rapat)
+                VALUES (%s, %s, %s, %s, %s, %s)
+                """,
+                [idPertandingan, nowDatetime, idPanitia, idManajerTimA, idManajerTimB, isiRapat]
+            )
+        except Exception as e:
+            cursor = connection.cursor()
+        
+    
+    return redirect("/panitia/mulaiRapat")
+
+def confirmationRapat(request):
+    if request.method == "POST":
+        idPertandingan = request.POST.get("idPertandingan")
+        nama = request.POST.get("stadium")
+        timA = request.POST.get("timA")
+        timB = request.POST.get("timB")
+        notaRapat = request.POST.get("notaRapat")
+        perwakilanPanitia = request.session.get("id")
+        datetime = timezone.now()
+
+        cursor = connection.cursor()
+
+        try:
+            cursor.execute(
+                f"""
+                select id_manajer
+                from tim_manajer
+                where nama_tim = %s
+                """,
+                [timA]
+            )
+        except Exception as e:
+            cursor = connection.cursor()
+        
+        manajerA = cursor.fetchone()
+
+        try:
+            cursor.execute(
+                f"""
+                select id_manajer
+                from tim_manajer
+                where nama_tim = %s
+                """,
+                [timB]
+            )
+        except Exception as e:
+            cursor = connection.cursor()
+        
+        manajerB = cursor.fetchone()
+        
+
+        try:
+            cursor.execute(
+                f"""
+                INSERT INTO rapat (id_pertandingan, datetime, perwakilan_panitia, manajer_tim_a, manajer_tim_b, isi_rapat)
+                values (%s, %s, %s, %s, %s, %s)
+                """,
+                [idPertandingan, datetime, perwakilanPanitia, manajerA, manajerB, notaRapat]
+            )
+        except Exception as e:
+            cursor = connection.cursor()
+
+    return redirect("/panitia/profile")
 
 def submit_pertandingan(request):
     daftar_wasit={}
@@ -433,3 +639,4 @@ def submit_peristiwa(request):
             # Perform your database insertion or processing here using the extracted values
             
         return render(request, 'peristiwaTimBertanding.html')
+    

@@ -17,4 +17,5 @@ urlpatterns = [
     path('submitPertandingan/', submit_pertandingan, name='submit_pertandingan'),
     path('scheduleList/', schedule_list, name='scheduleList'),
     path('submitPeristiwa/', submit_peristiwa, name='submit_peristiwa'),
+    path('prosesNotaRapat/', prosesNotaRapat, name='prosesNotaRapat'),
 ]
