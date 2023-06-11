@@ -18,7 +18,7 @@ from datetime import datetime
 # Create your views here.
 
 def get_database():
-    conn = connection.connect(database="tk3_sepakbola", user="postgres", password="postgres")
+    conn = connection
     return conn
 
 
@@ -224,12 +224,12 @@ def show_profile(request):
         },
     )
 
-@login_required(login_url='../../user/login')
 def registerTim(request):
     cursor = connection.cursor()
     # check if manager has any teams
     username = request.session["username"]
-    username = 'rsamber14'
+    print(username)
+    # username = 'rsamber14'
     try:
         cursor.execute(
             f"""
@@ -237,10 +237,14 @@ def registerTim(request):
                 from tim t 
                 join tim_manajer tm on t.nama_tim = tm.nama_tim 
                 join manajer m on tm.id_manajer = m.id_manajer 
-                where username = '{username}';;
+                where username = '{username}';
             """
         )
-        if cursor.fetchone():
+        tim = cursor.fetchone()
+        print(tim)
+        if tim:
+            request.session["nama_tim"]  = tim[0]
+            request.session["nama_univ"] = tim[1]
             return redirect("../detail/")
     except Exception as e:
         return HttpResponseBadRequest()
@@ -264,7 +268,6 @@ def registerTim(request):
     return render(request, "registerTim.html")
 
 
-@login_required(login_url='../../user/login')
 def detailTim(request):
     username = request.session["username"]
     username = 'rsamber14'
@@ -330,6 +333,7 @@ def detailTim(request):
     }
     return render(request, "detailTim.html", context)
 
+@csrf_exempt
 def makecaptain(request):
     nama_tim = request.session["nama_tim"]
     # nama_tim = 'Hurricanes'
@@ -358,10 +362,11 @@ def makecaptain(request):
             return HttpResponseBadRequest(f"Can not registered pemain into Tim {nama_tim}")
     
 
-@login_required(login_url='../../user/login')
 def pilihPemain(request):
+    for key in request.session.keys():
+        print ("key:=>" + str(request.session[key]))
     nama_tim = request.session["nama_tim"]
-    nama_tim = 'Hurricanes'
+    # nama_tim = 'Hurricanes'
     cursor = connection.cursor()
     if request.method == "POST":
         pemain_selected = request.POST.get("pemain")
@@ -409,7 +414,7 @@ def pilihPemain(request):
     }
     return render(request, "pemain.html", context)
 
-@login_required(login_url='../../user/login')
+
 def pilihPelatih(request):
     cursor = connection.cursor()
     nama_tim = request.session["nama_tim"]
@@ -435,7 +440,7 @@ def pilihPelatih(request):
             if isSpExist:
                 cursor.execute(
                     f"""
-                        update SPESIALISASI_PELATIH set nama_tim = '{nama_tim}' where id_pelatih = '{pelatih_selected}'; 
+                        update PELATIH set nama_tim = '{nama_tim}' where id_pelatih = '{pelatih_selected}'; 
                         """
                 )
         except Exception as e:
