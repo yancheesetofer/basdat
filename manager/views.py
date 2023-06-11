@@ -18,7 +18,7 @@ from datetime import datetime
 # Create your views here.
 
 def get_database():
-    conn = connection.connect(database="tk3_sepakbola", user="postgres", password="postgres")
+    conn = connection
     return conn
 
 

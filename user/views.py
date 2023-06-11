@@ -1,3 +1,6 @@
+import uuid
+
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.db import *
 from django.contrib import messages
@@ -16,15 +19,87 @@ def register(request):
 
 
 def register_manager(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        nama_depan = request.POST['nama-depan']
+        nama_belakang = request.POST['nama-blkg']
+        nomor_hp = request.POST['no_hp']
+        email = request.POST['email']
+        alamat = request.POST['alamat']
+        status = request.POST['status']
+        print(username, password, nama_depan, nama_belakang, nomor_hp, email, alamat)
+
+        with connection.cursor() as cursor:
+            id = uuid.uuid4()
+            cursor.execute("INSERT INTO User_System (Username, Password) VALUES (%s, %s)", [username, password])
+            cursor.execute(
+                "INSERT INTO Non_Pemain (id, Nama_Depan, Nama_Belakang, Nomor_HP, Email, Alamat) VALUES (%s,%s, %s, "
+                "%s, %s, %s)", [id, nama_depan, nama_belakang, nomor_hp, email, alamat])
+            cursor.execute("INSERT INTO status_non_pemain(id_non_pemain, status) VALUES (%s,%s)", [id, status])
+            cursor.execute("INSERT INTO manajer(id_manajer, username) VALUES (%s,%s)", [id, username])
+
+        return HttpResponseRedirect(reverse('user:loginPage'))
+
     return render(request, "registerUser.html")
 
 
 def register_penonton(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        nama_depan = request.POST['nama-depan']
+        nama_belakang = request.POST['nama-blkg']
+        nomor_hp = request.POST['no_hp']
+        email = request.POST['email']
+        alamat = request.POST['alamat']
+        status = request.POST['status']
+        print(username, password, nama_depan, nama_belakang, nomor_hp, email, alamat)
+
+        with connection.cursor() as cursor:
+            id = uuid.uuid4()
+            cursor.execute("INSERT INTO User_System (Username, Password) VALUES (%s, %s)", [username, password])
+            cursor.execute(
+                "INSERT INTO Non_Pemain (id, Nama_Depan, Nama_Belakang, Nomor_HP, Email, Alamat) VALUES (%s,%s, %s, "
+                "%s, %s, %s)", [id, nama_depan, nama_belakang, nomor_hp, email, alamat])
+            cursor.execute("INSERT INTO status_non_pemain(id_non_pemain, status) VALUES (%s,%s)", [id, status])
+            cursor.execute("INSERT INTO penonton(id_penonton, username) VALUES (%s,%s)", [id, username])
+
+        return HttpResponseRedirect(reverse('user:loginPage'))
+
     return render(request, "registerUser.html")
 
 
 def register_panitia(request):
     context = {"isPanitia": "true"}
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        nama_depan = request.POST['nama-depan']
+        nama_belakang = request.POST['nama-blkg']
+        nomor_hp = request.POST['no_hp']
+        email = request.POST['email']
+        alamat = request.POST['alamat']
+        status = request.POST['status']
+        jabatan = request.POST['jabatan']
+        print(username, password, nama_depan, nama_belakang, nomor_hp, email, alamat)
+
+        with connection.cursor() as cursor:
+            id = uuid.uuid4()
+            cursor.execute("INSERT INTO User_System (Username, Password) VALUES (%s, %s)", [username, password])
+            cursor.execute(
+                "INSERT INTO Non_Pemain (id, Nama_Depan, Nama_Belakang, Nomor_HP, Email, Alamat) VALUES (%s,%s, %s, "
+                "%s, %s, %s)", [id, nama_depan, nama_belakang, nomor_hp, email, alamat])
+            cursor.execute("INSERT INTO status_non_pemain(id_non_pemain, status) VALUES (%s,%s)", [id, status])
+            cursor.execute("INSERT INTO panitia(id_panitia,jabatan, username) VALUES (%s,%s)", [id, jabatan, username])
+
+        return HttpResponseRedirect(reverse('user:loginPage'))
+
+    return render(request, "registerUser.html")
+
     return render(request, "registerUser.html", context)
 
 
@@ -57,7 +132,7 @@ def loginPage(request):
             request.session["is_authenticated"] = True
             # search for user role
             # try for role manajer
-            try :
+            try:
                 cursor.execute(
                     f"""
                     select *
@@ -75,9 +150,9 @@ def loginPage(request):
                 request.session["id"] = str(id_manajer)
 
                 return redirect("/manager/profile")
-            else :
+            else:
                 # try for role panitia
-                try :
+                try:
                     cursor.execute(
                         f"""
                         select *
@@ -94,11 +169,11 @@ def loginPage(request):
                     jabatan = data[1]
                     request.session["role"] = "panitia"
                     request.session["id"] = str(id_panitia)
-                    
+
                     return redirect("/panitia/profile")
-                else :
+                else:
                     # try for role penonton
-                    try :
+                    try:
                         cursor.execute(
                             f"""
                             select *

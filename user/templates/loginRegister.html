@@ -30,14 +30,14 @@
                     <ul class="items-center flex-block">
                         <li class="py-3">
                             <a href="{% url 'user:loginPage' %}">
-                                <button href="#" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                <button href="{% url 'user:loginPage' %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                     LOGIN
                                 </button>
                             </a>
                         </li>
                         <li class="py-3">
-                            <a href="{% url 'user:index' %}">
-                                <button href="#" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            <a href="{% url 'user:register' %}">
+                                <button href="{% url 'user:register' %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                     REGISTER
                                 </button>
                             </a>
