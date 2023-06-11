@@ -83,7 +83,6 @@ def show_profile(request):
     context = {
         'list_rapat' : list_rapat
     }
-    print(user_info)
     return render(request, 'dashboard_panitia.html',context)
 
 def manage_pertandingan(request):
