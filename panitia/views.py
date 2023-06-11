@@ -60,7 +60,69 @@ def peristiwa_tim(request, id_pertandingan, nama_tim):
 def show_profile(request):
     cursor = connection.cursor()
     # cursor.execute("SET search_path TO SIREST")
-    cursor.execute("SELECT * FROM rapat")
+    id_panitia = request.session.get("id")
+    print(id_panitia)
+    try:
+        cursor.execute(
+            f"""
+            select * 
+            from non_pemain
+            where id = %s
+            """,
+            [id_panitia]
+        )
+    except Exception as e:
+        cursor = connection.cursor()
+    dataPanitia = cursor.fetchall()
+    print("data didaapt")
+    print(dataPanitia)
+
+    try:
+        cursor.execute(
+            f"""
+            select jabatan
+            from panitia
+            where id_panitia = %s
+            """,
+            [id_panitia]
+        )
+    except Exception as e:
+        cursor = connection.cursor()
+    jabatanPanitia = cursor.fetchall()
+    print(jabatanPanitia)
+
+    try:
+        cursor.execute(
+            f"""
+            select status
+            from status_non_pemain
+            where id_non_pemain = %s
+            """,
+            [id_panitia]
+        )
+    except Exception as e:
+        cursor = connection.cursor()
+    statusPanitia = cursor.fetchall()
+    print(statusPanitia)
+
+    listDataPanitia = {
+        'namaDepan' : dataPanitia[0][1],
+        'namaBelakang' : dataPanitia[0][2],
+        'nomorHP' : dataPanitia[0][3],
+        'email' : dataPanitia[0][4],
+        'alamat' : dataPanitia[0][5],
+        'status' : statusPanitia[0][0],
+        'jabatan' : jabatanPanitia[0][0]
+    }
+
+    cursor.execute(
+        f"""
+        select *
+        from rapat
+        where perwakilan_panitia = %s
+        """,
+        [id_panitia]
+    )
     list_rapat = []
     allrapat = cursor.fetchall()
     # user_info = query(
@@ -83,7 +145,8 @@ def show_profile(request):
         list_rapat.append(rapat)
 
     context = {
-        'list_rapat' : list_rapat
+        'list_rapat' : list_rapat,
+        'dataPanitia' : listDataPanitia                 
     }
     return render(request, 'dashboard_panitia.html',context)
 
