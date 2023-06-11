@@ -17,8 +17,8 @@
     </thead>
     <tbody>
 
-      <form method="POST" action="{% url 'panitia:notaRapat' %}">
       {% for response in listResponse %}
+      <form method="POST" action="{% url 'panitia:notaRapat' %}">
       {% csrf_token %}
       <tr>
         <td class="p-3 border-t border-gray-400">{{response.timBertanding}}</td>
@@ -43,8 +43,8 @@
           {% endif %}
         </td>
       </tr>
-      {% endfor %}
     </form>
+    {% endfor %}
       <!-- Add more rows as needed -->
     </tbody>
   </table>

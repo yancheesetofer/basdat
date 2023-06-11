@@ -1,4 +1,5 @@
 from datetime import date
+import datetime
 from django.shortcuts import render, redirect
 from django.conf import settings
 from django.db import *
@@ -331,6 +332,67 @@ def nota_rapat(request):
         "timB": timB
     })
 
+def prosesNotaRapat(request):
+    if request.method == "POST":
+        idPanitia = request.session.get("id")
+        nowDatetime = datetime.datetime.now()
+        idPertandingan = request.POST.get("idPertandingan")
+        namaTimA = request.POST.get("timA")
+        namaTimB = request.POST.get("timB")
+        isiRapat = request.POST.get("isi_rapat")
+        print(idPanitia + " idPanitia")
+        print(nowDatetime)
+        print(idPertandingan + " id pertandingan")
+        print(namaTimA)
+        print(namaTimB)
+        print(isiRapat + " isi rapat")
+
+        cursor = connection.cursor()
+        try:
+            cursor.execute(
+                f"""
+                select id_manajer
+                from tim_manajer
+                where nama_tim = %s
+                """,
+                [namaTimA]
+            )
+        except Exception as e:
+            cursor = connection.cursor()
+
+        idManajerTimA = cursor.fetchone()
+        print(idManajerTimA[0])
+
+        cursor = connection.cursor()
+        try:
+            cursor.execute(
+                f"""
+                select id_manajer
+                from tim_manajer
+                where nama_tim = %s
+                """,
+                [namaTimB]
+            )
+        except Exception as e:
+            cursor = connection.cursor()
+
+        idManajerTimB = cursor.fetchone()
+        print(idManajerTimB[0])
+
+        try:
+            cursor.execute(
+                f"""
+                INSERT INTO rapat (id_pertandingan, datetime, perwakilan_panitia, manajer_tim_a, manajer_tim_b, isi_rapat)
+                VALUES (%s, %s, %s, %s, %s, %s)
+                """,
+                [idPertandingan, nowDatetime, idPanitia, idManajerTimA, idManajerTimB, isiRapat]
+            )
+        except Exception as e:
+            cursor = connection.cursor()
+        
+    
+    return redirect("/panitia/mulaiRapat")
+
 def confirmationRapat(request):
     if request.method == "POST":
         idPertandingan = request.POST.get("idPertandingan")
@@ -514,3 +576,4 @@ def submit_peristiwa(request):
             # Perform your database insertion or processing here using the extracted values
             
         return render(request, 'peristiwaTimBertanding.html')
+    
