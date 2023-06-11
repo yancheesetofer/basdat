@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 
 
 def get_database():
-    conn = connection.connect(database="tk3_sepakbola", user="postgres", password="postgres")
+    conn = connection
     return conn
 
 
