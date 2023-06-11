@@ -196,3 +196,11 @@ def loginPage(request):
             messages.error("Email atau password yang dimasukkan salah")
 
     return render(request, "login.html")
+
+def logout(request):
+    del request.session["role"]
+    del request.session["id"]
+    del request.session["username"]
+    del request.session["password"]
+    del request.session["is_authenticated"]
+    return redirect("/user/login")
