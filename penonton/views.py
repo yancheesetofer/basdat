@@ -2,6 +2,10 @@ import uuid
 
 from django.db import connection
 from django.shortcuts import render, redirect
+
+from penonton.forms import PembayaranForm, StadiumForm
+
+
 # from .forms import StadiumForm, PembayaranForm
 # import psycopg2
 
@@ -129,16 +133,16 @@ def show_profile(request):
     return render(request, "dashboardPenonton.html", context)
 
 
-# def pilih_stadium(request):
-#     if request.method == 'POST':
-#         form = StadiumForm(request.POST)
-#         if form.is_valid():
-#             request.session['stadium'] = form.cleaned_data['stadium']
-#             request.session['tanggal'] = form.cleaned_data['tanggal'].strftime('%Y-%m-%d')
-#             return redirect('/penonton/cr_pembelian_tiket/list_waktu_stadium')  # redirect to next page
-#     else:
-#         form = StadiumForm()
-#     return render(request, 'pilih_stadium.html', {'form': form})
+def pilih_stadium(request):
+    if request.method == 'POST':
+        form = StadiumForm(request.POST)
+        if form.is_valid():
+            request.session['stadium'] = form.cleaned_data['stadium']
+            request.session['tanggal'] = form.cleaned_data['tanggal'].strftime('%Y-%m-%d')
+            return redirect('/penonton/cr_pembelian_tiket/list_waktu_stadium')  # redirect to next page
+    else:
+        form = StadiumForm()
+    return render(request, 'pilih_stadium.html', {'form': form})
 
 
 def list_waktu_stadium(request):
@@ -190,28 +194,28 @@ def pilih_pertandingan(request):
     return render(request, 'pilih_pertandingan.html', {'pertandingan_list': pertandingan_list})
 
 
-# def beli_tiket(request):
-#     if request.method == 'POST':
-#         form = PembayaranForm(request.POST)
-#         if form.is_valid():
-#             jenis_tiket = form.cleaned_data['jenis_tiket']
-#             pembayaran = form.cleaned_data['pembayaran']
-#             # Generate receipt number
-#             nomor_receipt = uuid.uuid4().hex
-#             with connection.cursor() as cursor:
-#                 cursor.execute("""
-#                     INSERT INTO Pembelian_Tiket(Nomor_Receipt, ID_Penonton, Jenis_Tiket, Jenis_Pembayaran, ID_Pertandingan) 
-#                     VALUES (%s, (SELECT ID_Penonton FROM Penonton WHERE Username = %s), %s, %s, 
-#                     (SELECT ID_Pertandingan 
-#                         FROM Pertandingan 
-#                         WHERE Stadium = (SELECT ID_Stadium FROM Stadium WHERE Nama = %s)
-#                         AND DATE(Start_Datetime) = DATE(%s)))
-#                 """, [nomor_receipt, request.user.username, jenis_tiket, pembayaran, request.session['stadium'],
-#                       request.session['tanggal']])
-#             return redirect('/penonton/profile')  # redirect to dashboard page
-#     else:
-#         form = PembayaranForm()
-#     return render(request, 'beli_tiket.html', {'form': form})
+def beli_tiket(request):
+    if request.method == 'POST':
+        form = PembayaranForm(request.POST)
+        if form.is_valid():
+            jenis_tiket = form.cleaned_data['jenis_tiket']
+            pembayaran = form.cleaned_data['pembayaran']
+            # Generate receipt number
+            nomor_receipt = uuid.uuid4().hex
+            with connection.cursor() as cursor:
+                cursor.execute("""
+                    INSERT INTO Pembelian_Tiket(Nomor_Receipt, ID_Penonton, Jenis_Tiket, Jenis_Pembayaran, ID_Pertandingan) 
+                    VALUES (%s, (SELECT ID_Penonton FROM Penonton WHERE Username = %s), %s, %s, 
+                    (SELECT ID_Pertandingan 
+                        FROM Pertandingan 
+                        WHERE Stadium = (SELECT ID_Stadium FROM Stadium WHERE Nama = %s)
+                        AND DATE(Start_Datetime) = DATE(%s)))
+                """, [nomor_receipt, request.user.username, jenis_tiket, pembayaran, request.session['stadium'],
+                      request.session['tanggal']])
+            return redirect('/penonton/profile')  # redirect to dashboard page
+    else:
+        form = PembayaranForm()
+    return render(request, 'beli_tiket.html', {'form': form})
 
 
 def list_pertandingan_penonton(request):
