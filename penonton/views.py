@@ -13,22 +13,119 @@ def get_database():
 
 # Create your views here.
 def show_profile(request):
-    pertandingan1 = {
-        "id": 11,
-        "waktu_mulai": "Minggu, 7 Mei 2023 7:00 pm",
-        "waktu_selesai": "Minggu, 7 Mei 2023 8:30 pm",
-        "stadium": "Anfield",
-    }
-    pertandingan2 = {
-        "id": 13,
-        "waktu_mulai": "Selasa, 9 Mei 2023 7:00 pm",
-        "waktu_selesai": "Selasa, 9 Mei 2023 8:30 pm",
-        "stadium": "Old Trafford",
-    }
-    list_pertandingan = [pertandingan1, pertandingan2]
+    cursor = connection.cursor()
+    idPenonton = request.session.get("id")
+    try:
+        cursor.execute(
+            f"""
+            select *
+            from non_pemain
+            where id = %s
+            """,
+            [idPenonton]
+        )
+    except Exception as e:
+        cursor = connection.cursor()
+    dataPenonton = cursor.fetchall()
+    namaDepan = dataPenonton[0][1]
+    namaBelakang = dataPenonton[0][2]
+    nomorHP = dataPenonton[0][3]
+    email = dataPenonton[0][4]
+    alamat = dataPenonton[0][5]
 
-    context = {"list_pertandingan_penonton": list_pertandingan}
-    context = {}
+    try:
+        cursor.execute(
+            f"""
+            select status
+            from status_non_pemain
+            where id_non_pemain = %s
+            """,
+            [idPenonton]
+        )
+    except Exception as e:
+        cursor = connection.cursor()
+    dataStatus = cursor.fetchone()
+
+    panitia = {
+        'namaDepan' : namaDepan,
+        'namaBelakang' : namaBelakang,
+        'nomorHP' : nomorHP,
+        'email' : email,
+        'alamat' : alamat,
+        'status' : dataStatus[0]
+    }
+
+    list_pertandingan = []
+
+    try:
+        cursor.execute(
+            f"""
+            select *
+            from pertandingan
+            """
+        )
+    except Exception as e:
+        cursor = connection.cursor()
+    dataPertandingan = cursor.fetchall()
+
+    for pertandingan in dataPertandingan:
+        idPertandingan = pertandingan[0]
+        startDatetime = pertandingan[1]
+        end_datetime = pertandingan[2]
+        id_stadium = pertandingan[3]
+
+        print(idPertandingan)
+        try:
+            cursor.execute(
+                f"""
+                select nama
+                from stadium
+                where id_stadium = %s
+                """,
+                [id_stadium]
+            )
+        except Exception as e:
+            cursor = connection.cursor()
+        dataStadium = cursor.fetchone()
+        namaStadium = dataStadium[0]
+
+        try:
+            cursor.execute(
+                f"""
+                select nama_tim
+                from tim_pertandingan
+                where id_pertandingan = %s
+                """,
+                [idPertandingan]
+            )
+        except Exception as e:
+            cursor = connection.cursor()
+        dataPetanding = cursor.fetchall()
+        print(dataPetanding)
+        if dataPetanding:
+            print(dataPetanding[0])
+            timA = dataPetanding[0][0]
+            timB = dataPetanding[1][0]
+            judul = timA + " vs " + timB
+        else:
+            continue
+            judul = "Tim yang bertanding belum ditentukan"
+        # print(dataPetanding[0])
+        # print(dataPetanding[1])
+
+        detailPertandingan = {
+            'judul' : judul,
+            'namaStadium' : namaStadium,
+            'startDate' : startDatetime,
+            'endDate' : end_datetime
+        }
+        list_pertandingan.append(detailPertandingan)
+
+    context = {
+        "list_pertandingan_penonton": list_pertandingan,
+        "panitia" : panitia
+    }
+
     return render(request, "dashboardPenonton.html", context)
 
 

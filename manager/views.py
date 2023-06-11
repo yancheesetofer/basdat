@@ -10,7 +10,9 @@ from django.http import HttpResponseBadRequest
 from django.shortcuts import redirect, render
 from django.db import *
 from pprint import pprint
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
+from datetime import datetime
 
 
 # Create your views here.
@@ -489,7 +491,6 @@ def scheduleBooking(request):
 
         id_stadium = cursor.fetchone()
 
-        print("idstadium " + str(id_stadium[0]))
         return render(
             request,
             "schedule_booking.html",
@@ -498,11 +499,18 @@ def scheduleBooking(request):
                 "date": date,
             },
         )
-    print("KOK SINI")
     return HttpResponseForbidden("kenot")
 
-
+@csrf_exempt
 def stadiumBooking(request):
+    if request.method == "POST":
+        namaStadium = request.POST.get("namaStadium")
+        startDate = request.POST.get("startDate")
+        endDate = request.POST.get("endDate")
+        request.session["namaStadium"] = namaStadium
+        request.session["startDate"] = startDate
+        request.session["endDate"] = endDate
+
     cursor = connection.cursor()
     try:
         cursor.execute(
@@ -595,31 +603,100 @@ def bookingConfirmation(request):
             )
         except Exception as e:
             cursor = connection.cursor()
-
         id_stadium = cursor.fetchone()
 
-        response = ""
+        if request.session.get("namaStadium"):
+            namaStadium = request.session.get("namaStadium")
+            startDatetime = request.session["startDate"]
+            endDatetime = request.session["endDate"]
 
-        try:
-            cursor.execute(
-                f"""
-                INSERT INTO peminjaman (id_manajer, start_datetime, end_datetime, id_stadium) 
-                VALUES (%s, %s, %s, %s);
-                """,
-                [id_manager, start_datetime, end_datetime, id_stadium[0]],
-            )
-        except Exception as e:
-            response = e
+            if "a.m." in startDatetime:
+                startDatestring = startDatetime.replace("a.m.", "AM")
+            else:
+                startDatestring = startDatetime.replace("p.m.", "PM")
+                
+            start_datetime_object = datetime.strptime(startDatestring, '%B %d, %Y, %I %p')
+            start_timestamp = start_datetime_object.strftime('%Y-%m-%d %H:%M:%S.%f')
 
-        print(start_datetime)
-        print(end_datetime)
-        print(id_stadium[0])
-        print(id_manager)
-        print("ini response sayang")
-        print(response)
-        if response == "":
-            messages.success(request, "Berhasil melakukan peminjaman stadium")
+            if "a.m." in endDatetime:
+                endDatestring = endDatetime.replace("a.m.", "AM")
+            elif "noon" in endDatetime:
+                endDatestring = endDatetime.replace("noon", "12 PM")
+            else :
+                endDatestring = endDatetime.replace("p.m.", "PM")
+
+
+            end_datetime_object = datetime.strptime(endDatestring, '%B %d, %Y, %I %p')
+            end_timestamp = end_datetime_object.strftime('%Y-%m-%d %H:%M:%S.%f')
+
+            print("nah")
+            print(start_timestamp)
+            print(end_timestamp)
+            print(start_datetime)
+            print(end_datetime)
+
+            print(id_manager)
+
+            try:
+                cursor.execute(
+                    f"""
+                    select id_stadium
+                    from stadium
+                    where nama = %s
+                    """,
+                    [namaStadium],
+                )
+            except Exception as e:
+                cursor = connection.cursor()
+            idStadium = cursor.fetchone()
+            print(idStadium)
+            response = ""
+            if request.session["namaStadium"] == stadium:
+                try:
+                    cursor.execute(
+                    f"""
+                    UPDATE peminjaman
+                    set start_datetime = %s,
+                        end_datetime = %s
+                    where id_manajer = %s AND start_datetime = %s AND id_stadium = %s
+                    """,
+                    [start_datetime, end_datetime, id_manager, start_timestamp, idStadium[0]]
+                )
+                except Exception as e:
+                    response = e
+            else:
+                response = "Update jadwal peminjaman tidak bisa dilakukan"
+            
+            if response == "":
+                messages.success(request, "Berhasil melakukan perubahan jadwal stadium")
+            else :
+                messages.error(request, response)
+            del request.session["namaStadium"]
+            del request.session["startDate"]
+            del request.session["endDate"]
+
         else :
-            messages.error(request, response)
+            response = ""
+            try:
+                cursor.execute(
+                    f"""
+                    INSERT INTO peminjaman (id_manajer, start_datetime, end_datetime, id_stadium) 
+                    VALUES (%s, %s, %s, %s);
+                    """,
+                    [id_manager, start_datetime, end_datetime, id_stadium[0]],
+                )
+            except Exception as e:
+                response = e
+
+            print(start_datetime)
+            print(end_datetime)
+            print(id_stadium[0])
+            print(id_manager)
+            print("ini response sayang")
+            print(response)
+            if response == "":
+                messages.success(request, "Berhasil melakukan peminjaman stadium")
+            else :
+                messages.error(request, response)
 
     return redirect("/manager/listPeminjaman")
