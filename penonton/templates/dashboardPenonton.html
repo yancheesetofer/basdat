@@ -42,28 +42,28 @@
                         <div class="grid md:grid-cols-2 text-sm">
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-3 font-semibold">Nama Depan</div>
-                                <div class="px-4 py-3">{{namaDepan}}</div>
+                                <div class="px-4 py-3">{{panitia.namaDepan}}</div>
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-3 font-semibold">Nama Belakang</div>
-                                <div class="px-4 py-3">{{namaBelakang}}</div>
+                                <div class="px-4 py-3">{{panitia.namaBelakang}}</div>
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-3 font-semibold">Nomor HP</div>
-                                <div class="px-4 py-3">{{nomorHP}}</div>
+                                <div class="px-4 py-3">{{panitia.nomorHP}}</div>
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-3 font-semibold">Email</div>
-                                <div class="px-4 py-3">{{email}}</div>
+                                <div class="px-4 py-3">{{panitia.email}}</div>
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-3 font-semibold">Alamat</div>
-                                <div class="px-4 py-3">{{alamat}}</div>
+                                <div class="px-4 py-3">{{panitia.alamat}}</div>
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-3 font-semibold">Status</div>
                                 <div class="px-4 py-3">
-                                    {{status}}
+                                    {{panitia.status}}
                                 </div>
                             </div>
                         </div>
@@ -85,13 +85,13 @@
                                 </span>
                                 <span class="tracking-wide">Daftar Pertandingan</span>
                             </div>
-                            {% if list_pertandingan == null %}
+                            {% if list_pertandingan_penonton == null %}
                                 <h1 class="text-gray-500 font-semibold text-m"> 
                                     Belum Memesan Pertandingan
                                 </h1>
                             {% else %}
                                 <ul class="list-inside space-y-2 p-5">
-                                  {% for pertandingan in list_pertandingan %}
+                                  {% for pertandingan in list_pertandingan_penonton %}
                                   <li>
                                     <div class="container mx-auto mt-2">
                                         <div
@@ -110,7 +110,7 @@
                                               :class="faqOne === true ? activeClass : ''"
                                               class="flex items-center text-sm justify-between w-full py-3 pl-3 pr-2 font-semibold text-gray-100 bg-teal-600 rounded cursor-pointer hover:text-white-100"
                                             >
-                                                Pertandingan #{{pertandingan.id}}
+                                                Pertandingan {{pertandingan.judul}}
                                               <span
                                                 class="flex items-center justify-center w-6 h-6"
                                               >
@@ -141,17 +141,17 @@
                                                       <ul>
                                                         <li>
                                                             <p class ="text-gray-500 text-sm">
-                                                                Waktu mulai: {{pertandingan.waktu_mulai}}
+                                                                Waktu mulai: {{pertandingan.startDate}}
                                                             </p>
                                                         </li>  
                                                         <li>
                                                             <p class ="text-gray-500 text-sm">
-                                                                Waktu selesai: {{pertandingan.waktu_selesai}}
+                                                                Waktu selesai: {{pertandingan.endDate}}
                                                             </p>
                                                         </li>  
                                                         <li>
                                                             <p class ="text-gray-500 text-sm">
-                                                                Tempat: {{pertandingan.stadium}}
+                                                                Tempat: {{pertandingan.namaStadium}}
                                                             </p>
                                                         </li>   
                                                       </ul>  
