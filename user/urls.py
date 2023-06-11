@@ -10,4 +10,5 @@ urlpatterns = [
     path("register/panitia", register_panitia, name="register_panitia"),
     path("",homePage, name="homePage"),
     path("login",loginPage, name="loginPage"),
+    path("logout/", logout, name="logout"),
 ]
