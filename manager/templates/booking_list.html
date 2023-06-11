@@ -4,33 +4,76 @@
 </head>
 <body class="bg-gray-100">
   {% include 'navbar_manager.html' %}
-  <h1 class="text-3xl font-bold mt-8">List Pemesanan</h1>
-  <table class="table-auto w-full mt-8">
-    <thead>
-      <tr class="bg-gray-200">
-        <th class="px-4 py-2">Stadium</th>
-        <th class="px-4 py-2">Waktu</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="border-b border-gray-200">
-        <td class="px-4 py-2">Stadium 1</td>
-        <td class="px-4 py-2">08:00 - 10:00</td>
-      </tr>
-      <tr class="border-b border-gray-200">
-        <td class="px-4 py-2">Stadium 2</td>
-        <td class="px-4 py-2">10:00 - 12:00</td>
-      </tr>
-      <tr class="border-b border-gray-200">
-        <td class="px-4 py-2">Stadium 3</td>
-        <td class="px-4 py-2">12:00 - 14:00</td>
-      </tr>
-    </tbody>
-  </table>
-  <button
-    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-8 rounded"
-  >
-    PESAN
-  </button>
+  <div class="flex items-center flex-col gap-5">
+    <h1 class="text-3xl font-bold mt-8">List Pemesanan</h1>
+    <div class="relative overflow-x-auto w-2/5">
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead
+          class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+        >
+          <tr>
+            <th scope="col" class="px-6 py-3 text-center">Nama Stadium</th>
+            <th scope="col" class="px-6 py-3 text-center">Waktu</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for peminjaman in list_peminjaman %}
+          <form method="POST" action="{% url 'manager:stadiumBooking' %}">
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <th
+              scope="row"
+              class="px-6 py-4 font-medium text-black text-center dark:text-white"
+            >
+              {{peminjaman.namaStadium}}
+            </th>
+            <td class="px-6 py-4 text-center text-black font-medium">
+              {{peminjaman.startDate}} - {{peminjaman.endDate}}
+            </td>
+            <input type="hidden" name="namaStadium" value="{{peminjaman.namaStadium}}" />
+            <input type="hidden" name="startDate" value="{{peminjaman.startDate}}"/>
+            <input type="hidden" name="endDate" value="{{peminjaman.endDate}}"/>
+            <td class="px-6 py-4 text-center text-black ">
+              <button
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-5 rounded"
+              >
+                Ubah Jadwal
+              </button>
+            </td>
+          </tr>
+        </form>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <a href="/manager/stadiumBooking">
+      <button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-5 rounded"
+      >
+        PESAN
+      </button>
+    </a>
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %} 
+      {% if message == "Berhasil melakukan peminjaman stadium" %}
+      <div
+        class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
+        role="success"
+      >
+        <strong class="font-bold">{{message}}</strong>
+        <span class="absolute top-0 bottom-0 right-0 px-4 py-3"> </span>
+      </div>
+      {% else %}
+      <div
+        class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+        role="alert"
+      >
+        <strong class="font-bold">{{message}}</strong>
+        <span class="absolute top-0 bottom-0 right-0 px-4 py-3"> </span>
+      </div>
+      {% endif %} {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
 </body>
 {% endblock content %}

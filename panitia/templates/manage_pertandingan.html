@@ -1,451 +1,81 @@
-{% extends 'base.html' %} {% load static %} {% block meta %} {% endblock meta %}
+{% extends 'base.html' %} 
+{% block meta %}
+<title>Manage Pertandingan</title>
+{% endblock meta %} 
+
 {% block content %}
 {% include 'navbar_panitia.html' %}
-<head>
-  <!-- <link
-    href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css"
-    rel="stylesheet"
-  /> -->
-</head>
-<body class="bg-gray-200">
-  {% if not isLengkap %}
-  <div class="py-20 self-center items-center text-center">
-    <h2 class="text-2xl font-bold py-10">
-      PERTANDINGAN BELUM LENGKAP! KLIK TOMBOL NEXT UNTUK MEMBUAT PERTANDINGAN
-    </h2>
-    <button
-      type="submit"
-      class="w-100 text-gray-700 bg-white hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-    >
-      NEXT
-    </button>
-  </div>
-  {% else %}
-  <div
-    id="default-carousel"
-    class="relative w-full p-20 h-full"
-    data-carousel="slide"
-  >
-    <!-- Carousel wrapper -->
-    <div class="relative overflow-hidden rounded-lg md:h-screen">
-      <!-- Item 1 -->
-      <div class="hidden duration-700 ease-in-out" data-carousel-item>
-        <div class="relative overflow-x-auto text-center items-center">
-          <h2
-            class="text-2xl font-bold pt-10 self-center items-center text-center"
-          >
-            LIST PERTANDINGAN GRUP STAGE
-          </h2>
-          <h2 class="text-center text-xl font-semibold py-5">Babak Pertama</h2>
-          <table
-            class="w-full text-sm text-left text-gray-500 dark:text-gray-400"
-          >
-            <thead
-              class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-            >
-              <tr>
-                <th scope="col" class="px-6 py-3">Grup</th>
-                <th scope="col" class="px-6 py-3">Tim</th>
-                <th scope="col" class="px-6 py-3">Waktu</th>
-                <th scope="col" class="px-6 py-3">Pemenang</th>
-                <th scope="col" class="px-6 py-3">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr
-                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-              >
-                <th
-                  scope="row"
-                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                >
-                  A
-                </th>
-                <td class="px-6 py-4">A vs B</td>
-                <td class="px-6 py-4">28 April 2023, 13:00</td>
-                <td class="px-6 py-4">A</td>
-                <td class="px-6 py-4">
-                  <ul>
-                    <li>
-                      <a class="underline text-teal-400 font-semibold">
-                        Lihat Peristiwa Tim 1
-                      </a>
-                    </li>
-                    <li>
-                      <a class="underline text-teal-400 font-semibold">
-                        Lihat Peristiwa Tim 2
-                      </a>
-                    </li>
-                  </ul>
-                </td>
-              </tr>
-              <tr
-                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-              >
-                <th
-                  scope="row"
-                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                >
-                  A
-                </th>
-                <td class="px-6 py-4">C vs D</td>
-                <td class="px-6 py-4">29 April 2023, 13:00</td>
-                <td class="px-6 py-4">D</td>
-                <td class="px-6 py-4">
-                  <ul>
-                    <li>
-                      <a class="underline text-teal-400 font-semibold">
-                        Lihat Peristiwa Tim 1
-                      </a>
-                    </li>
-                    <li>
-                      <a class="underline text-teal-400 font-semibold">
-                        Lihat Peristiwa Tim 2
-                      </a>
-                    </li>
-                  </ul>
-                </td>
-              </tr>
-              <tr
-                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-              >
-                <th
-                  scope="row"
-                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                >
-                  A
-                </th>
-                <td class="px-6 py-4">E vs F</td>
-                <td class="px-6 py-4">[Waktu Dimulai -5 Menit]</td>
-                <td class="px-6 py-4">-</td>
-                <td class="px-6 py-4">
-                  <div class="flex-inline">
-                    <a class="underline text-teal-400 font-semibold"> Mulai </a>
-                  </div>
-                </td>
-              </tr>
-              <tr
-                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-              >
-                <th
-                  scope="row"
-                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                >
-                  A
-                </th>
-                <td class="px-6 py-4">G vs H</td>
-                <td class="px-6 py-4">10 May 2023, 12:00</td>
-                <td class="px-6 py-4">-</td>
-                <td class="px-6 py-4">
-                  <div class="flex-inline">Belum Waktunya</div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <button
-            class="bg-teal-400 text-white w-full text-center self-center items-center"
-          >
-            FINISH
-          </button>
-        </div>
-      </div>
-      <!-- Item 2 -->
+<div class="page-title">
+</div>
 
-      <div class="hidden duration-700 ease-in-out" data-carousel-item>
-        <div class="relative overflow-x-auto">
-          <h2
-            class="text-2xl font-bold pt-10 self-center items-center text-center"
-          >
-            LIST PERTANDINGAN GRUP STAGE
-          </h2>
-          <h2 class="text-center text-xl font-semibold py-5">Babak Kedua</h2>
-          <table
-            class="w-full text-sm text-left text-gray-500 dark:text-gray-400"
-          >
-            <thead
-              class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-            >
-              <tr>
-                <th scope="col" class="px-6 py-3">Grup</th>
-                <th scope="col" class="px-6 py-3">Tim</th>
-                <th scope="col" class="px-6 py-3">Waktu</th>
-                <th scope="col" class="px-6 py-3">Pemenang</th>
-                <th scope="col" class="px-6 py-3">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr
-                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-              >
-                <th
-                  scope="row"
-                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                >
-                  A
-                </th>
-                <td class="px-6 py-4">A vs D</td>
-                <td class="px-6 py-4">28 Mei 2023, 13:00</td>
-                <td class="px-6 py-4">-</td>
-                <td class="px-6 py-4">
-                  <a class="underline text-teal-400 font-semibold"> Update </a>
-                </td>
-              </tr>
-              <tr
-                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-              >
-                <th
-                  scope="row"
-                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                >
-                  A
-                </th>
-                <td class="px-6 py-4">E vs H</td>
-                <td class="px-6 py-4">-</td>
-                <td class="px-6 py-4">-</td>
-                <td class="px-6 py-4">
-                  <a class="underline text-teal-400 font-semibold"> Update </a>
-                </td>
-              </tr>
-              <tr
-                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-              >
-                <th
-                  scope="row"
-                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                >
-                  A
-                </th>
-                <td class="px-6 py-4">E vs F</td>
-                <td class="px-6 py-4">-</td>
-                <td class="px-6 py-4">-</td>
-                <td class="px-6 py-4">
-                  <a class="underline text-teal-400 font-semibold"> Update </a>
-                </td>
-              </tr>
-              <tr
-                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-              >
-                <th
-                  scope="row"
-                  class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                >
-                  A
-                </th>
-                <td class="px-6 py-4">G vs H</td>
-                <td class="px-6 py-4">-</td>
-                <td class="px-6 py-4">-</td>
-                <td class="px-6 py-4">
-                  <a class="underline text-teal-400 font-semibold"> Update </a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <button
-            class="bg-teal-400 text-white w-full text-center self-center items-center"
-          >
-            Save
-          </button>
-        </div>
-      </div>
-      <!-- Item 3 -->
-      <div class="hidden duration-700 ease-in-out" data-carousel-item>
-        <div class="relative overflow-x-auto text-center items-center">
-          <h2
-            class="text-2xl font-bold pt-10 mb-10 self-center items-center text-center"
-          >
-            LIST PERTANDINGAN
-          </h2>
-          <table
-            class="w-full text-sm text-left text-gray-500 dark:text-gray-400"
-          >
-            <thead
-              class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-            >
-              <tr>
-                <th scope="col" class="px-6 py-3">Tim</th>
-                <th scope="col" class="px-6 py-3">Waktu</th>
-                <th scope="col" class="px-6 py-3">Pemenang</th>
-                <th scope="col" class="px-6 py-3">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr
-                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-              >
-                <td class="px-6 py-4">A vs I</td>
-                <td class="px-6 py-4">28 Mei 2023, 13:00</td>
-                <td class="px-6 py-4">A</td>
-                <td class="px-6 py-4">
-                  <ul>
-                    <li>
-                      <a class="underline text-teal-400 font-semibold">
-                        Lihat Peristiwa Tim 1
-                      </a>
-                    </li>
-                    <li>
-                      <a class="underline text-teal-400 font-semibold">
-                        Lihat Peristiwa Tim 2
-                      </a>
-                    </li>
-                  </ul>
-                </td>
-              </tr>
-              <tr
-                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-              >
-                <td class="px-6 py-4">? vs ?</td>
-                <td class="px-6 py-4">[Waktu Dimulai -5 Menit]</td>
-                <td class="px-6 py-4">-</td>
-                <td class="px-6 py-4">
-                  <a class="underline text-teal-400 font-semibold"> Mulai </a>
-                </td>
-              </tr>
-              <tr
-                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-              >
-                <td class="px-6 py-4">? vs ?</td>
-                <td class="px-6 py-4">10 July 2023, 12:00</td>
-                <td class="px-6 py-4">-</td>
-                <td class="px-6 py-4">
-                  <div class="flex-inline">
-                    <a class="underline text-teal-400 font-semibold">
-                      Belum Waktunya
-                    </a>
-                  </div>
-                </td>
-              </tr>
-              <tr
-                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
-              >
-                <td class="px-6 py-4">G vs H</td>
-                <td class="px-6 py-4">10 May 2023, 12:00</td>
-                <td class="px-6 py-4">-</td>
-                <td class="px-6 py-4">
-                  <div class="flex-inline">Belum Waktunya</div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <button
-            class="bg-teal-400 text-white w-full text-center self-center items-center"
-          >
-            FINISH
-          </button>
-        </div>
-      </div>
-      <!-- Item 4 -->
-      <div class="hidden duration-700 ease-in-out" data-carousel-item>
-        <div class="py-20 self-center items-center text-center">
-          <h2 class="text-2xl font-bold py-10">
-            INI AKHIR MUSIM! KLIK TOMBOL NEXT UNTUK MEMBUAT PERTANDINGAN BARU
-          </h2>
-          <button
-            type="submit"
-            class="w-100 text-gray-700 bg-white hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-          >
-            NEXT
-          </button>
-        </div>
-      </div>
-      <!-- Item 5 -->
-    </div>
-    <!-- Slider indicators -->
-    <div
-      class="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2"
-    >
-      <button
-        type="button"
-        class="w-3 h-3 rounded-full"
-        aria-current="true"
-        aria-label="Slide 1"
-        data-carousel-slide-to="0"
-      ></button>
-      <button
-        type="button"
-        class="w-3 h-3 rounded-full"
-        aria-current="false"
-        aria-label="Slide 2"
-        data-carousel-slide-to="1"
-      ></button>
-      <button
-        type="button"
-        class="w-3 h-3 rounded-full"
-        aria-current="false"
-        aria-label="Slide 3"
-        data-carousel-slide-to="2"
-      ></button>
-      <button
-        type="button"
-        class="w-3 h-3 rounded-full"
-        aria-current="false"
-        aria-label="Slide 4"
-        data-carousel-slide-to="3"
-      ></button>
-      <button
-        type="button"
-        class="w-3 h-3 rounded-full"
-        aria-current="false"
-        aria-label="Slide 5"
-        data-carousel-slide-to="4"
-      ></button>
-    </div>
-    <!-- Slider controls -->
-    <button
-      type="button"
-      class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-      data-carousel-prev
-    >
-      <span
-        class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none"
-      >
-        <svg
-          aria-hidden="true"
-          class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M15 19l-7-7 7-7"
-          ></path>
-        </svg>
-        <span class="sr-only">Previous</span>
-      </span>
-    </button>
-    <button
-      type="button"
-      class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-      data-carousel-next
-    >
-      <span
-        class="inline-flex items-center justify-center w-8 h-8 rounded-full sm:w-10 sm:h-10 bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none"
-      >
-        <svg
-          aria-hidden="true"
-          class="w-5 h-5 text-white sm:w-6 sm:h-6 dark:text-gray-800"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M9 5l7 7-7 7"
-          ></path>
-        </svg>
-        <span class="sr-only">Next</span>
-      </span>
-    </button>
-  </div>
+{% if jumlahPertandingan %}
 
-  {% endif %}
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.js"></script>
-</body>
+<div class="wrapper">
+  <div class="content box-content">
+    <div class="content">
+      <div style="text-align: center; margin: 20px">
+        <div class="content-title" style="margin: 10px">
+          <h4 class="text-lg font-bold">List Pertandingan Grup Stage</h4>
+        </div>
+
+        <table class="table-auto w-full">
+          <thead>
+            <tr class="text-purple-600">
+              <th class="px-4 py-2">Grup</th>
+              <th class="px-4 py-2">Tim</th>
+              <th class="px-4 py-2">Waktu</th>
+              <th class="px-4 py-2">Pemenang</th>
+              <th class="px-4 py-2">Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {% for data in pertandingan %}
+            <tr>
+              <td class="px-4 py-2">A</td>
+              <td class="px-4 py-2">{{ data.tim.0 }} vs {{ data.tim.1 }}</td>
+              <td class="px-4 py-2">{{ data.start_datetime }}</td>
+              <!-- Cek siapa pemenangnya dengan menyamakan id_pertandingan pada data dan dictionary pemenang -->
+              {% for key, value in pemenang.items %} 
+              {% if key == data.id_pertandingan %}
+              <td class="px-4 py-2">{{ value }}</td>
+              <td class="px-4 py-2">
+                <a href="{% url 'panitia:list_peristiwa' id_pertandingan=data.id_pertandingan nama_tim=data.tim.0 %}" class="text-blue-600 hover:underline">Lihat Peristiwa Tim 1</a><br><br>
+                <a href="{% url 'panitia:list_peristiwa' id_pertandingan=data.id_pertandingan nama_tim=data.tim.1 %}" class="text-blue-600 hover:underline">Lihat Peristiwa Tim 2</a><br><br>
+              </td>
+              {% endif %}
+              {% endfor %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+        <button onclick="window.location.href='{% url 'panitia:show_profile' %}'" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
+          Finish
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% else %}
+<div class="wrapper">
+  <div class="box-content">
+    <div class="content">
+      <div class="announcement">
+        <p>
+          Pertandingan Belum Lengkap!<br />Klik Tombol Next untuk Membuat Pertandingan
+        </p>
+        <div>
+          <td><button onclick="window.location.href='#'" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Next</button></td>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--case already have winner-->
+{% endif %} 
 
 {% endblock content %}

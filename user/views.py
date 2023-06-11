@@ -2,7 +2,10 @@ from django.shortcuts import render
 from django.db import *
 from django.contrib import messages
 from pprint import pprint
+from django.shortcuts import redirect
 import psycopg2
+from django.urls import reverse
+from django.template.loader import render_to_string
 
 
 # Create your views here.
@@ -69,47 +72,9 @@ def loginPage(request):
             if data is not None:
                 id_manajer = data[0]
                 request.session["role"] = "manajer"
-                try:
-                    cursor.execute(
-                        f"""
-                        select *
-                        from non_pemain
-                        where non_pemain.id = %s
-                        """,
-                        [str(id_manajer)]
-                    )
-                except Exception as e:
-                    cursor = connection.cursor()
+                request.session["id"] = str(id_manajer)
 
-                manajerData = cursor.fetchone()
-                namaDepan = manajerData[1]
-                namaBelakang = manajerData[2]
-                nomorHP = manajerData[3]
-                email = manajerData[4]
-                alamat = manajerData[5]
-
-                try:
-                    cursor.execute(
-                        f"""
-                        select *
-                        from status_non_pemain
-                        where id_non_pemain = %s
-                        """,
-                        [str(id_manajer)]
-                    )
-                except Exception as e:
-                    cursor = connection.cursor()
-
-                statusManajerData = cursor.fetchone()
-                status = statusManajerData[1]
-                return render(request, "../../manager/templates/dashboard_manager.html", context={
-                    'namaDepan': namaDepan,
-                    'namaBelakang': namaBelakang,
-                    'nomorHP': nomorHP,
-                    'email': email,
-                    'alamat': alamat,
-                    'status': status
-                })
+                return redirect("/manager/profile")
             else :
                 # try for role panitia
                 try :
@@ -128,48 +93,9 @@ def loginPage(request):
                     id_panitia = data[0]
                     jabatan = data[1]
                     request.session["role"] = "panitia"
-                    try:
-                        cursor.execute(
-                            f"""
-                            select *
-                            from non_pemain
-                            where non_pemain.id = %s
-                            """,
-                            [str(id_panitia)]
-                        )
-                    except Exception as e:
-                        cursor = connection.cursor()
-
-                    panitiaData = cursor.fetchone()
-                    namaDepan = panitiaData[1]
-                    namaBelakang = panitiaData[2]
-                    nomorHP = panitiaData[3]
-                    email = panitiaData[4]
-                    alamat = panitiaData[5]
-
-                    try:
-                        cursor.execute(
-                            f"""
-                            select *
-                            from status_non_pemain
-                            where id_non_pemain = %s
-                            """,
-                            [str(id_panitia)]
-                        )
-                    except Exception as e:
-                        cursor = connection.cursor()
-
-                    statusPanitiaData = cursor.fetchone()
-                    status = statusPanitiaData[1]
-                    return render(request, "../../panitia/templates/dashboard_panitia.html", context={
-                        'namaDepan': namaDepan,
-                        'namaBelakang': namaBelakang,
-                        'nomorHP': nomorHP,
-                        'email': email,
-                        'alamat': alamat,
-                        'status': status,
-                        'jabatan': jabatan
-                    })
+                    request.session["id"] = str(id_panitia)
+                    
+                    return redirect("/panitia/profile")
                 else :
                     # try for role penonton
                     try :
@@ -188,47 +114,8 @@ def loginPage(request):
                     if data is not None:
                         id_penonton = data[0]
                         request.session["role"] = "penonton"
-                        try:
-                            cursor.execute(
-                                f"""
-                                select *
-                                from non_pemain
-                                where non_pemain.id = %s
-                                """,
-                                [str(id_penonton)]
-                            )
-                        except Exception as e:
-                            cursor = connection.cursor()
-
-                        penontonData = cursor.fetchone()
-                        namaDepan = penontonData[1]
-                        namaBelakang = penontonData[2]
-                        nomorHP = penontonData[3]
-                        email = penontonData[4]
-                        alamat = penontonData[5]
-
-                        try:
-                            cursor.execute(
-                                f"""
-                                select *
-                                from status_non_pemain
-                                where id_non_pemain = %s
-                                """,
-                                [str(id_penonton)]
-                            )
-                        except Exception as e:
-                            cursor = connection.cursor()
-
-                        statusPenontonData = cursor.fetchone()
-                        status = statusPenontonData[1]
-                        return render(request, "../../penonton/templates/dashboardPenonton.html", context={
-                            'namaDepan': namaDepan,
-                            'namaBelakang': namaBelakang,
-                            'nomorHP': nomorHP,
-                            'email': email,
-                            'alamat': alamat,
-                            'status': status
-                        })
+                        request.session["id"] = str(id_penonton)
+                        return redirect("/penonton/profile")
 
         else:
             messages.error("Email atau password yang dimasukkan salah")

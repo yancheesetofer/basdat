@@ -4,58 +4,49 @@
 </head>
 <body>
   {% include 'navbar_panitia.html' %}
-  <h1 class="text-3xl font-bold flex justify-center mt-10">
-    Mulai Pertandingan
-  </h1>
-  <div class="mx-auto mt-10 w-2/5">
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-      <table class="w-full text-sm text-gray-500 dark:text-gray-400">
-        <thead
-          class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+  <div class="flex items-center justify-center h-screen">
+    <div class="border border-gray-300 p-8">
+      <div class="page-title">
+        <h1 class="text-3xl font-bold">Mulai Pertandingan</h1>
+      </div>
+
+      <div class="mt-8">
+        <table class="table-auto w-full">
+          <thead>
+            <tr>
+              <th class="px-4 py-2">Tim 1</th>
+              <th class="px-4 py-2">Tim 2</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="px-4 py-2">{{data.nama_tim.0}}</td>
+              <td class="px-4 py-2">{{data.nama_tim.1}}</td>
+              <td class="px-4 py-2">
+                <a
+                  href="{% url 'panitia:peristiwa' id_pertandingan=data.id_pertandingan nama_tim=data.nama_tim.0 %}"
+                  class="text-blue-600 hover:underline"
+                  >Masukkan Peristiwa Tim 1</a
+                ><br /><br />
+                <a
+                  href="{% url 'panitia:peristiwa' id_pertandingan=data.id_pertandingan nama_tim=data.nama_tim.1 %}"
+                  class="text-blue-600 hover:underline"
+                  >Masukkan Peristiwa Tim 2</a
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <button
+          onclick="window.location.href='#'"
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
         >
-          <tr>
-            <th scope="col" class="px-6 py-3 bg-gray-200">Tim 1</th>
-            <th scope="col" class="px-6 py-3 bg-gray-200">Tim 2</th>
-            <th scope="col" class="px-6 py-3 bg-gray-200"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-            <th
-              scope="row"
-              class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              A
-            </th>
-            <th
-              scope="row"
-              class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              B
-            </th>
-            <td class="px-3 py-4 flex flex-col gap-2 w-auto">
-              <a
-                href="#"
-                class="font-medium text-blue-600 dark:text-blue-500 underline mx-auto"
-                >Masukkan peristiwa tim 1</a
-              >
-              <a
-                href="#"
-                class="font-medium text-blue-600 dark:text-blue-500 underline mx-auto"
-                >Masukkan peristiwa tim 2</a
-              >
-            </td>
-          </tr>
-        </tbody>
-      </table>
+          Submit
+        </button>
+      </div>
     </div>
-  </div>
-  <div class="flex justify-center">
-    <button
-      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-10"
-    >
-      Submit
-    </button>
   </div>
 </body>
 {% endblock content %}

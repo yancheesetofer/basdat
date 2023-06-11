@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+    <head>
+        <title>Pilih Pertandingan</title>
+    </head>
+    {% include 'navbar_penonton.html' %}
+
+    <body>
+    <h1 class="text-3xl font-bold flex justify-center mt-10">
+        Pilih Pertandingan
+    </h1>
+    <div class="mx-auto mt-10 w-3/5">
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table class="w-full text-sm text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3 bg-gray-200">Tim 1</th>
+                    <th scope="col" class="px-6 py-3 bg-gray-200">Tim 2</th>
+                    <th scope="col" class="px-6 py-3 bg-gray-200"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for pertandingan in pertandingan_list %}
+                    <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {{ pertandingan.0 }}
+                        </th>
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {{ pertandingan.1 }}
+                        </th>
+                        <td class="px-6 py-4 flex justify-center">
+                            <form method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="pertandingan"
+                                       value="{{ pertandingan.0 }} vs {{ pertandingan.1 }}">
+                                <button type="submit" class="font-medium text-blue-600 dark:text-blue-500 underline">
+                                    Pilih
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </body>
+{% endblock content %}
