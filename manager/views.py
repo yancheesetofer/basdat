@@ -59,11 +59,13 @@ def show_profile(request):
     return render(request, "dashboard_manager.html", context)
 
 
-@login_required(login_url='../../user/login')
+# TODO : UNCOMMENT
+# @login_required(login_url='../../user/login')
 def registerTim(request):
     cursor = connection.cursor()
     # check if manager has any teams
-    username = request.session["username"]
+    # TODO: UNCOMMENT
+    # username = request.session["username"]
     username = 'rsamber14'
     try:
         cursor.execute(
@@ -99,12 +101,14 @@ def registerTim(request):
     return render(request, "registerTim.html")
 
 
-@login_required(login_url='../../user/login')
+# TODO : UNCOMMENT
+# @login_required(login_url='../../user/login')
 def detailTim(request):
-    username = request.session["username"]
+    # TODO: UNCOMMENT
+    # username = request.session["username"]
     username = 'rsamber14'
-    if (request.session["role"] != 'manajer'):  
-        return HttpResponseBadRequest("This page is restricted")
+    # if (request.session["role"] != 'manajer'):  
+    #     return HttpResponseBadRequest("This page is restricted")
 
     daftar_pemain = []
     daftar_pelatih = []
@@ -166,8 +170,9 @@ def detailTim(request):
     return render(request, "detailTim.html", context)
 
 def makecaptain(request):
-    nama_tim = request.session["nama_tim"]
-    # nama_tim = 'Hurricanes'
+    # TODO : UNCOMMENT
+    # nama_tim = request.session["nama_tim"]
+    nama_tim = 'Hurricanes'
     cursor = connection.cursor()
     if request.method == "POST":
         pemain_selected = request.POST.get("pemain")
@@ -193,9 +198,11 @@ def makecaptain(request):
             return HttpResponseBadRequest(f"Can not registered pemain into Tim {nama_tim}")
     
 
-@login_required(login_url='../../user/login')
+# TODO : UNCOMMENT
+# @login_required(login_url='../../user/login')
 def pilihPemain(request):
-    nama_tim = request.session["nama_tim"]
+    # TODO : UNCOMMENT
+    # nama_tim = request.session["nama_tim"]
     nama_tim = 'Hurricanes'
     cursor = connection.cursor()
     if request.method == "POST":
@@ -244,11 +251,13 @@ def pilihPemain(request):
     }
     return render(request, "pemain.html", context)
 
-@login_required(login_url='../../user/login')
+# TODO : UNCOMMENT
+# @login_required(login_url='../../user/login')
 def pilihPelatih(request):
     cursor = connection.cursor()
-    nama_tim = request.session["nama_tim"]
-    # nama_tim = 'Bears'
+    # TODO : UNCOMMENT
+    # nama_tim = request.session["nama_tim"]
+    nama_tim = 'Bears'
     cursor = connection.cursor()
     if request.method == "POST":
         pelatih_selected = request.POST.get("pelatih")
